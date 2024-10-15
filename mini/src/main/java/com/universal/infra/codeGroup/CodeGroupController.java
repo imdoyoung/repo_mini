@@ -13,7 +13,7 @@ public class CodeGroupController {
 		return "/xdm/v1/infra/codeGroup/codeGroupXdmList";
 	}
 	
-	// Form
+	// Form 
 	@RequestMapping(value="/xdm/v1/infra/codeGroup/codeGroupXdmForm")
 	public String codeGroupXdmForm() {
 		return "/xdm/v1/infra/codeGroup/codeGroupXdmForm";
