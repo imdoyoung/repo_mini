@@ -82,7 +82,7 @@
                   </div>
                   <div class="col-md-2">
 					<select class="form-select" aria-label="Default select example" name="shCompleteNy" id="shCompleteNy">
-						<option value="" th:selected="${vo.shCompleteNy == null}">삭제여부</option>
+						<option value="" th:selected="${vo.shCompleteNy == null}">댓글작성여부</option>
 						<option value="1" th:selected="${vo.shCompleteNy == 1}">Y</option>
 						<option value="0" th:selected="${vo.shCompleteNy == 0}">N</option>
                     </select>
@@ -170,13 +170,19 @@
                     </tr>
                   </thead>
                   <tbody>
+					<tr th:if="${#lists.isEmpty(list)}">
+						<td colspan="14" align="center">
+							<p style="padding-top: 12px;">There is no data!</p>
+						</td>
+					</tr>
 					<tr th:if="!${#lists.isEmpty(list)}" th:each="list:${list}">
                       <td>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </td>
                       <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td th:text="${list.inqbSeq}"></td>
-					  <td></td>
+					  <td th:if="${list.inqbType eq 8}">상품관련문의</td>
+					  <td th:unless="${list.inqbType eq 8}">상품</td>
                       <td><a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" th:text="${list.inqbTitle}"></a></td>
                       <td th:text="${list.inqbContent}"></td>
                       <td></td>

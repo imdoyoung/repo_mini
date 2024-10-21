@@ -68,10 +68,10 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">기본정보</h5>
+              <h5 class="card-title">code group Form</h5>
               
               <!-- Custom Styled Validation -->
-              <form name="form" method="post" action="/xdm/v1/infra/codeGroup/codeGroupXdmInst" class="needs-validation" novalidate>
+              <form name="form" method="post" action="/xdm/v1/infra/codeGroup/codeGroupXdmInst">
                 <div class="row mb-3">
                   <div class="col-md-3">
                     <label for="incgSeq" class="form-label">코드<a style="color: red;">*</a></label>
@@ -135,15 +135,15 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-1">
-                    <button type="submit" class="btn btn-outline-dark">
-                      <a href="./0_list.html">
+					<a href="/xdm/v1/infra/codeGroup/codeGroupXdmList">
+                      <button type="bttton" class="btn btn-outline-dark">
                         <i class="bi bi-list-ul"></i>
-                      </a>
-                    </button>
+                      </button>
+					</a>
                   </div>
                   <div class="col-md-10"></div>
                   <div class="col-md-1" align="Right">
-                    <button type="submit" class="btn btn-primary"id="btnSubmit" action="redirect:/xdm/v1/infra/codeGroup/codeGroupXdmInst">
+                    <button type="submit" class="btn btn-primary">
                       <a>
                         <i class="bi bi-server"></i>
                       </a>

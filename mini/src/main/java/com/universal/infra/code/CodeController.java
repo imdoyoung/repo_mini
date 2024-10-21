@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.universal.infra.codeGroup.CodeGroupDto;
 import com.universal.infra.codeGroup.CodeGroupVo;
 
+import jakarta.annotation.PostConstruct;
+
 
 @Controller
 public class CodeController {
@@ -72,6 +74,8 @@ public class CodeController {
 			codeService.uelete(codeDto);
 			return "redirect:/xdm/v1/infra/code/codeXdmList";
 		}
+		// 
+		
 		
 
 }

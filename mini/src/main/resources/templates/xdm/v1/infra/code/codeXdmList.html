@@ -68,7 +68,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">Code</h1>
+              <h1 class="card-title">Code List</h1>
              	<form name="form" method="post" action="/xdm/v1/infra/code/codeXdmList">
 					<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1" />
 					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
@@ -169,7 +169,7 @@
                   </thead>
                   <tbody>
 					<tr th:if="${#lists.isEmpty(list)}">
-						<td colspan="14">
+						<td colspan="14" align="center">
 							<p style="padding-top: 12px;">There is no data!</p>
 						</td>
 					</tr>
@@ -245,7 +245,7 @@
                       </a>
                     </button>
                     <button type="button" class="btn btn-primary">
-                      <a href="./0_form.html">
+                      <a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm">
                         <i class="bi bi-plus-lg icon_color_change"></i>
                       </a>
                     </button>

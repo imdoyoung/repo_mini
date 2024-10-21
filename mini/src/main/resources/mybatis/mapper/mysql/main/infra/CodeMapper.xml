@@ -134,5 +134,17 @@
   	SELECT COUNT(*)
   	<include refid="selectCommon"/>
   </select>
+  
+  <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+	SELECT 
+		incdSeq,
+		incdName,
+		inCodegroup_incgSeq
+	FROM
+		mini.incode
+	WHERE 1=1
+		AND incdDelNy = 0
+	    AND incdUseNy = 1
+ </select>
 	  
 </mapper>

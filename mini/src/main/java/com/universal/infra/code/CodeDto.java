@@ -1,6 +1,8 @@
 package com.universal.infra.code;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CodeDto {
 	
@@ -18,6 +20,18 @@ public class CodeDto {
 	private String incgName;
 	
 	
+	// for cache
+	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
+	
+	
+	
+	
+	public static List<CodeDto> getCachedCodeArrayList() {
+		return cachedCodeArrayList;
+	}
+	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
+		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+	}
 	public String getIncdSeq() {
 		return incdSeq;
 	}

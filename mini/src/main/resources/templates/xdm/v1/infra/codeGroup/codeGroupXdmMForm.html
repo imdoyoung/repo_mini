@@ -67,7 +67,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">기본정보</h5>
+              <h5 class="card-title">code group 수정</h5>
               
               <!-- Custom Styled Validation -->
               <form class="needs-validation" id="form" name="form"  action="/xdm/v1/infra/codeGroup/codeGroupXdmUpdt" novalidate>
@@ -136,19 +136,19 @@
 					</select>
                   </div>
                   <div class="col-md-3">
-                   <!-- <label for="incgRegDate" class="form-label">작성일</label>
-                    <input class="form-control" id="incgRegDate" name="incgRegDate" type="datetime" th:value="${ #dates.format(item.incgRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+                   <label for="incgRegDate" class="form-label">작성일</label>
+                    <input class="form-control" id="validationCustom01" name="incgRegDate" type="datetime" th:value="${#dates.format(item?.incgRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                     <div class="invalid-feedback">
                       입력해주세요.
                     </div>
                   </div>
                   <div class="col-md-3">
                     <label for="incgEdiDate" class="form-label">수정일</label>
-                    <input class="form-control" id="incgEdiDate" name="incgEdiDate" type="datetime" th:value="${ #dates.format(item.incgEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+                    <input class="form-control" id="validationCustom01" name="incgEdiDate" type="datetime" th:value="${#dates.format(item?.incgEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                     <div class="invalid-feedback">
                       입력해주세요.
                     </div>
-                  </div>-->
+                  </div>
                 </div>
                 </div>
     
