@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
-	  
+<mapper namespace="com.universal.infra.inClaim.InClaimDao">
+
+	<resultMap type="com.universal.infra.inClaim.InClaimDto" id="resultMapObj"></resultMap>
+	
+<!--========== inClaimAccept ==========-->
+	<select id="inClaimAcceptSelectList" resultMap="resultMapObj">
+		SELECT
+			h.incaccSeq,
+			h.incaccSubmitNo,
+			h.incaccProType,
+		    c.inmeSeq,
+		    c.inmeName,
+			h.incaccGender,
+		    c.inmeTel,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeZipCode,
+		    c.inmeAddr,
+		    c.inmeAddrDetail,
+		    c.inmeEmail,
+		    c.inmeJobNy,
+		    c.inmeDiseaseNy,
+			h.incaccCompleteNy,
+			h.incaccRequType,
+			h.incaccRequReason,
+			h.incaccAccDate,
+			h.incaccAccPlace,
+			h.incaccAccDesc,
+			h.incaccDisease,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			h.incaccTosNy,
+		    d.instId,
+		    d.instName,
+			h.incaccRegDate,
+			h.incaccEdiDate,
+			h.incaccDelNy,
+			h.inMember_inmeSeq,
+			h.inStaff_instSeq
+		FROM inClaimAccept AS h
+			LEFT JOIN inMember AS c 
+				ON h.inMember_inmeSeq = c.inmeSeq
+		    LEFT JOIN inStaff AS d 
+		    	ON h.inStaff_instSeq = d.instSeq
+		ORDER BY
+			h.incaccSeq DESC
+	</select>
+	
+	<insert id="inClaimAcceptInsert">
+	INSERT INTO inClaimAccept (
+		incaccProType,
+		incaccGender,
+		incaccCompleteNy,
+		incaccRequType,
+		incaccRequReason,
+		incaccAccDate,
+		incaccAccPlace,
+		incaccAccDesc,
+		incaccDisease,
+		incaccSettleRankType,
+		incaccSettleAcNo,
+		incaccTosNy,
+		incaccRegDate,
+		incaccEdiDate,
+		incaccDelNy,
+		inMember_inmeSeq,
+		inStaff_instSeq
+	) VALUES (
+	    #{incaccProType},
+	    #{incaccGender},
+	    #{incaccCompleteNy},
+	    #{incaccRequType},
+	    #{incaccRequReason},
+	    #{incaccAccDate},
+	    #{incaccAccPlace},
+	    #{incaccAccDesc},
+	    #{incaccDisease},
+	    #{incaccSettleRankType},
+	    #{incaccSettleAcNo},
+	    #{incaccTosNy},
+	    now(),
+	    now(),
+	    0,
+	    #{inMember_inmeSeq},
+	    #{inStaff_instSeq}
+	)
+	</insert>
+
 </mapper>
