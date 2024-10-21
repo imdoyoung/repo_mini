@@ -1,6 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.inStaff.InStaffDao">
+	
+	<resultMap type="com.universal.infra.inStaff.InStaffDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectStaffList" resultMap="resultMapObj">
+		select
+			d.instSeq,
+			d.instName,
+			d.instGender,
+			d.instposition,
+			d.instId,
+			d.instPw,
+			d.instTel,
+			d.instEmail,
+			d.instRegDate,
+			d.instEdiDate,
+			d.instDelNy
+		from 
+			instaff d
+		where 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND instDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
+			
+		    <!-- 검색구분 -->
+			<choose> 
+				<when test="shOption == 1">AND instSeq = #{shValue}</when>
+				<when test="shOption == 2">AND instposition LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND instName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND instId LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			
+		    <!-- 달력 -->
+			<choose>
+				<when test="shOptionDate == 1">AND d.instRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+				<when test="shOptionDate == 2">AND d.instEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+			</choose>
+			
+		order by
+			d.instSeq desc
+	</select> 
+	
+	<insert id="staffInsert">
+		insert into instaff (
+		   instName,
+		   instGender,
+		   instposition,
+		   instId,
+		   instPw,
+		   instTel,
+		   instEmail,
+		   instRegDate,
+		   instEdiDate,
+		   instDelNy
+		) values (
+		   #{instName},
+		   #{instGender},
+		   #{instposition},
+		   #{instId},
+		   #{instPw},
+		   #{instTel},
+		   #{instEmail},
+		   now(),
+		   now(),
+		   0  
+		)
+	</insert>
+	
+	<select id="selectOneStaff" resultMap="resultMapObj">
+		select
+			d.instSeq,
+			d.instName,
+			d.instGender,
+			d.instposition,
+			d.instId,
+			d.instPw,
+			d.instTel,
+			d.instEmail,
+			d.instRegDate,
+			d.instEdiDate,
+			d.instDelNy
+		from
+			instaff d
+		where 1=1
+			and d.instSeq = #{instSeq}
+	</select>
+	  
+	<update id="staffUpdate">
+		update instaff
+		set 
+		   instName = #{instName},
+		   instGender = #{instGender},
+		   instposition = #{instposition},
+		   instId = #{instId},
+		   instPw = #{instPw},
+		   instTel = #{instTel},
+		   instEmail = #{instEmail},
+		   instEdiDate = now(),
+		   instDelNy = 0
+		where 1=1
+			and instSeq = #{instSeq}	
+	</update>
+	 
+	
+	
+	
+	
+	
+	
+	
 	  
 </mapper>

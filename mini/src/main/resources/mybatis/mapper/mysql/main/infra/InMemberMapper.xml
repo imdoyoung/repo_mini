@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.inMember.InMemberDao">
+
+	<resultMap type="com.universal.infra.inMember.InMemberDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectMemberList" resultMap="resultMapObj">
+		select
+			c.inmeSeq,
+			c.inmeName,
+			c.inmeGender,
+			c.inmeTel,
+			c.inmeIdNumberFr,
+			c.inmeIdNumberBa,
+			c.inmeZipCode,
+			c.inmeAddr,
+			c.inmeAddrDetail,
+			c.inmeId,
+			c.inmePw,
+			c.inmeEmail,
+			c.inmeGrade,
+			c.inmeJobNy,
+			c.inmeDiseaseNy,
+			c.inmeBankType,
+			c.inmeAccNo,
+			c.inmeRegDate,
+			c.inmeEdiDate,
+			c.inmeTosNy,
+			c.inmeMktNy,
+			c.inmeDelNy
+		from 
+			inmember c
+		where 1=1 
+			<if test="shDelNy != null and !shDelNy.equals('')">AND inmeDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
+			<if test="shJobNy != null and !shJobNy.equals('')">AND inmeJobNy = #{shJobNy}</if> <!-- 직업위험군여부 여부 -->
+			<if test="shDiseaseNy != null and !shDiseaseNy.equals('')">AND inmeDiseaseNy = #{shDiseaseNy}</if> <!-- 의료수급권자 여부 -->
+			
+			<!-- 검색구분 -->
+			<choose> 
+				<when test="shOption == 1">AND inmeSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			
+			<!-- 달력 -->
+			<choose>
+				<when test="shOptionDate == 1">AND c.inmeRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+				<when test="shOptionDate == 2">AND c.inmeEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+			</choose>
+		order by
+			c.inmeSeq desc
+	</select>
+	
+	<insert id="memberInsert">
+		insert into inmember(
+			inmeName,
+			inmeGender,
+			inmeTel,
+			inmeIdNumberFr,
+			inmeIdNumberBa,
+			inmeZipCode,
+			inmeAddr,
+			inmeAddrDetail,
+			inmeId,
+			inmePw,
+			inmeEmail,
+			inmeGrade,
+			inmeJobNy,
+			inmeDiseaseNy,
+			inmeBankType,
+			inmeAccNo,
+			inmeRegDate,
+			inmeEdiDate,
+			inmeTosNy,
+			inmeMktNy,
+			inmeDelNy
+		) values (
+			#{inmeName},
+			#{inmeGender},
+			#{inmeTel},
+			#{inmeIdNumberFr},
+			#{inmeIdNumberBa},
+			#{inmeZipCode},
+			#{inmeAddr},
+			#{inmeAddrDetail},
+			#{inmeId},
+			#{inmePw},
+			#{inmeEmail},
+			#{inmeGrade},
+			#{inmeJobNy},
+			#{inmeDiseaseNy},
+			#{inmeBankType},
+			#{inmeAccNo},
+			now(),
+			now(),
+			1,
+			1,
+			0
+		)
+	</insert>
+	
+	<select id="selectOneMember" resultMap="resultMapObj">
+		select
+			c.inmeSeq,
+			c.inmeName,
+			c.inmeGender,
+			c.inmeTel,
+			c.inmeIdNumberFr,
+			c.inmeIdNumberBa,
+			c.inmeZipCode,
+			c.inmeAddr,
+			c.inmeAddrDetail,
+			c.inmeId,
+			c.inmePw,
+			c.inmeEmail,
+			c.inmeGrade,
+			c.inmeJobNy,
+			c.inmeDiseaseNy,
+			c.inmeBankType,
+			c.inmeAccNo,
+			c.inmeRegDate,
+			c.inmeEdiDate,
+			c.inmeTosNy,
+			c.inmeMktNy,
+			c.inmeDelNy
+		from
+			inmember c
+		where 1=1
+			and c.inmeSeq = #{inmeSeq}
+	</select>
+	
+	<update id="memberUpdate">
+		update inmember	
+		set 
+			inmeName = #{inmeName},
+			inmeGender = #{inmeGender},
+			inmeTel = #{inmeTel},
+			inmeIdNumberFr = #{inmeIdNumberFr},
+			inmeIdNumberBa = #{inmeIdNumberBa},
+			inmeZipCode = #{inmeZipCode},
+			inmeAddr = #{inmeAddr},
+			inmeAddrDetail = #{inmeAddrDetail},
+			inmeId = #{inmeId},
+			inmePw = #{inmePw},
+			inmeEmail = #{inmeEmail},
+			inmeGrade = #{inmeGrade},	
+			inmeJobNy = #{inmeJobNy},
+			inmeDiseaseNy = #{inmeDiseaseNy},
+			inmeBankType = #{inmeBankType},
+			inmeAccNo = #{inmeAccNo},
+			inmeEdiDate = now(),
+			inmeTosNy = 1,
+			inmeMktNy = 1,
+			inmeDelNy = 0
+		where 1=1
+			and inmeSeq = #{inmeSeq}
+	</update>
+
+
+
+
+
+
 	  
 </mapper>
