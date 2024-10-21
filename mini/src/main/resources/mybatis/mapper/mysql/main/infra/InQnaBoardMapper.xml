@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.universal.infra.inQnaBoard.InQnaBoardDao">
 
-<mapper namespace="test">
+  <resultMap type="com.universal.infra.inQnaBoard.InQnaBoardDto" id="resultMapObj"></resultMap>
+
+   <select id="selectList" resultMap="resultMapObj">
+    SELECT aa.* FROM (
+	  SELECT
+		  	l.inqbSeq,
+		  	l.inqbType,
+		  	l.inqbTitle,
+		  	l.inqbContent,
+		  	l.inqbCompleteNy,
+		  	l.inqbRegDate,
+		  	l.inqbEdiDate, 
+		  	l.inqbDelNy, 
+		  	l.inMember_inmeSeq, 
+		  	l.inStaff_instSeq,
+		  	l.inQnaBoard_inqbSeq
+	 <include refid="selectCommon"/>
+	  ORDER BY	  	
+		   (case when inQnaBoard_inqbSeq = 0 then inqbSeq else inQnaBoard_inqbSeq end), inqbRegDate	
+		 ) aa limit #{rowNumToShow} offset #{startRnumForMysql}
+		 
+ </select>		   	
+	 <!--   FROM 
+		   mini.inqnaboard l
+	    ORDER BY
+	       (case when inQnaBoard_inqbSeq = 0 then inqbSeq else inQnaBoard_inqbSeq end), inqbRegDate		
+	</select>-->
+	
+	<sql id="selectCommon">
+	FROM 
+		mini.inqnaboard l
+	WHERE 1=1
+	   <if test="shDelNy !=null and !shDelNy.equals('')">AND inqbDelNy = #{shDelNy}</if>
+	   <if test="shCompleteNy !=null and !shCompleteNy.equals('')">AND inqbCompleteNy = #{shCompleteNy}</if>
+	   <choose>
+		    <when test="shOption==1">AND inqbSeq=#{shValue}</when>
+		    <when test="shOption==2">AND inqbTitle=#{shValue}</when>
+		    <when test="shOption==3">AND inqbContent=#{shValue}</when>
+		</choose>
+		
+		<choose>
+			<when test="shOptionDate == 1">AND a.inqbRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.inqbEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+	</sql>
+
+	<select id="selectOne" resultMap="resultMapObj">
+	SELECT
+			l.inqbSeq,
+		  	l.inqbType,
+		  	l.inqbTitle,
+		  	l.inqbContent,
+		  	l.inqbCompleteNy,
+		  	l.inqbRegDate,
+		  	l.inqbEdiDate, 
+		  	l.inqbDelNy, 
+		  	l.inMember_inmeSeq, 
+		  	l.inStaff_instSeq,
+		  	l.inQnaBoard_inqbSeq
+			 FROM
+			    mini.inqnaboard l
+			 WHERE 1=1
+			    AND l.inqbSeq = #{inqbSeq}
+	</select>
+	
+	<update id="update">
+	    UPDATE inqnaboard
+	    SET
+	  	    inqbTitle = #{inqbTitle}
+			,inqbContent = #{inqbContent}
+			,inqbCompleteNy = #{inqbCompleteNy}
+			,inqbEdiDate = sysdate()
+		WHERE 1=1
+			AND	inqbSeq = #{inqbSeq}	
+	</update>
+		  
+	  <insert id="insert">
+	   INSERT INTO inqnaboard(
+		    inqbTitle,
+		    inqbContent,
+		    inqbCompleteNy,
+		    inqbRegDate,
+		    inqbEdiDate,
+		    inqbDelNy,
+		    inMember_inmeSeq,
+		    inStaff_instSeq,
+		    inQnaBoard_inqbSeq 
+		  )VALUE(
+			  #{inqbTitle},
+			  #{inqbContent},
+			  0,
+			  now(),
+			  now(),
+			  0,
+			  0,
+			  0,
+			  IFNULL(#{inQnaBoard_inqbSeq},0)
+		      )
+	  <selectKey resultType="String" keyProperty="inqbSeq" order="AFTER">
+			SELECT last_insert_id()
+	  </selectKey>
+	  </insert>
+	      
+	  <delete id="delete">
+	  	DELETE FROM inqnaboard
+	  	WHERE 1=1
+	  		AND inqbSeq = #{inqbSeq}	
+	  </delete>
 	  
+	  <update id="uelete">
+	  	UPDATE inqnaboard
+	  	SET
+	  		inqbDelNy = 1
+	  	WHERE 1=1
+	  		AND inqbSeq = #{inqbSeq}
+	  </update>
+	  
+	  <select id="selectOneCount">
+	  	SELECT COUNT(*)
+	  	<include refid="selectCommon"/>
+	  </select>
+
 </mapper>

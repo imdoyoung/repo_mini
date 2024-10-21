@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.codeGroup.CodeGroupDao">
+
+<resultMap type="com.universal.infra.codeGroup.CodeGroupDto" id="resultMapObj"></resultMap>
+
+<select id="selectList" resultMap="resultMapObj">
+   SELECT aa.* FROM (
+	SELECT
+	  a.incgSeq,
+	  a.incgName,
+	  a.incgUseNy,
+	  a.incgDelNy,
+	  a.incgDesc,
+	  a.incgRegDate,
+	  a.incgEdiDate,
+	  a.incgOrder,
+	  (SELECT count(incdSeq) FROM incode AS b WHERE 1=1 AND b.inCodegroup_incgSeq = a.incgSeq) as XincdCount
+	  <include refid="selectCommon"/>
+			ORDER BY
+			   a.incgSeq desc
+        ) aa limit #{rowNumToShow} offset #{startRnumForMysql}
+</select>
+
+<sql id="selectCommon">
+	FROM 
+		mini.incodegroup a
+	WHERE 1=1
+	   <if test="shDelNy !=null and !shDelNy.equals('')">AND incgDelNy = #{shDelNy}</if>
+	   <if test="shUseNy !=null and !shUseNy.equals('')">AND incgUseNy = #{shUseNy}</if>
+	   <choose>
+		    <when test="shOption==1">AND incgSeq=#{shValue}</when>
+		    <when test="shOption==2">AND incgName=#{shValue}</when>
+		    <when test="shOption==3">AND incgOrder=#{shValue}</when>
+		</choose>
+		
+		<choose>
+			<when test="shOptionDate == 1">AND a.incgRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.incgEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+	</sql>	
+  
+	
+	<insert id="insert">
+	INSERT INTO incodegroup(
+		  incgName,
+		  incgUseNy,
+		  incgDelNy,
+		  incgDesc,
+		  incgRegDate,
+		  incgEdiDate,
+		  incgOrder
+	  )VALUE(
+		  #{incgName},
+		  #{incgUseNy},
+		  0,
+		  #{incgDesc},
+		  now(),
+		  now(),
+		  #{incgOrder}
+	      )
+      <selectKey resultType="String" keyProperty="incgSeq" order="AFTER">
+			SELECT last_insert_id()
+	  </selectKey>
+	</insert>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+		  a.incgSeq,
+		  a.incgName,
+		  a.incgUseNy,
+		  a.incgDelNy,
+		  a.incgDesc,
+		  a.incgRegDate,
+		  a.incgEdiDate,
+		  a.incgOrder
+		 FROM
+		    mini.incodegroup a
+		 WHERE 1=1
+		    AND a. incgSeq = #{incgSeq}
+	</select>
+	
+	<update id="update">
+	    UPDATE incodegroup
+	    SET
+	  	    incgName = #{incgName}
+			,incgUseNy = #{incgUseNy}
+			,incgOrder = #{incgOrder}
+			,incgDesc = #{incgDesc}
+			,incgDelNy = #{incgDelNy}
+		WHERE 1=1
+			AND	incgSeq = #{incgSeq}	
+	  </update>
 	  
+	  <delete id="delete">
+	  	DELETE FROM incodegroup
+	  	WHERE 1=1
+	  		AND incgSeq = #{incgSeq}	
+	  </delete>
+	  
+	  <update id="uelete">
+	  	UPDATE incodegroup
+	  	SET
+	  		incgDelNy = 1
+	  	WHERE 1=1
+	  		AND incgSeq = #{incgSeq}
+	  </update>
+	  
+	  <select id="selectOneCount">
+	  	SELECT COUNT(*)
+	  	<include refid="selectCommon"/>
+	  </select>
 </mapper>

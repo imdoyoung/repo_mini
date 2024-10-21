@@ -27,7 +27,6 @@
   <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/css/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
@@ -61,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>Code Group</h1>
+      <h1>QnA</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -69,12 +68,12 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">Code Group</h1>
-             	<form name="form" method="post" action="/xdm/v1/infra/codeGroup/codeGroupXdmList">
+              <h1 class="card-title">QnA</h1>
+             	<form name="form" method="post" action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList">
 					<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1" />
 					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
                 <div class="row mb-3">
-                 <div class="col-md-2">
+                  <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" name="shDelNy" id="shDelNy">
 						<option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
 						<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
@@ -82,14 +81,14 @@
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" name="shUseNy" id="shUseNy">
-						<option value="" th:selected="${vo.shUseNy == null}">사용여부</option>
-						<option value="1" th:selected="${vo.shUseNy == 1}">Y</option>
-						<option value="0" th:selected="${vo.shUseNy == 0}">N</option>
+					<select class="form-select" aria-label="Default select example" name="shCompleteNy" id="shCompleteNy">
+						<option value="" th:selected="${vo.shCompleteNy == null}">삭제여부</option>
+						<option value="1" th:selected="${vo.shCompleteNy == 1}">Y</option>
+						<option value="0" th:selected="${vo.shCompleteNy == 0}">N</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shOptionDate" name="shOptionDate">
+					<select class="form-select" aria-label="Default select example" id="shOptionDate" name="shOptionDate">
 						<option value="" th:selected="${vo.shOptionDate == null}">검색구분</option>
 						<option value="1" th:selected="${vo.shOptionDate == 1}">작성날짜</option>
 				    	<option value="2" th:selected="${vo.shOptionDate == 2}">수정날짜</option>
@@ -104,14 +103,14 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example"id="shOption" name="shOption">
+					<select class="form-select" aria-label="Default select example"id="shOption" name="shOption">
 						<option value="" th:selected="${vo.shOption == null}">검색구분
 						</option>
 						<option value="1" th:selected="${vo.shOption == 1}">코드
 						</option>
-						<option value="2" th:selected="${vo.shOption == 2}">이름
+						<option value="2" th:selected="${vo.shOption == 2}">제목
 						</option>
-						<option value="3" th:selected="${vo.shOption == 3}">순서
+						<option value="3" th:selected="${vo.shOption == 3}">내용
 						</option>
                     </select>
                   </div>
@@ -127,11 +126,11 @@
 
               <div class="row mb-3">
                 <div class="col-md-2">
-                  <a th:text="'   Total : '+${vo.totalRows}"></a>
+					<a th:text="'   Total : '+${vo.totalRows}"></a>
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
-                  <select class="form-select" aria-label="Default select example" id="changeRowNum">
+					<select class="form-select" aria-label="Default select example" id="changeRowNum">
 						<option value="5" th:selected="${vo.rowNumToShow eq 5}">5
 						</option>
 						<option value="10" th:selected="${vo.rowNumToShow eq 10}">10
@@ -146,7 +145,7 @@
 						</option>
 						<option value="70" th:selected="${vo.rowNumToShow eq 70}">70
 						</option>
-                  </select>
+                    </select>
                 </div>
 
                 <!-- Table with stripped rows -->
@@ -159,36 +158,35 @@
                       </th>
                       <th>#</th>
                       <th>코드</th>
-                      <th>코드그룹 이름</th>
-                      <th>순서</th>
-                      <th>개수</th>
-                      <th>사용여부</th>
-                      <th>삭제여부</th>
-                      <th>등록일</th>
-                      <th>수정일</th>
+                      <th>문의종류</th>
+                      <th>제목</th>
+                      <th>내용</th>
+                      <th>작성자</th>
+					  <th>삭제여부</th>
+					  <th>댓글작성자</th>
+					  <th>작성일</th>
+					  <th>수정일</th>
+					  <th>상태</th>
                     </tr>
                   </thead>
                   <tbody>
-					<tr th:if="${#lists.isEmpty(list)}">
-						<td colspan="14">
-							<p style="padding-top: 12px;">There is no data!</p>
-						</td>
-					</tr>
-                    <tr th:if="!${#lists.isEmpty(list)}" th:each="list:${list}">
+					<tr th:if="!${#lists.isEmpty(list)}" th:each="list:${list}">
                       <td>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </td>
                       <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-                      <td th:text="${list.incgSeq}"></td>
-                      <td><a th:href="@{/xdm/v1/infra/codeGroup/codeGroupXdmMForm(incgSeq=${list.incgSeq})}" th:text="${list.incgName}"></a></td>
-                      <td th:text="${list.incgOrder}"></td>
-                      <td th:text="${list.XincdCount}"></td>
-					  <td th:if="${list.incgUseNy eq 0}">N</td>
-					  <td th:unless="${list.incgUseNy eq 0}">Y</td>
-					  <td th:if="${list.incgDelNy eq 0}">N</td>
-					  <td th:unless="${list.incgDelNy eq 0}">Y</td>
-                      <td th:text="${#dates.format(list.incgRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                      <td th:text="${#dates.format(list.incgEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                      <td th:text="${list.inqbSeq}"></td>
+					  <td></td>
+                      <td><a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" th:text="${list.inqbTitle}"></a></td>
+                      <td th:text="${list.inqbContent}"></td>
+                      <td></td>
+					  <td th:if="${list.inqbDelNy eq 0}">N</td>
+					  <td th:unless="${list.inqbDelNy eq 0}">Y</td>
+					  <td></td>
+                      <td th:text="${#dates.format(list.inqbRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                      <td th:text="${#dates.format(list.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					  <td th:if="${list.inqbCompleteNy eq 0}">N</td>
+					  <td th:unless="${list.inqbCompleteNy eq 0}">Y</td>
                     </tr>
                   </tbody>
                 </table>
@@ -225,6 +223,7 @@
 						</div>
 					</div>
 				</div>
+				
                 <!--pagination end-->
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -246,7 +245,7 @@
                       </a>
                     </button>
                     <button type="submit" class="btn btn-primary">
-                      <a href="/xdm/v1/infra/codeGroup/codeGroupXdmForm">
+                      <a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm">
                         <i class="bi bi-plus-lg icon_color_change"></i>
                       </a>
                     </button>
@@ -273,19 +272,18 @@
 
   <!-- Vendor JS Files -->
   <script type="text/javascript">
-	goList = function(thisPage) {
-		document.querySelector("input[name=thisPage]").value = thisPage;
-		document.querySelector("form[name=form]").action = "/xdm/v1/infra/codeGroup/codeGroupXdmList";
-		document.querySelector("form[name=form]").submit();
-	}
-	document.getElementById("changeRowNum").onchange = function () {
-					document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-					
-					form.action = "/xdm/v1/infra/codeGroup/codeGroupXdmList";
-					form.submit();
-				}
-  </script>
-  
+  	goList = function(thisPage) {
+  		document.querySelector("input[name=thisPage]").value = thisPage;
+  		document.querySelector("form[name=form]").action = "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+  		document.querySelector("form[name=form]").submit();
+  	}
+  	document.getElementById("changeRowNum").onchange = function () {
+  					document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+  					
+  					form.action = "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+  					form.submit();
+  				}
+    </script>
   <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>
