@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.inApplication.InApplicationDao">
+	<resultMap type="com.universal.infra.inApplication.InApplicationDto" id="resultMapObj"></resultMap>
+	
+	<select id="AppselectList" resultMap="resultMapObj">
+		SELECT 
+			e.inappSeq,
+		    e.inappRequType,
+		    c.inmeSeq,
+		    c.inmeName,
+		    e.inappGender,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeTel,
+		    c.inmeJobNy,
+		    c.inmeDiseaseNy,
+		    c.inmeZipCode,
+		    c.inmeAddr,
+		    c.inmeAddrDetail,
+		    c.inmeEmail,
+		    e.inappRecBankType,
+		    e.inappRecAccNo,
+		    e.inappTosNy,
+		    e.inappRegDate,
+		    e.inappEdiDate,
+		    e.inappDelNy
+		FROM inapplication e
+		LEFT JOIN inmember c
+		ON e.inMember_inmeSeq = c.inmeSeq
+		ORDER BY
+			e.inappSeq desc
+	</select>
+	
+		<select id="AppselectOne" resultMap="resultMapObj">
+		SELECT 
+			e.inappSeq,
+		    e.inappRequType,
+		    c.inmeSeq,
+		    c.inmeName,
+		    e.inappGender,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeTel,
+		    c.inmeJobNy,
+		    c.inmeDiseaseNy,
+		    c.inmeZipCode,
+		    c.inmeAddr,
+		    c.inmeAddrDetail,
+		    c.inmeEmail,
+		    e.inappRecBankType,
+		    e.inappRecAccNo,
+		    e.inappTosNy,
+		    e.inappRegDate,
+		    e.inappEdiDate,
+		    e.inappDelNy
+		FROM inapplication e
+		LEFT JOIN inmember c
+		ON e.inMember_inmeSeq = c.inmeSeq
+		WHERE 1=1
+			AND e.inappSeq = #{inappSeq}
+	</select>
+	
+	<insert id="AppInsert">
+		INSERT INTO inApplication (
+			inappRequType,
+			inappGender,
+			inappRecBankType,
+			inappRecAccNo,
+			inappTosNy,
+			inappRegDate,
+			inappEdiDate,
+			inappDelNy,
+			inMember_inmeSeq
+		) VALUES (
+			#{inappRequType},
+			#{inappGender},
+			#{inappRecBankType},
+			#{inappRecAccNo},
+			#{inappTosNy},
+			now(),
+			now(),
+			#{inappDelNy},
+			#{inMember_inmeSeq}
+		)
+	</insert>
+	
+	<update id="AppUpdate">
+		UPDATE inApplication
+		SET 
+			inappRequType = #{inappRequType},
+			inappGender = #{inappGender},
+			inappRecBankType = #{inappRecBankType},
+			inappRecAccNo = #{inappRecAccNo},
+			inappTosNy = #{inappTosNy},
+			inappEdiDate = now(),
+			inappDelNy = 0
+		WHERE 1=1
+			AND inappSeq = #{inappSeq}
+	</update>
 	  
 </mapper>
