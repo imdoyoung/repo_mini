@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>code</h1>
+      <h1>Code</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -68,13 +68,13 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">기본정보</h5>
+              <h5 class="card-title">Code Form</h5>
               
               <!-- Custom Styled Validation -->
               <form class="needs-validation" name="form" method="post" autocomplete="off" action="/xdm/v1/infra/code/codeXdmInst" novalidate>
 				<div class="row mb-3">
                  <div class="col-md-3">
-                   <label for="inCodegroup_incgSeq" class="form-label">그룹명<a style="color: red;">*</a></label>
+                   <label for="inCodegroup_incgSeq" class="form-label">코드그룹명<a style="color: red;">*</a></label>
                    <select class="form-select" name="inCodegroup_incgSeq" required>
                      <option value="">그룹명</option>
                      <option th:each="list:${listCodeGroup}" th:value="${list.incgSeq}" th:text="${list.incgName}"></option>
@@ -143,9 +143,11 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-1">
-                    <button type="submit" class="btn btn-outline-dark">
+					<a href="/xdm/v1/infra/code/codeXdmList">
+                    <button type="button" class="btn btn-outline-dark">
                         <i class="bi bi-list-ul"></i>
                     </button>
+					</a>
                   </div>
                   <div class="col-md-10"></div>
                   <div class="col-md-1" align="Right">

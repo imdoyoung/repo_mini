@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.universal.infra.codeGroup.UtilDateTime;
+
 
 @Controller
 public class InQnaBoardController {
@@ -18,6 +20,11 @@ public class InQnaBoardController {
 		inQnaBoardvo.setParamsPaging(inQnaBoardService.selectOneCount(inQnaBoardvo));
 		System.out.println("StartRnumForMysql : "+inQnaBoardvo.getStartRnumForMysql());
 		System.out.println("RowNumToShow : "+inQnaBoardvo.getRowNumToShow());
+		inQnaBoardvo.setShDateStart(inQnaBoardvo.getShDateStart() == null || inQnaBoardvo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inQnaBoardvo.getShDateStart()));
+		inQnaBoardvo.setShDateEnd(inQnaBoardvo.getShDateEnd() == null || inQnaBoardvo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inQnaBoardvo.getShDateEnd()));
+		
+		
+		
 		if (inQnaBoardvo.getTotalRows() > 0) {
 		model.addAttribute("list", inQnaBoardService.selectList(inQnaBoardvo));
 		}

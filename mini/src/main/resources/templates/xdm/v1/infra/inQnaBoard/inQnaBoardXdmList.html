@@ -27,6 +27,9 @@
   <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!--datetime-->
+  <link href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
   <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
@@ -160,10 +163,10 @@
                       <th>코드</th>
                       <th>문의종류</th>
                       <th>제목</th>
-                      <th>내용</th>
+                      <!--<th>내용</th>-->
                       <th>작성자</th>
 					  <th>삭제여부</th>
-					  <th>댓글작성자</th>
+					  <!--<th>댓글작성자</th>-->
 					  <th>작성일</th>
 					  <th>수정일</th>
 					  <th>상태</th>
@@ -181,14 +184,25 @@
                       </td>
                       <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td th:text="${list.inqbSeq}"></td>
-					  <td th:if="${list.inqbType eq 8}">상품관련문의</td>
-					  <td th:unless="${list.inqbType eq 8}">상품</td>
+					  <td th:if="${list.inqbType eq 1}">상품관련문의</td>
+					  <td th:if="${list.inqbType eq 2}">해지관련문의</td>
+					  <td th:if="${list.inqbType eq 3}">지급관련문의</td>
+					  <td th:if="${list.inqbType eq 4}">가입조건문의</td>
+					  <td th:if="${list.inqbType eq 5}">정보변경문의</td>
+					  <td th:if="${list.inqbType eq 6}">기타문의</td>
+					 <!-- <td th:text="${list.inqbType}"></td>-->
+					 <!-- <td th:if="${list.inqbType != null}" th:text="${@codeService.selectOneCachedCode(list.inqbType)}"></td>
+					  <td th:unless="${list.inqbType != null}"></td>-->
                       <td><a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" th:text="${list.inqbTitle}"></a></td>
-                      <td th:text="${list.inqbContent}"></td>
-                      <td></td>
+                      <!--<td th:text="${list.inqbContent}"></td>-->
+                      <td th:if="${list.inMember_inmeSeq eq 1}">ghjk8795</td>		
+					  <td th:if="${list.inMember_inmeSeq eq 2}">dthb7655</td>					 
+					  <td th:if="${list.inMember_inmeSeq eq 3}">gfghk85</td>		
+					  <td th:if="${list.inMember_inmeSeq eq 4}">fgh75</td>
 					  <td th:if="${list.inqbDelNy eq 0}">N</td>
 					  <td th:unless="${list.inqbDelNy eq 0}">Y</td>
-					  <td></td>
+					  <!--<td th:if="${list.inStaff_instSeq eq 0}">000001</td>		
+					  <td th:unless="${list.inStaff_instSeq eq 0}">000002</td>-->
                       <td th:text="${#dates.format(list.inqbRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                       <td th:text="${#dates.format(list.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					  <td th:if="${list.inqbCompleteNy eq 0}">N</td>
@@ -278,6 +292,13 @@
 
   <!-- Vendor JS Files -->
   <script type="text/javascript">
+	window.addEventListener('load', function () {
+			$.datetimepicker.setLocale('ko');
+			$("#shDateStart,#shDateEnd").datetimepicker({
+				timepicker: false,
+				format: 'Y-m-d'
+			});
+		});
   	goList = function(thisPage) {
   		document.querySelector("input[name=thisPage]").value = thisPage;
   		document.querySelector("form[name=form]").action = "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
@@ -298,7 +319,9 @@
   <script src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
-
+  <!--datetime-->
+  <script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
+  <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
 

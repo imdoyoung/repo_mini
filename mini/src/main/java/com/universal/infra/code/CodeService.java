@@ -78,11 +78,10 @@ public class CodeService {
 		return rt;
 	}
 	
-	public static String selectOneCachedCode(int code){
-		System.out.println("code: " + code);
+	public static String selectOneCachedCode(int incdSeq){
 		String rt = "";
 		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
-			if (codeRow.getIncdSeq().equals(Integer.toString(code))) {
+			if (codeRow.getIncdSeq().equals(Integer.toString(incdSeq))) {
 				rt = codeRow.getIncdName();
 			} else {
 				// by pass

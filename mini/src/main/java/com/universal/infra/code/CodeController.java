@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.universal.infra.codeGroup.CodeGroupDto;
 import com.universal.infra.codeGroup.CodeGroupVo;
+import com.universal.infra.codeGroup.UtilDateTime;
 
 import jakarta.annotation.PostConstruct;
 
@@ -27,6 +28,9 @@ public class CodeController {
 			codevo.setParamsPaging(codeService.selectOneCount(codevo));
 			System.out.println("StartRnumForMysql : "+codevo.getStartRnumForMysql());
 			System.out.println("RowNumToShow : "+codevo.getRowNumToShow());
+			codevo.setShDateStart(codevo.getShDateStart() == null || codevo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(codevo.getShDateStart()));
+			codevo.setShDateEnd(codevo.getShDateEnd() == null || codevo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(codevo.getShDateEnd()));
+			
 			if (codevo.getTotalRows() > 0) {
 			model.addAttribute("list", codeService.selectList(codevo));
 			}
@@ -74,8 +78,6 @@ public class CodeController {
 			codeService.uelete(codeDto);
 			return "redirect:/xdm/v1/infra/code/codeXdmList";
 		}
-		// 
-		
 		
 
 }

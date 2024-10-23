@@ -74,11 +74,17 @@
               <form class="needs-validation" name="form" method="post" autocomplete="off" action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst" novalidate>
 				<div class="row mb-3">
                 <div class="col-md-3">
-                 <label for="inCodegroup_incgSeq" class="form-label">문의종류<a style="color: red;">*</a></label>
-                    <!--<select class="form-select" name="inCodegroup_incgSeq" required>
+                 <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
+                   <select class="form-select" name="inqbType">
                      <option value="">문의종류</option>
-                     <option th:each="list:${listCodeGroup}" th:value="${list.incgSeq}" th:text="${list.incgName}"></option>
-                   </select>-->
+					 <option value="1">상품관련문의</option>
+					 <option value="2">해지관련문의</option>
+					 <option value="3">지급관련문의</option>
+					 <option value="4">가입조건문의</option>
+					 <option value="5">정보변경문의</option>
+					 <option value="6">기타문의</option>
+                     <!--<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option>--> 
+                   </select>
                    <div class="invalid-feedback">
                      문의종류를 선택해주세요.
                    </div>
@@ -90,19 +96,22 @@
                     <input type="text" class="form-control" id="inqbSeq" name="inqbSeq" placeholder="자동생성" style="background-color: lightgray;" required readonly>
                   </div>
                   <div class="col-md-3">
-                    <label for="inqbTitle" class="form-label">제목</label>
+                    <label for="inqbTitle" class="form-label">제목<a style="color: red;">*</a></label>
                     <input type="text" name="inqbTitle" class="form-control" id="inqbTitle" placeholder="영대소문자,숫자" required>
                     <div class="invalid-feedback">
-                      코드를 입력해주세요.
+                      제목을 입력해주세요.
                     </div>
                   </div>
 				  <div class="col-md-3">
-                   <label for="" class="form-label">작성자</label>
-                     <input type="text"  class="form-control" id="validationCustom01" placeholder="영대소문자,숫자" required>
-                      <div class="invalid-feedback">
-                    코드를 입력해주세요.
+                   <label for="" class="form-label">작성자ID<a style="color: red;">*</a></label>
+				     <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" required>
+				         <option value="" th:selected="${item?.inMember_inmeSeq==null}">id</option>
+				   		 <option value="1" th:selected="${item?.inMember_inmeSeq==1}">ghjk8795</option>
+				   	     <option value="2" th:selected="${item?.inMember_inmeSeq==2}">rtyu7411</option>
+						 <option value="3" th:selected="${item?.inMember_inmeSeq==3}">gfghk85</option>
+						 <option value="4" th:selected="${item?.inMember_inmeSeq==4}">fgh75</option>
+					 </select>	
                   </div>
-                </div>
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label"></label>
                   </div>
@@ -120,19 +129,25 @@
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <label for="" class="form-label">작성자<a style="color: red;">*</a></label>
-					<!--<select class="form-select" id="incdOrder" name="incdOrder" required>
-						<option value="" th:selected="${item?.incdOrder==null}">순서</option>
-					</select>-->
+                    <label for="" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
+					<select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" required>
+						<option value="" th:selected="${item?.inStaff_instSeq==null}">id</option>
+						<option value="1" th:selected="${item?.inStaff_instSeq==1}">미작성</option>
+						<option value="2" th:selected="${item?.inStaff_instSeq==2}">001</option>
+						<option value="3" th:selected="${item?.inStaff_instSeq==3}">002</option>
+						<option value="4" th:selected="${item?.inStaff_instSeq==4}">003</option>
+						<option value="5" th:selected="${item?.inStaff_instSeq==5}">004</option>
+						<option value="6" th:selected="${item?.inStaff_instSeq==6}">005</option>
+					</select>
                   </div>
-				  <div class="col-md-3" ><!-- style = "display:none"-->
+				  <div class="col-md-3" style="display:none">
 					<label for="inQnaBoard_inqbSeq" class="form-label">원천게시글번호</label>
 					<input type="text" class="form-control" id="inQnaBoard_inqbSeq" name="inQnaBoard_inqbSeq" th:value="${item?.inqbSeq}" required readonly>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="inqbContent" class="form-label">내용</label>
+                    <label for="inqbContent" class="form-label">내용<a style="color: red;">*</a></label>
                     <textarea class="form-control" name="inqbContent" style="height: 100px"id="inqbContent" required></textarea>
                     <div class="invalid-feedback">
                       내용을 입력해주세요.
@@ -149,7 +164,7 @@
                   </div>
                   <div class="col-md-10"></div>
                   <div class="col-md-1" align="Right">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst">
                       <a>
                         <i class="bi bi-server"></i>
                       </a>

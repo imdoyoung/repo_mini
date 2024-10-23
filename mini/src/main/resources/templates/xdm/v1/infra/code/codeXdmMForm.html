@@ -91,7 +91,7 @@
                     <input type="text" class="form-control" id="incdSeq" name="incdSeq"  th:value="${item?.incdSeq}" placeholder="자동생성" style="background-color: lightgray;"readonly>
                   </div>
                   <div class="col-md-3">
-                    <label for="incgName" class="form-label">코드그룹 이름</label>
+                    <label for="incgName" class="form-label">코드이름</label>
                     <input type="text" class="form-control" id="incdName" name="incdName" th:value="${item?.incdName}" placeholder="영대소문자,숫자" required>
                     <div class="invalid-feedback">
                       코드를 입력해주세요.
@@ -153,20 +153,20 @@
 						<option value="0" th:selected="${item?.incdDelNy==0}">N</option>
 					</select>
                   </div>
-                 <!-- <div class="col-md-3">
+                  <div class="col-md-3">
                     <label for="incdRegDate" class="form-label">작성일</label>
-                    <input class="form-control" id="incdRegDate" name="incdRegDate" type="datetime" th:value="${ #dates.format(item.incdRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+                    <input class="form-control" id="incdRegDate" name="incdRegDate" type="datetime" th:value="${ #dates.format(item?.incdRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                     <div class="invalid-feedback">
                       입력해주세요.
                     </div>
                   </div>
                   <div class="col-md-3">
                     <label for="incdEdiDate" class="form-label">수정일</label>
-                    <input class="form-control" id="incdEdiDate" name="incdEdiDate" type="datetime" th:value="${ #dates.format(item.incdEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+                    <input class="form-control" id="incdEdiDate" name="incdEdiDate" type="datetime" th:value="${ #dates.format(item?.incdEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                     <div class="invalid-feedback">
                       입력해주세요.
                     </div>
-                  </div>-->
+                  </div>
                 </div>
                 </div>
     

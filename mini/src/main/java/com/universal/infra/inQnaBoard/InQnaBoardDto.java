@@ -16,8 +16,37 @@ public class InQnaBoardDto {
 	private String inStaff_instSeq;
 	private Integer inQnaBoard_inqbSeq;
 	
+	private String inmeSeq;
+	private String inmeId;
+	private String instSeq;
+	private String instId;
 	
 	
+	
+	public String getInmeSeq() {
+		return inmeSeq;
+	}
+	public void setInmeSeq(String inmeSeq) {
+		this.inmeSeq = inmeSeq;
+	}
+	public String getInmeId() {
+		return inmeId;
+	}
+	public void setInmeId(String inmeId) {
+		this.inmeId = inmeId;
+	}
+	public String getInstSeq() {
+		return instSeq;
+	}
+	public void setInstSeq(String instSeq) {
+		this.instSeq = instSeq;
+	}
+	public String getInstId() {
+		return instId;
+	}
+	public void setInstId(String instId) {
+		this.instId = instId;
+	}
 	public Integer getInQnaBoard_inqbSeq() {
 		return inQnaBoard_inqbSeq;
 	}

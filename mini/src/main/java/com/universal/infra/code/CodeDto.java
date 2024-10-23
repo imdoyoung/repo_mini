@@ -16,7 +16,7 @@ public class CodeDto {
 	private Date incdEdiDate;
 	private String inCodegroup_incgSeq;
 	//codegroup
-	private String incgSeq;
+	private String incgSeq="1";
 	private String incgName;
 	
 	
@@ -26,12 +26,12 @@ public class CodeDto {
 	
 	
 	
-	public static List<CodeDto> getCachedCodeArrayList() {
-		return cachedCodeArrayList;
-	}
-	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
-		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
-	}
+//	public static List<CodeDto> getCachedCodeArrayList() {
+//		return cachedCodeArrayList;
+//	}
+//	public static void setCachedCodeArrayList(List<CodeDto> cachedCodeArrayList) {
+//		CodeDto.cachedCodeArrayList = cachedCodeArrayList;
+//	}
 	public String getIncdSeq() {
 		return incdSeq;
 	}

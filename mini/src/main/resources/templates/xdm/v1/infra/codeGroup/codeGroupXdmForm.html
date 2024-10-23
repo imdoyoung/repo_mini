@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>code group</h1>
+      <h1>Code Group</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -74,11 +74,11 @@
               <form name="form" method="post" action="/xdm/v1/infra/codeGroup/codeGroupXdmInst">
                 <div class="row mb-3">
                   <div class="col-md-3">
-                    <label for="incgSeq" class="form-label">코드<a style="color: red;">*</a></label>
+                    <label for="incgSeq" class="form-label">코드그룹 번호<a style="color: red;">*</a></label>
                     <input type="text" class="form-control" id="validationCustom01" name="incgSeq" placeholder="자동생성" style="background-color: lightgray;" required readonly>
                   </div>
                   <div class="col-md-3">
-                    <label for="incgName" class="form-label">코드이름</label>
+                    <label for="incgName" class="form-label">코드그룹 이름</label>
                     <input type="text" name="incgName" class="form-control" id="validationCustom01" placeholder="영대소문자,숫자" required>
                     <div class="invalid-feedback">
                       코드를 입력해주세요.
@@ -136,14 +136,14 @@
                 <div class="row mb-3">
                   <div class="col-md-1">
 					<a href="/xdm/v1/infra/codeGroup/codeGroupXdmList">
-                      <button type="bttton" class="btn btn-outline-dark">
+                      <button type="button" class="btn btn-outline-dark">
                         <i class="bi bi-list-ul"></i>
                       </button>
 					</a>
                   </div>
                   <div class="col-md-10"></div>
                   <div class="col-md-1" align="Right">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" action="redirect:/xdm/v1/infra/codeGroup/codeGroupXdmInst">
                       <a>
                         <i class="bi bi-server"></i>
                       </a>
