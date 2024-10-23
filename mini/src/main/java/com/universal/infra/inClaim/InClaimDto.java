@@ -32,18 +32,14 @@ public class InClaimDto {
 	private String inStaff_instSeq;		// 클레임관리접수 직원Seq
 	
 	// ===== inClaimProcess(클레임관리-검토&처리) ===== //
-//	private String incproSeq;			// 클레임관리검토&처리 Seq
-//	private Integer incproApproveNy;	// 클레임관리검토&처리 지급승인여부
-//	private String incproRejectReason;	// 클레임관리검토&처리 지급반려사유
-//	private Integer incproProType;		// 클레임관리검토&처리 보험상품타입
-//	private Integer incproRequType;		// 클레임관리검토&처리 청구유형
-//	private Integer incproRequReason;	// 클레임관리검토&처리 청구사유
-//	private Integer incproBankType;		// 클레임관리검토&처리 보험금수령은행
-//	private Integer incproCompleteNy;	// 클레임관리검토&처리 처리완료여부
-//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//	private Date incproEdiDate;			// 클레임관리검토&처리 수정일
-//	private Integer incproDelNy;		// 클레임관리검토&처리 삭제여부
-//	private String inClaimAccept_incaccSeq;	// 클레임관리검토&처리-클레임관리접수 Seq
+	private String incproSeq;			// 클레임관리검토&처리 Seq
+	private Integer incproApproveNy;	// 클레임관리검토&처리 지급승인여부
+	private String incproRejectReason;	// 클레임관리검토&처리 지급반려사유
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date incproEdiDate;			// 클레임관리검토&처리 수정일
+	private Integer incproDelNy;		// 클레임관리검토&처리 삭제여부
+	private Integer incproCompleteNy;	// 클레임관리검토&처리 처리완료여부
+	private String inClaimAccept_incaccSeq;	// 클레임관리검토&처리-클레임관리접수 Seq
 	
 //	// ===== inClaimPay(클레임관리-지급) ===== //
 //	private String incpaySeq;			// 클레임관리지급 Seq
@@ -52,17 +48,23 @@ public class InClaimDto {
 //	private Integer incpaySettleNy;		// 클레임관리지급 지급완료여부
 	
 //	// ===== inClaimAssign(클레임관리-배정) ===== //
-//	private String incassSeq;			// 클레임관리배정 Seq
-//	private Integer incassRequType;		// 클레임관리배정 청구유형
-//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//	private Date incassAssigndate;		// 클레임관리배정 배정일
-//	private Integer incassAssignNy;		// 클레임관리배정 배정현황(상태)
-//	private Integer incassCompleteNy;	// 클레임관리배정 클레임완료여부
-//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//	private Date incassRegDate;			// 클레임관리배정 등록일
-//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//	private Date incassEdiDate;			// 클레임관리배정 수정일
-//	private Integer incassDelNy;		// 클레임관리배정 삭제여부
+	private String incassSeq;			// 클레임관리배정 Seq
+	public Integer getIncproCompleteNy() {
+		return incproCompleteNy;
+	}
+	public void setIncproCompleteNy(Integer incproCompleteNy) {
+		this.incproCompleteNy = incproCompleteNy;
+	}
+	private Integer incassRequType;		// 클레임관리배정 청구유형
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date incassAssigndate;		// 클레임관리배정 배정일
+	private Integer incassAssignNy;		// 클레임관리배정 배정현황(상태)
+	private Integer incassCompleteNy;	// 클레임관리배정 클레임완료여부
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date incassRegDate;			// 클레임관리배정 등록일
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date incassEdiDate;			// 클레임관리배정 수정일
+	private Integer incassDelNy;		// 클레임관리배정 삭제여부
 	
 	// ===== inMember(고객) ===== //
 	private String inmeSeq;				// 고객 Seq
@@ -82,6 +84,11 @@ public class InClaimDto {
 	private String instName;			// 담당자 이름
 	private String instId;				// 담당자 이름
 	private String instTel;				// 담당자 연락처
+
+	
+	
+// ========== getter/setter =========== //
+
 	public String getIncaccSeq() {
 		return incaccSeq;
 	}
@@ -196,6 +203,90 @@ public class InClaimDto {
 	public void setInStaff_instSeq(String inStaff_instSeq) {
 		this.inStaff_instSeq = inStaff_instSeq;
 	}
+	public String getIncproSeq() {
+		return incproSeq;
+	}
+	public void setIncproSeq(String incproSeq) {
+		this.incproSeq = incproSeq;
+	}
+	public Integer getIncproApproveNy() {
+		return incproApproveNy;
+	}
+	public void setIncproApproveNy(Integer incproApproveNy) {
+		this.incproApproveNy = incproApproveNy;
+	}
+	public String getIncproRejectReason() {
+		return incproRejectReason;
+	}
+	public void setIncproRejectReason(String incproRejectReason) {
+		this.incproRejectReason = incproRejectReason;
+	}
+	public Date getIncproEdiDate() {
+		return incproEdiDate;
+	}
+	public void setIncproEdiDate(Date incproEdiDate) {
+		this.incproEdiDate = incproEdiDate;
+	}
+	public Integer getIncproDelNy() {
+		return incproDelNy;
+	}
+	public void setIncproDelNy(Integer incproDelNy) {
+		this.incproDelNy = incproDelNy;
+	}
+	public String getInClaimAccept_incaccSeq() {
+		return inClaimAccept_incaccSeq;
+	}
+	public void setInClaimAccept_incaccSeq(String inClaimAccept_incaccSeq) {
+		this.inClaimAccept_incaccSeq = inClaimAccept_incaccSeq;
+	}
+	public String getIncassSeq() {
+		return incassSeq;
+	}
+	public void setIncassSeq(String incassSeq) {
+		this.incassSeq = incassSeq;
+	}
+	public Integer getIncassRequType() {
+		return incassRequType;
+	}
+	public void setIncassRequType(Integer incassRequType) {
+		this.incassRequType = incassRequType;
+	}
+	public Date getIncassAssigndate() {
+		return incassAssigndate;
+	}
+	public void setIncassAssigndate(Date incassAssigndate) {
+		this.incassAssigndate = incassAssigndate;
+	}
+	public Integer getIncassAssignNy() {
+		return incassAssignNy;
+	}
+	public void setIncassAssignNy(Integer incassAssignNy) {
+		this.incassAssignNy = incassAssignNy;
+	}
+	public Integer getIncassCompleteNy() {
+		return incassCompleteNy;
+	}
+	public void setIncassCompleteNy(Integer incassCompleteNy) {
+		this.incassCompleteNy = incassCompleteNy;
+	}
+	public Date getIncassRegDate() {
+		return incassRegDate;
+	}
+	public void setIncassRegDate(Date incassRegDate) {
+		this.incassRegDate = incassRegDate;
+	}
+	public Date getIncassEdiDate() {
+		return incassEdiDate;
+	}
+	public void setIncassEdiDate(Date incassEdiDate) {
+		this.incassEdiDate = incassEdiDate;
+	}
+	public Integer getIncassDelNy() {
+		return incassDelNy;
+	}
+	public void setIncassDelNy(Integer incassDelNy) {
+		this.incassDelNy = incassDelNy;
+	}
 	public String getInmeSeq() {
 		return inmeSeq;
 	}
@@ -292,9 +383,5 @@ public class InClaimDto {
 	public void setInstTel(String instTel) {
 		this.instTel = instTel;
 	}
-	
-
-// ========== getter/setter =========== //
-
 
 }

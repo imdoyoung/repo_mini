@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Forms / Validation - NiceAdmin Bootstrap Template</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="/xdm/v1/template/minions/assets/img/favicon.png" rel="icon">
+<link href="/xdm/v1/template/minions/assets/img/apple-touch-icon.png"
+	rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link
+	href="/xdm/v1/template/minions/assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link href="/xdm/v1/template/minions/assets/vendor/quill/quill.snow.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css"
+	rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/xdm/v1/template/minions/assets/css/style.css"
+	rel="stylesheet">
+
+<!-- by developer -->
+<link rel="stylesheet"
+	href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" />
+ㄴ
+
+<!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<div th:replace="~{/xdm/v1/infra/common/header :: header}"></div>
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+	<div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Page 1</a></li>
+					<li class="breadcrumb-item"><a href="index.html">Page 2</a></li>
+					<li class="breadcrumb-item active">Default</li>
+				</ol>
+			</nav>
+			<h1>InClaimProcessMfom</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">InClaimProcessMfom</h5>
+							<!-- Custom Styled Validation -->
+							<form name="form" id="form" method="post" action="/xdm/v1/infra/inClaim/inClaimProcessXdmUpdt">
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label">
+											클레임검토&처리SEQ
+										</label> 
+										<input type="text" class="form-control" id="incproSeq" name="incproSeq" placeholder="자동생성"
+											th:value="${item?.incproSeq}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 접수번호 </label>
+										<input type="text" class="form-control" id="inClaimAccept_incaccSeq" name="inClaimAccept_incaccSeq" 
+											th:value="${item?.inClaimAccept_incaccSeq}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 보험상품타입 </label>
+										<input type="text" class="form-control" id="incaccProType" name="incaccProType" 
+											th:value="${item?.incaccProType}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객번호 </label> 
+										<input type="text" class="form-control" id="inMember_inmeSeq" name="inMember_inmeSeq" placeholder="이름을 입력해주세요" 
+											th:value="${item?.inMember_inmeSeq}" style="background-color: #E9ECEF;" readonly>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객이름 </label> 
+										<input type="text" class="form-control" id="inmeName" name="inmeName" placeholder="이름을 입력해주세요"
+											th:value="${item?.inmeName}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객성별 </label> 
+										<input type="text" class="form-control" id="inmeGender" name="inmeGender" 
+											th:value="${item?.inmeGender}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객전화번호 </label>
+										<input type="text" class="form-control" id="inmeTel" name="inmeTel" 
+											th:value="${item?.inmeTel}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label">
+											고객주민등록번호앞 </label> <input type="text" class="form-control"
+											id="inmeIdNumberFr" name="inmeIdNumberFr"
+											th:value="${item?.inmeIdNumberFr}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label">
+											고객주민등록번호뒤 </label> <input type="text" class="form-control"
+											id="inmeIdNumberBa" name="inmeIdNumberBa"
+											th:value="${item?.inmeIdNumberBa}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객우편번호 </label>
+										<input type="text" class="form-control" id="inmeZipCode" name="inmeZipCode" 
+											th:value="${item?.inmeZipCode}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객주소 </label> 
+										<input type="text" class="form-control" id="inmeAddr" name="inmeAddr" 
+											th:value="${item?.inmeAddr}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객주소상세 </label>
+										<input type="text" class="form-control" id="inmeAddrDetail" name="inmeAddrDetail" 
+											th:value="${item?.inmeAddrDetail}" style="background-color: #E9ECEF;" readonly>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 고객이메일 </label> <input
+											type="text" class="form-control" id="inmeEmail"
+											name="inmeEmail" th:value="${item?.inmeEmail}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 직업위험군여부 </label> 
+										<input type="text" class="form-control" id="inmeJobNy" name="inmeJobNy" 
+											th:value="${item?.inmeJobNy}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 의료수급권자여부 </label> 
+										<input type="text" class="form-control" id="inmeDiseaseNy" name="inmeDiseaseNy" 
+											th:value="${item?.inmeDiseaseNy}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 청구유형 </label> 
+										<input type="text" class="form-control" id="incaccRequType" name="incaccRequType" 
+											th:value="${item?.incaccRequType}" style="background-color: #E9ECEF;" readonly>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 청구사유 </label> 
+										<input type="text" class="form-control" id="incaccRequReason" name="incaccRequReason" 
+											th:value="${item?.incaccRequReason}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label class="form-label"> 사고날짜 </label> 
+										<input type="text" class="form-control" name="incaccAccDate" id="incaccAccDate"
+											th:value="${#dates.format(item?.incaccAccDate, 'yyyy-MM-dd')}" autocomplete="off" 
+											style="background-color: #E9ECEF;" readonly disabled>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 사고장소 </label> 
+										<input type="text" class="form-control" id="incaccAccPlace" name="incaccAccPlace" 
+											th:value="${item?.incaccAccPlace}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 사고경위 </label> <input
+											type="text" class="form-control" id="incaccAccDesc" name="incaccAccDesc" 
+											th:value="${item?.incaccAccDesc}" style="background-color: #E9ECEF;" readonly>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 병명 </label> 
+										<input type="text" class="form-control" id="incaccDisease" name="incaccDisease" 
+											th:value="${item?.incaccDisease}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 보험금수령은행 </label> 
+										<input type="text" class="form-control" id="incaccSettleRankType" name="incaccSettleRankType" 
+											th:value="${item?.incaccSettleRankType}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 보험금수령계좌번호 </label> 
+										<input type="text" class="form-control" id="incaccSettleAcNo" name="incaccSettleAcNo" placeholder="보험금수령계좌번호를 입력해주세요"
+											th:value="${item?.incaccSettleAcNo}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 약관 </label> 
+										<select class="form-select" id="incaccTosNy" name="incaccTosNy" disabled>
+											<option value="">약관선택</option>
+											<option value="1" th:selected="${item?.incaccTosNy == 1}">Y</option>
+											<option value="0" th:selected="${item?.incaccTosNy == 0}">N</option>
+										</select>
+										<div class="invalid-feedback">약관을 선택해주세요.</div>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 담당직원ID <a
+											style="color: red;">*</a>
+										</label> <input type="text" class="form-control" id="inStaff_instSeq"
+											name="inStaff_instSeq" th:value="${item?.inStaff_instSeq}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 담당직원이름 <a
+											style="color: red;">*</a>
+										</label> <input type="text" class="form-control" id="instName" name="instName" 
+											th:value="${item?.instName}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="" class="form-label">
+											지급승인여부
+											<a style="color: red;">*</a>
+										</label> 
+										<select class="form-select" id="incproApproveNy" name="incproApproveNy">
+											<option value="">지급승인여부선택</option>
+											<option value="1" th:selected="${item?.incproApproveNy == 1}">Y</option>
+											<option value="0" th:selected="${item?.incproApproveNy == 0}">N</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label for="" class="form-label">
+											지급승인반려사유
+										</label> 
+										<input type="text" class="form-control" name="incproRejectReason" id="incproRejectReason" 
+											placeholder="지급승인반려사유를 입력해주세요" th:value="${item?.incproRejectReason}">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-3">
+										<label class="form-label"> 등록날짜 </label> 
+										<input type="datetime" class="form-control" name="incaccRegDate"
+											th:value="${#dates.format(item?.incaccRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+									</div>
+									<div class="col-md-3">
+										<label class="form-label"> 수정날짜 </label> 
+										<input type="datetime" class="form-control" name="incaccEdiDate"
+											th:value="${#dates.format(item?.incproEdiDate, 'yyyy-MM-dd HH:mm:ss')}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 접수처리완료여부 </label> 
+										<select class="form-select" id="incproCompleteNy" name="incproCompleteNy">
+											<option value="">검토&처리여부선택</option>
+											<option value="1" th:selected="${item?.incproCompleteNy == 1}">검토전</option>
+											<option value="2" th:selected="${item?.incproCompleteNy == 2}">검토중</option>
+											<option value="3" th:selected="${item?.incproCompleteNy == 3}">처리완료</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 삭제여부 </label> 
+										<select class="form-select" id="incproDelNy" name="incproDelNy" disabled>
+											<option value="">삭제여부</option>
+											<option value="1" th:selected="${item?.incproDelNy == 1}">Y</option>
+											<option value="0" th:selected="${item?.incproDelNy == 0}">N</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<a href="/xdm/v1/infra/inClaim/inClaimAcceptXdmList">
+											<button type="button" class="btn btn-outline-dark" id="btnList">
+												<i class="bi bi-list-ul"></i>
+											</button>
+										</a>
+										<button type="button" class="btn btn-danger" id="btnDelete">
+											<i class="bi bi-x-lg icon_color_change"></i>
+										</button>
+										<button type="button" class="btn btn-danger" id="btnUelete" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+											<i class="bi bi-trash-fill icon_color_change"></i>
+										</button>
+									</div>
+									<div class="col-md-6" align="Right">
+										<a>
+											<button type="submit" class="btn btn-primary">
+												<i class="bi bi-server"></i>
+											</button>
+										</a>
+									</div>
+								</div>
+							</form>
+							<!-- End Custom Styled Validation -->
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer id="footer" class="footer">
+		<div class="copyright">
+			&copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
+			Reserved
+		</div>
+		<div class="credits">
+			<!-- All the links in the footer should remain intact. -->
+			<!-- You can delete the links only if you purchased the pro version. -->
+			<!-- Licensing information: https://bootstrapmade.com/license/ -->
+			<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+			Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+		</div>
+	</footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/xdm/v1/template/minions/assets/vendor/quill/quill.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+
+	<!-- by developer -->
+	<script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
+	<script
+		src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
+	<script type="text/javascript">
+		
+		// 사고날짜선택
+		window.addEventListener('load', function() {
+
+			$.datetimepicker.setLocale('ko');
+
+			$("#incaccAccDate").datetimepicker({
+				timepicker : false,
+				format : 'Y-m-d'
+			});
+		});
+		
+		// Uelete
+		document.getElementById("btnUelete").onclick = function(){
+			alert("UELETE 확인");
+			let form = document.querySelector("form[name=form]");
+			form.action = "/xdm/v1/infra/inClaim/inCalimProcessXdmUel";
+			form.submit();
+		}
+		
+		// Delete
+		document.getElementById("btnDelete").onclick = function(){
+			alert("DELETE 확인");
+			let form = document.querySelector("form[name=form]");
+			form.action = "/xdm/v1/infra/inClaim/inCalimProcessXdmDel";
+			form.submit();
+		}
+		
+	</script>
+</body>
+
+</html>

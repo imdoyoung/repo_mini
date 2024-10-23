@@ -13,7 +13,7 @@
 			h.incaccProType,
 		    c.inmeSeq,
 		    c.inmeName,
-			h.incaccGender,
+			c.inmeGender,
 		    c.inmeTel,
 		    c.inmeIdNumberFr,
 		    c.inmeIdNumberBa,
@@ -50,43 +50,281 @@
 	</select>
 	
 	<insert id="inClaimAcceptInsert">
-	INSERT INTO inClaimAccept (
-		incaccProType,
-		incaccGender,
-		incaccCompleteNy,
-		incaccRequType,
-		incaccRequReason,
-		incaccAccDate,
-		incaccAccPlace,
-		incaccAccDesc,
-		incaccDisease,
-		incaccSettleRankType,
-		incaccSettleAcNo,
-		incaccTosNy,
-		incaccRegDate,
-		incaccEdiDate,
-		incaccDelNy,
-		inMember_inmeSeq,
-		inStaff_instSeq
-	) VALUES (
-	    #{incaccProType},
-	    #{incaccGender},
-	    #{incaccCompleteNy},
-	    #{incaccRequType},
-	    #{incaccRequReason},
-	    #{incaccAccDate},
-	    #{incaccAccPlace},
-	    #{incaccAccDesc},
-	    #{incaccDisease},
-	    #{incaccSettleRankType},
-	    #{incaccSettleAcNo},
-	    #{incaccTosNy},
-	    now(),
-	    now(),
-	    0,
-	    #{inMember_inmeSeq},
-	    #{inStaff_instSeq}
-	)
+		INSERT INTO inClaimAccept (
+			incaccProType,
+			incaccCompleteNy,
+			incaccRequType,
+			incaccRequReason,
+			incaccAccDate,
+			incaccAccPlace,
+			incaccAccDesc,
+			incaccDisease,
+			incaccSettleRankType,
+			incaccSettleAcNo,
+			incaccTosNy,
+			incaccRegDate,
+			incaccEdiDate,
+			incaccDelNy,
+			inMember_inmeSeq,
+			inStaff_instSeq
+		) VALUES (
+		    #{incaccProType},
+		    1,
+		    #{incaccRequType},
+		    #{incaccRequReason},
+		    #{incaccAccDate},
+		    #{incaccAccPlace},
+		    #{incaccAccDesc},
+		    #{incaccDisease},
+		    #{incaccSettleRankType},
+		    #{incaccSettleAcNo},
+		    #{incaccTosNy},
+		    now(),
+		    now(),
+		    0,
+		    #{inMember_inmeSeq},
+		    #{inStaff_instSeq}
+		)
 	</insert>
+	
+	<select id="inClaimAcceptSelectOne" resultMap="resultMapObj">
+		SELECT
+			h.incaccSeq,
+			h.incaccSubmitNo,
+			h.incaccProType,
+		    c.inmeSeq,
+		    c.inmeName,
+			c.inmeGender,
+		    c.inmeTel,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeZipCode,
+		    c.inmeAddr,
+		    c.inmeAddrDetail,
+		    c.inmeEmail,
+		    c.inmeJobNy,
+		    c.inmeDiseaseNy,
+			h.incaccCompleteNy,
+			h.incaccRequType,
+			h.incaccRequReason,
+			h.incaccAccDate,
+			h.incaccAccPlace,
+			h.incaccAccDesc,
+			h.incaccDisease,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			h.incaccTosNy,
+		    d.instId,
+		    d.instName,
+			h.incaccRegDate,
+			h.incaccEdiDate,
+			h.incaccDelNy,
+			h.inMember_inmeSeq,
+			h.inStaff_instSeq
+		FROM inClaimAccept AS h
+			LEFT JOIN inMember AS c 
+				ON h.inMember_inmeSeq = c.inmeSeq
+		    LEFT JOIN inStaff AS d 
+		    	ON h.inStaff_instSeq = d.instSeq
+		WHERE 1 = 1
+			AND h.incaccSeq = #{incaccSeq}
+	</select>
+	
+	<update id="inClaimAcceptUpdate">
+		UPDATE inClaimAccept
+		SET 
+			incaccRequType = #{incaccRequType},
+			incaccRequReason = #{incaccRequReason},
+			incaccAccDate = #{incaccAccDate},
+			incaccAccPlace = #{incaccAccPlace},
+			incaccAccDesc = #{incaccAccDesc},
+			incaccDisease = #{incaccDisease},
+			incaccSettleRankType = #{incaccSettleRankType},
+			incaccSettleAcNo = #{incaccSettleRankType},
+			incaccEdiDate = now(),
+			incaccDelNy = 0
+		WHERE 1 = 1
+			AND incaccSeq = #{incaccSeq}
+	</update>
+	
+	<update id="inClaimAcceptUelete">
+		UPDATE inClaimAccept
+		SET
+			incaccDelNy = 1
+		WHERE 1 = 1
+			AND incaccSeq = #{incaccSeq}
+	</update>
+	
+	<delete id="inClaimAcceptDelete">
+		DELETE FROM inClaimAccept
+		WHERE 1 = 1
+			AND incaccSeq = #{incaccSeq}
+	</delete>
+	
+	
+	
+	
+	
+	
+<!--========== inClaimProcess ==========-->
+
+	<select id="inClaimProcessSelectList" resultMap="resultMapObj">
+		SELECT 
+			i.incproSeq, 
+			h.incaccSeq,
+			i.incproApproveNy,
+			i.incproRejectReason,
+			h.incaccProType,
+			c.inmeSeq,
+			c.inmeName,
+			c.inmeGender,
+			c.inmeTel,
+			c.inmeIdNumberFr,
+			c.inmeIdNumberBa,
+			c.inmeZipCode,
+			c.inmeAddr,
+			c.inmeAddrDetail,
+			c.inmeEmail,
+			c.inmeJobNy,
+			c.inmeDiseaseNy,
+			h.incaccRequType,
+			h.incaccRequReason,
+			h.incaccAccDate,
+			h.incaccAccPlace,
+			h.incaccAccDesc,
+			h.incaccDisease,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			h.incaccTosNy,
+			d.instId,
+			d.instName,
+			h.incaccRegDate,
+			i.incproEdiDate,
+			i.incproCompleteNy,
+			i.incproDelNy,
+			i.inMember_inmeSeq,
+			i.inStaff_instSeq,
+			i.inClaimAccept_incaccSeq
+		FROM inClaimProcess AS i
+			LEFT JOIN inClaimAccept AS h
+				ON i.inClaimAccept_incaccSeq = h.incaccSeq
+			LEFT JOIN inMember AS c 
+				ON h.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d 
+				ON h.inStaff_instSeq = d.instSeq
+		ORDER BY 
+			i.incproSeq DESC
+	</select>
+	
+	<insert id="inClaimProcessInsert">
+		INSERT INTO inClaimProcess (
+			incproApproveNy,
+			incproRejectReason,
+			incproEdiDate,
+			incproCompleteNy,
+			incproDelNy,
+			inClaimAccept_incaccSeq,
+			inMember_inmeSeq,
+			inStaff_instSeq
+		) VALUES (
+			#{incproApproveNy},
+			#{incproRejectReason},
+			now(),
+			1,
+			0,
+			#{inClaimAccept_incaccSeq},
+			(SELECT 
+				inMember_inmeSeq
+			FROM 
+				inClaimAccept
+			WHERE
+				incaccSeq = #{inClaimAccept_incaccSeq}
+			),
+			(SELECT 
+				inStaff_instSeq 
+			FROM 
+				inClaimAccept 
+			WHERE 
+				incaccSeq = #{inClaimAccept_incaccSeq}
+			)
+		)
+	</insert>
+	
+	<select id="inClaimProcessSelectOne" resultMap="resultMapObj">
+		SELECT
+			i.incproSeq, 
+			h.incaccSeq,
+			i.incproApproveNy,
+			i.incproRejectReason,
+			h.incaccProType,
+			c.inmeSeq,
+			c.inmeName,
+			c.inmeGender,
+			c.inmeTel,
+			c.inmeIdNumberFr,
+			c.inmeIdNumberBa,
+			c.inmeZipCode,
+			c.inmeAddr,
+			c.inmeAddrDetail,
+			c.inmeEmail,
+			c.inmeJobNy,
+			c.inmeDiseaseNy,
+			h.incaccRequType,
+			h.incaccRequReason,
+			h.incaccAccDate,
+			h.incaccAccPlace,
+			h.incaccAccDesc,
+			h.incaccDisease,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			h.incaccTosNy,
+			d.instId,
+			d.instName,
+			i.incproCompleteNy,
+			h.incaccRegDate,
+			i.incproEdiDate,
+			i.incproCompleteNy,
+			i.incproDelNy,
+			i.inMember_inmeSeq,
+			i.inStaff_instSeq,
+			i.inClaimAccept_incaccSeq
+		FROM inClaimProcess AS i
+			LEFT JOIN inClaimAccept AS h
+				ON i.inClaimAccept_incaccSeq = h.incaccSeq
+			LEFT JOIN inMember AS c 
+				ON h.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d 
+				ON i.inStaff_instSeq = d.instSeq
+		WHERE 1 = 1
+			AND i.incproSeq = #{incproSeq}
+	</select>
+	
+	<update id="inClaimProcessUpdate">
+		UPDATE inClaimProcess
+		SET
+			incproApproveNy = #{incproApproveNy},
+			incproRejectReason = #{incproRejectReason},
+			incproCompleteNy = #{incproCompleteNy},
+			incproEdiDate = now(),
+			incproDelNy = 0
+		WHERE 1 = 1
+			AND incproSeq = #{incproSeq}
+	</update>
+	
+	<update id="inClaimProcessUelete">
+		UPDATE inClaimProcess
+		SET
+			incproDelNy = 1
+		WHERE 1 = 1
+			AND incproSeq = #{incproSeq}
+	</update>
+	
+	<delete id="inClaimProcessDelete">
+		DELETE FROM inClaimProcess
+		WHERE 1 = 1
+			AND incproSeq = #{incproSeq}
+	</delete>
+	
+	
 
 </mapper>

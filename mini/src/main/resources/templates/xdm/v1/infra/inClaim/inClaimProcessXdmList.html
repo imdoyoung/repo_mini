@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>InClaimAccept</h1>
+      <h1>InClaimProcess</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -68,7 +68,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">InClaimAccept</h1>
+              <h1 class="card-title">InClaimProcess</h1>
               <form>
                 <div class="row mb-3">
                   <div class="col-md-2">
@@ -146,6 +146,9 @@
 	                      </th>
 	                      <th>#</th>
 	                      <th>Seq</th>
+	                      <th>접수번호</th>
+	                      <th>지급승인여부</th>
+	                      <th>지급반려사유</th>
 	                      <th>보험상품타입</th>
 	                      <th>고객번호</th>
 	                      <th>이름</th>
@@ -178,20 +181,22 @@
 	                  </thead>
 	                  <tbody>
 	                  	<tr th:if="${#lists.isEmpty(list)}">
-	                  		<td colspan="31" align="center">no data!</td>
+	                  		<td colspan="34" align="center">no data!</td>
 	                  	</tr>
 	                    <tr th:if="!${#lists.isEmpty(list)}" th:each="list : ${list}">
 	                      <td>
 	                        <input class="form-check-input" type="checkbox" id="gridCheck1">
 	                      </td>
 	                      <td></td>
+	                      <td th:text="${list.incproSeq}"></td>
 	                      <td th:text="${list.incaccSeq}"></td>
+	                      <td th:text="${list.incproApproveNy}"></td>
+	                      <td th:text="${list.incproRejectReason}"></td>
 	                      <td th:text="${list.incaccProType}"></td>
 	                      <td th:text="${list.inmeSeq}"></td>
 	                      <td>
-	                      	<a th:href="@{/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom(incaccSeq=${list?.incaccSeq})}" th:text="${list.inmeName}"></a>
+	                      	<a th:href="@{/xdm/v1/infra/inClaim/inClaimProcessXdmMfom(incproSeq=${list?.incproSeq})}" th:text="${list.inmeName}"></a>
 	                      </td>
-<!-- 	                      <td th:text="${list.inmeGender}"></td> -->
 	                      <td th:if="${list.inmeGender eq 1}">남자</td>
 	                      <td th:unless="${list.inmeGender eq 1}">여자</td>
 	                      <td th:text="${list.inmeTel}"></td>
@@ -216,11 +221,10 @@
 	                      <td th:text="${list.instId}"></td>
 	                      <td th:text="${list.instName}"></td>
 	                      <td th:text="${#dates.format(list?.incaccRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-	                      <td th:text="${#dates.format(list?.incaccEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-	                      <td th:if="${list.incaccCompleteNy eq 0}">N</td>
-	                      <td th:unless="${list.incaccCompleteNy eq 0}">Y</td>
-	                      <td th:if="${list.incaccDelNy eq 0}">N</td>
-	                      <td th:unless="${list.incaccDelNy eq 0}">Y</td>
+	                      <td th:text="${#dates.format(list?.incproEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+	                      <td th:text="${list.incproCompleteNy}"></td>
+	                      <td th:if="${list.incproDelNy eq 0}">N</td>
+	                      <td th:unless="${list.incproDelNy eq 0}">Y</td>
 	                    </tr>
 	                  </tbody>
 	                </table>
@@ -265,7 +269,7 @@
                         <i class="bi bi-file-earmark-x icon_color_change"></i>
                       </a>
                     </button>
-                    <a href="/xdm/v1/infra/inClaim/inClaimAcceptXdmForm">
+                    <a href="/xdm/v1/infra/inClaim/inClaimProcessXdmForm">
                       <button type="button" class="btn btn-primary">
                         <i class="bi bi-plus-lg icon_color_change"></i>
                       </button>

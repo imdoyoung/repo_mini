@@ -13,6 +13,8 @@ public class InClaimController {
 	@Autowired
 	InClaimService inClaimService;
 	
+// ==================== inCalimAccept ==================== //
+
 	// ClaimAccept: Lsit-inClaimAcceptSelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmList")
 	public String inClaimAcceptXdmList(Model model) {
@@ -32,14 +34,93 @@ public class InClaimController {
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmInst")
 	public String inClaimAcceptXdmInst(InClaimDto inClaimDto) {
 		inClaimService.inClaimAcceptInsert(inClaimDto);
-		System.out.println("inst넘어왔다~");
+		System.out.println("inst 잘 넘어감");
 		return "redirect:/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
 	}
 
 	// ClaimAccept: Mfom
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom")
-	public String inClaimAcceptXdmMfom() {
+	public String inClaimAcceptXdmMfom(InClaimDto inClaimDto, Model model) {
+		model.addAttribute("item", inClaimService.inClaimAcceptSelectOne(inClaimDto));
+		System.out.println("selectOne 잘 넘어감");
 		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom";
 	}
+	
+	// ClaimAccept: Updt
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmUpdt")
+	public String inClaimAcceptXdmUpdt(InClaimDto inClaimDto) {
+		inClaimService.inClaimAcceptUpdate(inClaimDto);
+		System.out.println("updt 잘 넘어감");
+		return "redirect:/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+	}
+	
+	// ClaimAccept: Uel
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmUel")
+	public String inClaimAcceptUelete(InClaimDto inClaimDto) {
+		inClaimService.inClaimAcceptUelete(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+	}
+	
+	// ClaimAccept: Del
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmDel")
+	public String inClaimAcceptDelete(InClaimDto inClaimDto) {
+		inClaimService.inClaimAcceptDelete(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+	}
+	
+	
+// ==================== inCalimProcess ==================== //
+	
+	// ClaimProcess: Lsit-inClaimProcessSelectList
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmList")
+	public String inClaimProcessXdmList(Model model) {
 		
+		model.addAttribute("list", inClaimService.inClaimProcessSelectList());
+		
+		return "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+	}
+	
+	// ClaimProcess: Form
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmForm")
+	public String inClaimProcessXdmForm() {
+		return "/xdm/v1/infra/inClaim/inClaimProcessXdmForm";
+	}
+	
+	// ClaimProcess: Inst
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmInst")
+	public String inClaimProcessXdmInst(InClaimDto inClaimDto) {
+		inClaimService.inClaimProcessInsert(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+	}
+	
+	// ClaimProcess: Mfom
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmMfom")
+	public String inClaimProcessXdmMfom(InClaimDto inClaimDto, Model model) {
+		model.addAttribute("item", inClaimService.inClaimProcessSelectOne(inClaimDto));
+		System.out.println("selectOne 잘 넘어감");
+		return "/xdm/v1/infra/inClaim/inClaimProcessXdmMfom";
+	}
+	
+	// ClaimProcess: Updt
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmUpdt")
+	public String inClaimProcessUpdate(InClaimDto inClaimDto) {
+		inClaimService.inClaimProcessUpdate(inClaimDto);
+		System.out.println("updt 잘 넘어감");
+		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+	}
+	
+	// ClaimProcess: Uel
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inCalimProcessXdmUel")
+	public String inClaimProcessUelete(InClaimDto inClaimDto) {
+		inClaimService.inClaimProcessUelete(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+	}
+	
+	// ClaimProcess: Del
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inCalimProcessXdmDel")
+	public String inClaimProcessDelete(InClaimDto inClaimDto) {
+		inClaimService.inClaimProcessDelete(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+	}
+	
 }

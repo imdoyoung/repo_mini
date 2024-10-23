@@ -78,7 +78,7 @@
 					<li class="breadcrumb-item active">Default</li>
 				</ol>
 			</nav>
-			<h1>InClaimAcceptForm</h1>
+			<h1>InClaimProcessForm</h1>
 		</div>
 		<!-- End Page Title -->
 
@@ -87,39 +87,24 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">InClaimAcceptForm</h5>
+							<h5 class="card-title">InClaimProcessForm</h5>
 							<!-- Custom Styled Validation -->
-							<form name="form" id="form" method="post" action="/xdm/v1/infra/inClaim/inClaimAcceptXdmInst">
+							<form name="form" id="form" method="post" action="/xdm/v1/infra/inClaim/inClaimProcessXdmInst">
 								<div class="row mb-3">
 									<div class="col-md-3">
 										<label for="form-label" class="form-label">
-											접수SEQ
+											클레임검토&처리SEQ
 											<a style="color: red;">*</a>
 										</label> 
-										<input type="text" class="form-control" id="incaccSeq" name="incaccSeq" placeholder="자동생성" style="background-color: #E9ECEF;" readonly>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											보험상품타입
-											<a style="color: red;">*</a>
-										</label> 
-										<select class="form-select" id="incaccProType" name="incaccProType">
-											<option value="">보험상품타입선택</option>
-											<option value="1">실비</option>
-											<option value="2">암</option>
-											<option value="3">치아</option>
-											<option value="4">생명</option>
-											<option value="5">여행자</option>
-										</select>
-										<div class="invalid-feedback">보험상품타입을 선택해주세요.</div>
+										<input type="text" class="form-control" id="incproSeq" name="incproSeq" placeholder="자동생성" style="background-color: #E9ECEF;" readonly>
 									</div>
 									<div class="col-md-3">
 										<label for="form-label" class="form-label">
-											고객번호
+											접수번호
 											<a style="color: red;">*</a>
 										</label> 
-										<select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq">
-											<option value="">고객번호선택</option>
+										<select class="form-select" id="inClaimAccept_incaccSeq" name="inClaimAccept_incaccSeq">
+											<option value="">접수번호선택</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -129,120 +114,23 @@
 								</div>
 								<div class="row mb-3">
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">
-											청구유형
+										<label for="" class="form-label">
+											지급승인여부
 											<a style="color: red;">*</a>
 										</label> 
-										<select class="form-select" id="incaccRequType" name="incaccRequType">
-											<option value="">청구유형선택</option>
-											<option value="1">질병</option>
-											<option value="2">일반상해</option>
-											<option value="3">교통상해</option>
-											<option value="4">업무중상해</option>
-										</select>
-										<div class="invalid-feedback">청구유형을 선택해주세요.</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											청구사유
-											<a style="color: red;">*</a>
-										</label> 
-										<select class="form-select" id="incaccRequReason" name="incaccRequReason">
-											<option value="">청구사유선택</option>
-											<option value="1">입원</option>
-											<option value="2">골절</option>
-											<option value="3">통원</option>
-											<option value="4">수술</option>
-											<option value="5">진단</option>
-											<option value="6">장해</option>
-											<option value="7">사망</option>
-											<option value="8">기타</option>
-										</select>
-										<div class="invalid-feedback">청구사유를 선택해주세요.</div>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<div class="col-md-3">
-										<label class="form-label">
-											사고날짜
-											<a style="color: red;">*</a>
-										</label> 
-										<input type="text" class="form-control" name="incaccAccDate" id="incaccAccDate" placeholder="YYYY-MM-DD" autocomplete="off" readonly>
-										<div class="invalid-feedback">사고날짜를 입력해 주세요.</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											사고장소
-										</label> 
-										<input type="text" class="form-control" name="incaccAccPlace" id="incaccAccPlace" placeholder="사고장소를 입력해주세요" >
-										<div class="invalid-feedback">사고장소를 입력해주세요</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											사고경위
-										</label> 
-										<input type="text" class="form-control" name="incaccAccDesc" id="incaccAccDesc" placeholder="사고경위를 입력해주세요" >
-										<div class="invalid-feedback">사고경위를 입력해주세요</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											병명
-										</label> 
-										<input type="text" class="form-control" name="incaccDisease" id="incaccDisease" placeholder="병명을 입력해주세요" >
-										<div class="invalid-feedback">병명을 입력해주세요</div>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">
-											보험금수령은행
-											<a style="color: red;">*</a>
-										</label> 
-										<select class="form-select" id="incaccSettleRankType" name="incaccSettleRankType">
-											<option value="">보험금수령은행 선택</option>
-											<option value="1">신한은행</option>
-											<option value="2">국민은행</option>
-											<option value="3">농협은행</option>
-											<option value="4">수협은행</option>
-											<option value="5">하나은행</option>
-											<option value="6">기업은행</option>
-											<option value="7">신협</option>
-											<option value="8">카카오뱅크</option>
-											<option value="9">우리은행</option>
-										</select>
-										<div class="invalid-feedback">보험금수령은행을 선택해주세요.</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label" class="form-label">
-											보험금수령계좌번호
-											<a style="color: red;">*</a>
-										</label> 
-										<input type="text" class="form-control" name="incaccSettleAcNo" id="incaccSettleAcNo" placeholder="보험금수령계좌번호를 입력해주세요">
-										<div class="invalid-feedback">보험금수령계좌번호를 입력해주세요.</div>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label" class="form-label">
-											약관
-											<a style="color: red;">*</a>
-										</label> 
-										<select class="form-select" id="incaccTosNy" name="incaccTosNy">
-											<option value="">약관선택</option>
+										<select class="form-select" id="incproApproveNy" name="incproApproveNy">
+											<option value="">지급승인여부선택</option>
 											<option value="1">Y</option>
 											<option value="0">N</option>
 										</select>
-										<div class="invalid-feedback">약관을 선택해주세요.</div>
+										<div class="invalid-feedback">지급승인여부를 선택해주세요.</div>
 									</div>
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">
-											담당직원ID
-											<a style="color: red;">*</a>
+										<label for="" class="form-label">
+											지급승인반려사유
 										</label> 
-										<select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq">
-											<option value="">담당직원ID선택</option>
-											<option value="1">000001</option>
-											<option value="2">000002</option>
-										</select>
-										<div class="invalid-feedback">담당직원ID을 선택해주세요.</div>
+										<input type="text" class="form-control" name="incproRejectReason" id="incproRejectReason" placeholder="지급승인반려사유를 입력해주세요" >
+										<div class="invalid-feedback">지급승인반려사유를 입력해주세요</div>
 									</div>
 								</div>
 								<div class="row mb-3">
