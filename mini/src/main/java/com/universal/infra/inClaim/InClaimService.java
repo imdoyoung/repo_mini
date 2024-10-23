@@ -74,5 +74,32 @@ public class InClaimService {
 	public int inClaimProcessDelete(InClaimDto inClaimDto) {
 		return inClaimDao.inClaimProcessDelete(inClaimDto);
 	}
+	
+	
+	
+	
+// ========== inClaimAssign ========== //
+	
+	// selectList
+	public List<InClaimDto> inClaimAssignSelectList() {
+		return inClaimDao.inClaimAssignSelectList();
+	}
+	
+	// insert
+	public int inClaimAssignInsert(InClaimDto inClaimDto) {
+		return inClaimDao.inClaimAssignInsert(inClaimDto);
+	}
+	
+	// selectOne
+	public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto) {
+		return inClaimDao.inClaimAssignSelectOne(inClaimDto);
+	}
+	
+	// update
+	public int inClaimAssignUpdate(InClaimDto inClaimDto) {
+		return inClaimDao.inClaimAssignUpdate(inClaimDto);
+	}
+		
+
 
 }

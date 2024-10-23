@@ -42,19 +42,13 @@ public class InClaimDto {
 	private String inClaimAccept_incaccSeq;	// 클레임관리검토&처리-클레임관리접수 Seq
 	
 //	// ===== inClaimPay(클레임관리-지급) ===== //
-//	private String incpaySeq;			// 클레임관리지급 Seq
-//	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//	private Date incpaySettleDate;		// 클레임관리지급 최종지급일
-//	private Integer incpaySettleNy;		// 클레임관리지급 지급완료여부
+	private String incpaySeq;			// 클레임관리지급 Seq
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date incpaySettleDate;		// 클레임관리지급 최종지급일
+	private Integer incpaySettleNy;		// 클레임관리지급 지급완료여부
 	
 //	// ===== inClaimAssign(클레임관리-배정) ===== //
 	private String incassSeq;			// 클레임관리배정 Seq
-	public Integer getIncproCompleteNy() {
-		return incproCompleteNy;
-	}
-	public void setIncproCompleteNy(Integer incproCompleteNy) {
-		this.incproCompleteNy = incproCompleteNy;
-	}
 	private Integer incassRequType;		// 클레임관리배정 청구유형
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date incassAssigndate;		// 클레임관리배정 배정일
@@ -84,11 +78,16 @@ public class InClaimDto {
 	private String instName;			// 담당자 이름
 	private String instId;				// 담당자 이름
 	private String instTel;				// 담당자 연락처
+	
+	
+	
+	
+	
 
 	
 	
 // ========== getter/setter =========== //
-
+		
 	public String getIncaccSeq() {
 		return incaccSeq;
 	}
@@ -233,11 +232,35 @@ public class InClaimDto {
 	public void setIncproDelNy(Integer incproDelNy) {
 		this.incproDelNy = incproDelNy;
 	}
+	public Integer getIncproCompleteNy() {
+		return incproCompleteNy;
+	}
+	public void setIncproCompleteNy(Integer incproCompleteNy) {
+		this.incproCompleteNy = incproCompleteNy;
+	}
 	public String getInClaimAccept_incaccSeq() {
 		return inClaimAccept_incaccSeq;
 	}
 	public void setInClaimAccept_incaccSeq(String inClaimAccept_incaccSeq) {
 		this.inClaimAccept_incaccSeq = inClaimAccept_incaccSeq;
+	}
+	public String getIncpaySeq() {
+		return incpaySeq;
+	}
+	public void setIncpaySeq(String incpaySeq) {
+		this.incpaySeq = incpaySeq;
+	}
+	public Date getIncpaySettleDate() {
+		return incpaySettleDate;
+	}
+	public void setIncpaySettleDate(Date incpaySettleDate) {
+		this.incpaySettleDate = incpaySettleDate;
+	}
+	public Integer getIncpaySettleNy() {
+		return incpaySettleNy;
+	}
+	public void setIncpaySettleNy(Integer incpaySettleNy) {
+		this.incpaySettleNy = incpaySettleNy;
 	}
 	public String getIncassSeq() {
 		return incassSeq;

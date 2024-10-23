@@ -326,5 +326,121 @@
 	</delete>
 	
 	
+	
+    <!--========== inClaimAssign ==========-->
+	<select id="inClaimAssignSelectList" resultMap="resultMapObj">  
+		select
+			k.incassSeq,
+			k.incassRequType,    
+			k.incassAssigndate,
+			k.incassAssignNy,
+			k.incassCompleteNy,
+			k.incassRegDate,
+			k.incassEdiDate,
+			k.incassDelNy,
+		    h.incaccSeq,
+		    h.incaccRequType,
+		    d.instName,
+		    d.instId,
+		    d.instTel,
+		    c.inmeName,
+		    c.inmeTel,
+		    k.inClaimAccept_incaccSeq,
+    		k.inMember_inmeSeq,
+    		k.inStaff_instSeq
+		from
+			inClaimAssign as k
+		<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
+		left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
+		left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
+		left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+		order by   
+			incassSeq desc
+	</select>
+	
+	<insert id="inClaimAssignInsert">
+		INSERT INTO inClaimAssign (
+			incassRequType,
+			incassCompleteNy,
+			incassAssigndate,
+			incassAssignNy,
+			incassRegDate,
+			incassEdiDate,
+			incassDelNy,
+			inClaimAccept_incaccSeq,
+		    inMember_inmeSeq,
+		    inStaff_instSeq
+		) VALUES (
+			#{incassRequType},
+			#{incassCompleteNy},
+			#{incassAssigndate},
+			#{incassAssignNy},
+			now(),
+			now(),
+			0,
+			<!-- inClaimAccept_incaccSeq 안에 있는 멤버와 스테프 정보 가져옴 -->
+			#{inClaimAccept_incaccSeq},
+			<!-- 서브쿼리 -->
+			(SELECT 
+				inMember_inmeSeq
+		     FROM 
+		        inClaimAccept
+		     WHERE
+		        incaccSeq = #{inClaimAccept_incaccSeq}
+		     ),
+		     (SELECT 
+		        inStaff_instSeq 
+		     FROM 
+		        inClaimAccept 
+		     WHERE 
+		        incaccSeq = #{inClaimAccept_incaccSeq}
+		     )
+		     
+		)
+	</insert>
+	
+	<select id="inClaimAssignSelectOne" resultMap="resultMapObj">
+		select
+		    k.incassSeq,
+			k.incassRequType,    
+			k.incassAssigndate,
+			k.incassAssignNy,
+			k.incassCompleteNy,
+			k.incassRegDate,
+			k.incassEdiDate,
+			k.incassDelNy,
+		    h.incaccSeq,
+		    h.incaccRequType,
+		    d.instName,
+		    d.instId,
+		    d.instTel,
+		    c.inmeName,
+		    c.inmeTel,
+		    k.inClaimAccept_incaccSeq,
+    		k.inMember_inmeSeq,
+    		k.inStaff_instSeq
+    	from
+    		inClaimAssign as k
+		<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
+		left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
+		left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
+		left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+    	where 1=1 
+    		and k.incassSeq = #{incassSeq}       
+	</select>
+	
+	<update id="inClaimAssignUpdate">
+		update inClaimAssign
+		set 
+			incassRequType = #{incassRequType},    
+			incassAssigndate = #{incassAssigndate},
+			incassAssignNy = #{incassAssignNy},
+			incassCompleteNy = #{incassCompleteNy},
+			incassEdiDate = now(),
+			incassDelNy = 0
+		where 1=1
+			and incassSeq = #{incassSeq}
+	</update>
+	
 
 </mapper>

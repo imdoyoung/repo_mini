@@ -47,4 +47,20 @@ public interface InClaimDao {
 	// ClaimProcess: Delete
 	public int inClaimProcessDelete(InClaimDto inClaimDto);
 	
+
+
+// ========== inClaimAssign ========== // 
+	
+	// selectList
+	public List<InClaimDto> inClaimAssignSelectList();
+	
+	// insert
+	public int inClaimAssignInsert(InClaimDto inClaimDto);
+	
+	// selectOne
+	public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto);
+	
+	// update
+	public int inClaimAssignUpdate(InClaimDto inClaimDto);
+	
 }

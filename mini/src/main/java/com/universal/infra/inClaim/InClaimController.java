@@ -123,4 +123,49 @@ public class InClaimController {
 		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
 	}
 	
+	
+	
+	
+	////////// inClaimAssign (클레임 배정 관리) //////////
+	
+	// selectList
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmList")
+	public String inClaimAssignXdmList(Model model) {
+		 
+		model.addAttribute("assignList", inClaimService.inClaimAssignSelectList());
+		return "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+	}
+	
+	// Form
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmForm")
+	public String inClaimAssignXdmForm() {
+		return "/xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
+	}
+	              
+	// insert 
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmInst")
+	public String inClaimAssignXdmInst(InClaimDto inClaimDto) {
+		
+		inClaimService.inClaimAssignInsert(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+	}
+	
+	// selectOne
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmMForm")
+	public String inClaimAssignXdmMForm(InClaimDto inClaimDto, Model model) {
+		
+		model.addAttribute("assignItem", inClaimService.inClaimAssignSelectOne(inClaimDto));
+		return "/xdm/v1/infra/inClaim/inClaimAssignXdmMForm";
+	}
+	
+	// update 
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmUpdt")
+	public String inClaimAssignXdmUpdt(InClaimDto inClaimDto) {
+		
+		inClaimService.inClaimAssignUpdate(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+	}
+	
+	
+	
 }
