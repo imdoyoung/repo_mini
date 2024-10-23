@@ -124,8 +124,6 @@ public class InClaimController {
 	}
 	
 	
-	
-	
 	////////// inClaimAssign (클레임 배정 관리) //////////
 	
 	// selectList
