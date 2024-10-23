@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.inProduct.InProductDao">
+	<resultMap type="com.universal.infra.inProduct.InProductDto" id="resultMapObj"></resultMap>
+
+	<select id="ProSelectList" resultMap="resultMapObj">
+		SELECT 
+			f.inproSeq,
+		    f.inproType,
+		    f.inproName,
+		    f.inproContent,
+		    f.inproPrice,
+		    f.inproTosNy,
+		    f.inproGrade,
+		    f.inproStartDate,
+		    f.inproEndDate,
+		    f.inproDelNy
+		FROM inproduct f
+		WHERE 1=1
+			<if test="shproType != null and !shproType.equals('')">AND inproType = #{inproType}</if>
+			<if test="shproDelNy != null and !shproDelNy.equals('')">AND inproDelNy = #{shproDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND f.inproStartDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND f.inproEndDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inproSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inproName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			<if test="shproGrade != null and !shproGrade.equals('')">AND inproGrade = #{shproGrade}</if>
+		ORDER BY
+			f.inproSeq desc
+	</select>
+	
+	<select id="ProSelectOne" resultMap="resultMapObj">
+		SELECT 
+			f.inproSeq,
+		    f.inproType,
+		    f.inproName,
+		    f.inproContent,
+		    f.inproPrice,
+		    f.inproTosNy,
+		    f.inproGrade,
+		    f.inproStartDate,
+		    f.inproEndDate,
+		    f.inproDelNy
+		FROM inproduct f
+		WHERE 1=1
+			AND f.inproSeq = #{inproSeq}
+	</select>
+	
+	<insert id="ProInsert">
+		INSERT INTO inproduct (
+		    inproType,
+		    inproName,
+		    inproContent,
+		    inproPrice,
+		    inproTosNy,
+		    inproGrade,
+		    inproStartDate,
+		    inproEndDate,
+		    inproDelNy
+		) VALUES (
+		    #{inproType},
+		    #{inproName},
+		    #{inproContent},
+		    #{inproPrice},
+		    #{inproTosNy},
+		    #{inproGrade},
+		   	now(),
+		   	#{inproEndDate},
+		   	#{inproDelNy}
+		)
+	</insert>
+	
+	<update id="ProUpdate">
+		UPDATE inproduct
+		SET
+		    inproType = #{inproType},
+		    inproName = #{inproName},
+		    inproContent = #{inproContent},
+		    inproPrice = #{inproPrice},
+		    inproTosNy = #{inproTosNy},
+		    inproGrade = #{inproGrade},
+		    inproStartDate = #{inproStartDate},
+		    inproEndDate = #{inproEndDate},
+		    inproDelNy = #{inproDelNy}
+		WHERE 1=1
+			AND inproSeq = #{inproSeq}
+	</update>
 	  
 </mapper>

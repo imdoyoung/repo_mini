@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="com.universal.infra.inContract.InContractDao">
+	<resultMap type="com.universal.infra.inContract.InContractDto" id="resultMapObj"></resultMap>
+	
+	<select id="conSelectList" resultMap="resultMapObj">
+		SELECT 
+			g.inconSeq,
+			g.inconCondition,
+			g.inconSettleDate,
+		    g.inconRefund,
+		    g.inconRegDate,
+		    g.inconEdiDate,
+		    g.inconDelNy,
+			g.inApplication_inappSeq,
+			g.inMember_inmeSeq,
+			g.inStaff_instSeq,
+			g.inProduct_inproSeq,
+		    e.inappRequType,
+		    c.inmeName,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeJobNy,
+		    e.inappRecBankType,
+		    e.inappRecAccNo,
+		    f.inproName,
+		    f.inproGrade,
+		    f.inproContent,
+		    f.inproStartDate,
+		    f.inproEndDate
+		FROM 
+			inContract AS g
+			LEFT JOIN inApplication AS e
+				ON g.inApplication_inappSeq = e.inappSeq
+			LEFT JOIN inMember AS c
+				ON e.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d
+				ON g.inStaff_instSeq = d.instSeq
+			LEFT JOIN inProduct AS f
+				ON g.inProduct_inproSeq = f.inproSeq
+	</select>
+	
+	<insert id="conInsert">
+		INSERT INTO inContract (
+			inconCondition,
+			inconSettleDate,
+		    inconRefund,
+		    inconRegDate,
+		    inconEdiDate,
+		    inconDelNy,
+			inApplication_inappSeq,
+			inMember_inmeSeq,
+			inStaff_instSeq,
+			inProduct_inproSeq
+		) VALUES (
+		    #{inconCondition},
+		    #{inconSettleDate},
+		    #{inconRefund},
+		    #{inconRegDate},
+		    #{inconEdiDate},
+		    #{inconDelNy},
+		    #{inApplication_inappSeq},
+		    #{inMember_inmeSeq},
+		    #{inStaff_instSeq},
+		    #{inProduct_inproSeq}
+		)
+	</insert>
 	  
 </mapper>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface InApplicationDao {
 	
 	// AppselectList
-	public List<InApplicationDto> AppselectList();
+	public List<InApplicationDto> AppselectList(InApplicationVo inApplicationVo);
 	
 	// AppInsert
 	public int AppInsert(InApplicationDto inApplicationDto);

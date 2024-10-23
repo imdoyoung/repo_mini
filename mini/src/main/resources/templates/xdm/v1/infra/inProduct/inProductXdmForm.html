@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Forms / Validation - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/xdm/v1/template/minions/assets/img/favicon.png" rel="icon">
+  <link href="/xdm/v1/template/minions/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/xdm/v1/template/minions/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+      <div th:replace="~{/xdm/v1/infra/common/header :: header}"></div>
+    <!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+      <div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
+    <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Page 1</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Page 2</a></li>
+          <li class="breadcrumb-item active">Default</li>
+        </ol>
+      </nav>
+      <h1>보험상품 관리</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">보험상품</h5>
+              
+              <!-- Custom Styled Validation -->
+              <form class="needs-validation" id="form" name="form" method="post" action="/xdm/v1/infra/inProduct/inProductXdmInst" novalidate>
+              <!-- row 1 start -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">보험상품 타입<a style="color: red;">*</a></label>
+                    <select class="form-select" id="inproType" name="inproType">
+                      <option value="">선택하세요</option>
+                      <option value="1">실비</option>
+                      <option value="2">암</option>
+                      <option value="3">치아</option>
+                      <option value="4">생명</option>
+                      <option value="5">여행자</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      코드 그룹을 선택해주세요.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">상품 no.<a style="color: red;">*</a></label>
+                    <input type="text" class="form-control"
+                    id="inproSeq" name="inproSeq" placeholder="자동생성" 
+                    style="background-color: #E9ECEF;" required readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">보험상품명<a style="color: red;">*</a></label>
+                    <input type="text" class="form-control"
+                    id="inproName" name="inproName" placeholder="보험상품명">
+                  </div>
+                </div>
+                <!-- row 1 end -->
+                <!-- row 2 start -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">납부금액<a style="color: red;">*</a></label>
+                    <input type="text" class="form-control"
+                    id="inproPrice" name="inproPrice" placeholder="납부금액">
+                    <div class="invalid-feedback">
+                      코드 이름 (영문)을 입력해주세요.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">가입대상<a style="color: red;">*</a></label>
+                    <select class="form-select" id="inproGrade" name="inproGrade">
+                      <option value="">선택하세요</option>
+                      <option value="1">성인</option>
+                      <option value="2">어린이</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      코드 그룹을 선택해주세요.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">약관<a style="color: red;">*</a></label>
+                    <select class="form-select" id="inproTosNy" name="inproTosNy">
+                      <option value="">선택하세요</option>
+                      <option value="0">N</option>
+                      <option value="1">Y</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      코드 그룹을 선택해주세요.
+                    </div>
+                  </div>
+                </div>
+                <!-- row 2 end -->
+                <!-- row 3 start -->
+                <div class="row mb-3">
+                 <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">보험가입일</label>
+                    <input type="text" class="form-control"
+                    id="inproStartDate" name="inproStartDate" placeholder="보험가입일">
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">보험가입종료일</label>
+                    <input type="text" class="form-control"
+                    id="inproEndDate" name="inproEndDate" placeholder="보험가입종료일">
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom01" class="form-label">삭제여부</label>
+                    <select class="form-select" id="inproDelNy" name="inproDelNy">
+                      <option value="">선택하세요</option>
+                      <option value="0">N</option>
+                      <option value="1">Y</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- row 3 end -->
+                <!-- row 4 start -->
+                <div class="row mb-3">
+                	<div class="col-md-12">
+	                	<label for="inproContent" class="form-label">설명</label>
+	                	<textarea class="form-control" style="height: 100px" 
+	                	id="inproContent" name="inproContent"></textarea>
+                	</div>
+                </div>
+                <!-- row 4 end -->
+                <div class="row mb-3">
+                  <div class="col-md-1">
+                    <button type="button" class="btn btn-outline-dark">
+                      <a href="/xdm/v1/infra/inProduct/inProductXdmList">
+                        <i class="bi bi-list-ul"></i>
+                      </a>
+                    </button>
+                  </div>
+                  <div class="col-md-10"></div>
+                  <div class="col-md-1" align="Right">
+                    <button type="submit" class="btn btn-primary">
+                      <a>
+                        <i class="bi bi-server"></i>
+                      </a>
+                    </button>
+                  </div>
+                </div>
+              </form><!-- End Custom Styled Validation -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/quill/quill.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+
+</body>
+
+</html>

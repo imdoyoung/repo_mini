@@ -12,8 +12,8 @@ public class InApplicationService {
 	private InApplicationDao inApplicationDao;
 	
 	// AppselectList
-	public List<InApplicationDto> selectList() {
-		List<InApplicationDto> inApplications = inApplicationDao.AppselectList();
+	public List<InApplicationDto> selectList(InApplicationVo inApplicationVo) {
+		List<InApplicationDto> inApplications = inApplicationDao.AppselectList(inApplicationVo);
 		return inApplications;
 		}
 	
