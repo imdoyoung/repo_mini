@@ -31,6 +31,20 @@ public class InMemberService {
 		return inMemberDao.memberUpdate(inMemberDto);
 	}
 	
+	// paging    
+	public int selectOneCount(InMemberVo inMemberVo) {
+		return inMemberDao.selectOneCount(inMemberVo);
+	}
+	
+	// update delete
+    public int membertUelete(InMemberDto inMemberDto) {
+    	return inMemberDao.membertUelete(inMemberDto);
+    }
+    
+    // delete
+// 	public int memberDelete(InMemberDto inMemberDto) {
+// 		return inMemberDao.memberDelete(inMemberDto);
+// 	}
 	
 
 }

@@ -19,4 +19,19 @@ public interface InMemberDao {
 	// update
 	public int memberUpdate(InMemberDto inMemberDto);
 	
+	// paging 
+	public int selectOneCount(InMemberVo inMemberVo);
+	
+	// update delete
+	public int membertUelete(InMemberDto inMemberDto);
+	
+	// delete
+//	public int memberDelete(InMemberDto inMemberDto);      
+	
+	
+	
+	
+	
+
+	
 }

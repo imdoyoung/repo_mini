@@ -5,7 +5,34 @@
 
 	<resultMap type="com.universal.infra.inMember.InMemberDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+		from 
+			inmember c
+		where 1=1 
+			<if test="shDelNy != null and !shDelNy.equals('')">AND inmeDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
+			<if test="shJobNy != null and !shJobNy.equals('')">AND inmeJobNy = #{shJobNy}</if> <!-- 직업위험군여부 여부 -->
+			<if test="shDiseaseNy != null and !shDiseaseNy.equals('')">AND inmeDiseaseNy = #{shDiseaseNy}</if> <!-- 의료수급권자 여부 -->
+			
+			<!-- 검색구분 -->
+			<choose> 
+				<when test="shOption == 1">AND inmeSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			
+			<!-- 달력 -->
+			<choose>
+				<when test="shOptionDate == 1">AND c.inmeRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+				<when test="shOptionDate == 2">AND c.inmeEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>     
+			</choose>
+	</sql>
+	
+	<select id="selectOneCount">
+		select count(*)
+		<include refid="selectCommon"/>
+	</select>
+	
 	<select id="selectMemberList" resultMap="resultMapObj">
+		select aa.* from (
 		select
 			c.inmeSeq,
 			c.inmeName,
@@ -29,28 +56,13 @@
 			c.inmeTosNy,
 			c.inmeMktNy,
 			c.inmeDelNy
-		from 
-			inmember c
-		where 1=1 
-			<if test="shDelNy != null and !shDelNy.equals('')">AND inmeDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
-			<if test="shJobNy != null and !shJobNy.equals('')">AND inmeJobNy = #{shJobNy}</if> <!-- 직업위험군여부 여부 -->
-			<if test="shDiseaseNy != null and !shDiseaseNy.equals('')">AND inmeDiseaseNy = #{shDiseaseNy}</if> <!-- 의료수급권자 여부 -->
-			
-			<!-- 검색구분 -->
-			<choose> 
-				<when test="shOption == 1">AND inmeSeq = #{shValue}</when>
-				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
-			</choose>
-			
-			<!-- 달력 -->
-			<choose>
-				<when test="shOptionDate == 1">AND c.inmeRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
-				<when test="shOptionDate == 2">AND c.inmeEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
-			</choose>
+		<include refid="selectCommon"/>
 		order by
 			c.inmeSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
-	
+
 	<insert id="memberInsert">
 		insert into inmember(
 			inmeName,
@@ -155,11 +167,24 @@
 		where 1=1
 			and inmeSeq = #{inmeSeq}
 	</update>
+	
+	<update id="membertUelete">
+      UPDATE inmember
+      SET
+         inmeDelNy = 1
+      WHERE 1 = 1
+         AND inmeSeq = #{inmeSeq}
+    </update>
+    
+    <!-- 삭제 -->
+<!--     <delete id="memberDelete"> -->
+<!--       DELETE FROM inmember -->
+<!--       WHERE 1 = 1 -->
+<!--          AND inmeSeq = #{inmeSeq} -->
+<!--     </delete> -->
+  
 
-
-
-
-
+ 
 
 	  
 </mapper>

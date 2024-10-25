@@ -73,42 +73,44 @@
             <div class="card-body">
               <h1 class="card-title"></h1>
               <form name="form" method="post" action="/xdm/v1/infra/inStaff/inStaffXdmList">
+              <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+			  <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                 <div class="row mb-3">
                   <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" name="shDelNy">
-                      <option value="">삭제여부</option>
-                      <option value="0">N</option>
-                      <option value="1">Y</option>
+                      <option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+                      <option value="0" th:selected="${vo.shDelNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
                     </select>
                   </div>
                   <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" name="shOptionDate">
-                      <option value="">검색구분</option>
-                      <option value="1">등록일</option> 
-                      <option value="2">수정일</option>
+                      <option value="" th:selected="${vo.shOptionDate == null}">검색구분</option>
+                      <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option> 
+                      <option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
                     </select>
-                  </div>
+                  </div> 
                   <div class="col-md-2">
                     <input type="text" class="form-control" placeholder="시작일" id="shDateStart" name="shDateStart" 
-                    autocomplete="off" style="cursor: pointer;">
+                    autocomplete="off" style="cursor: pointer;" th:value="${#strings.substring(vo.shDateStart, 0, 10)}">
                   </div>
                   <div class="col-md-2">
                     <input type="text" class="form-control" placeholder="종료일" id="shDateEnd" name="shDateEnd" 
-                    autocomplete="off" style="cursor: pointer;">
+                    autocomplete="off" style="cursor: pointer;" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" name="shOption">
-                      <option value="">검색구분</option>
-                      <option value="1">직원번호</option>
-                      <option value="2">직급</option> 
-                      <option value="3">직원이름</option>
-                      <option value="4">직원아이디</option>
+                      <option value="" th:selected="${vo.shOption == null}">검색구분</option>
+                      <option value="1" th:selected="${vo.shOption == 1}">직원번호</option>
+                      <option value="2" th:selected="${vo.shOption == 2}">직급</option> 
+                      <option value="3" th:selected="${vo.shOption == 3}">직원이름</option>
+                      <option value="4" th:selected="${vo.shOption == 4}">직원아이디</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어" name="shValue">
+                    <input type="text" class="form-control" placeholder="검색어" name="shValue" th:value="${vo.shValue}">
                   </div>
                   <div class="col-md-2">
                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
@@ -117,7 +119,7 @@
                 </div>
               <div class="row mb-3">
                 <div class="col-md-2">
-                  <a>Total : 171</a>
+                  <a th:text="'Total : ' +${vo.totalRows}"></a>
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
@@ -146,7 +148,6 @@
                       <th>전화번호</th>
                       <th>이메일</th>  
                       <th>직원아이디</th>
-                      <th>비밀번호</th>
                       <th>등록일</th>
                       <th>수정일</th>
                       <th>삭제여부</th>
@@ -180,7 +181,6 @@
                       <td th:text="${list.instTel}"></td>
                       <td th:text="${list.instEmail}"></td>
                       <td th:text="${list.instId}"></td>
-                      <td th:text="${list.instPw}"></td>
                       <td th:text="${#dates.format(list.instRegDate	, 'yyyy-MM-dd HH:mm:ss')}"></td>
                       <td th:text="${#dates.format(list.instEdiDate	, 'yyyy-MM-dd HH:mm:ss')}"></td>
                       <td th:if="${list.instDelNy eq 0}">N</td>
@@ -191,25 +191,28 @@
                </div>
                 <!-- End Table with stripped rows -->
 
-                <!--pagination start-->
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!--pagination end-->
+					<!--pagination start-->
+                           <nav aria-label="Page navigation example">
+                              <ul class="pagination justify-content-center">
+                                 <li class="page-item disabled" th:if="${vo.startPage gt vo.pageNumToShow}" style="cursor: pointer;">
+                                    <a class="page-link" aria-label="Previous" href="javascript:goList(${vo.startPage - 1})"
+                                       th:attr="onclick=|goList('${vo.startPage - 1}')|"> 
+                                       <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                 </li>
+                                 <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+                                    th:classappend="${num eq vo.thisPage} ? active : ''" style="cursor: pointer;">
+                                    <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+                                 </li>
+                                 <li class="page-item" th:if="${vo.endPage ne vo.totalPages}" style="cursor: pointer;">
+                                    <a class="page-link" aria-label="Next" th:attr="onclick=|goList('${vo.endPage + 1}')|"> 
+                                       <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                 </li>
+                              </ul>
+                           </nav>
+                    <!--pagination end-->
+                
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <button type="button" class="btn btn-danger">
@@ -285,6 +288,18 @@
 		});
 	});
   
+	// paging
+    goList = function (thisPage) {
+		  document.querySelector("input[name=thisPage]").value = thisPage;
+		  form.action = "/xdm/v1/infra/inStaff/inStaffXdmList";
+		  form.submit();
+	}
+    	
+    goList = function (thisPage) {
+    	  document.querySelector("input[name=thisPage]").value = thisPage;
+    	  document.querySelector("form[name=form]").action = "/xdm/v1/infra/inStaff/inStaffXdmList";
+    	  document.querySelector("form[name=form]").submit();
+    }
   
   
   

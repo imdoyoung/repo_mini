@@ -156,24 +156,27 @@
                 
                 </div>
                 
-                <div class="row mb-3">
-                  <div class="col-md-1">
-                    <button type="button" class="btn btn-outline-dark">
-                      <a href="./0_list.html">
-                        <i class="bi bi-list-ul"></i>
-                      </a>
-                    </button>
-                  </div>
-                  
-                  <div class="col-md-10"></div>
-                  
-                  <div class="col-md-1" align="Right">
-                    <button type="submit" class="btn btn-primary">
-                      <a>
-                        <i class="bi bi-server"></i>
-                      </a>
-                    </button>
-                  </div>
+               <div class="row mb-3">
+               	 <div class="col-md-6">
+               		<a href="/xdm/v1/infra/inClaim/inClaimAcceptXdmList">
+               			<button type="button" class="btn btn-outline-dark" id="btnList">
+               				<i class="bi bi-list-ul"></i>
+                        </button>
+                     </a>
+                         <button type="button" class="btn btn-danger" id="btnDelete">
+                            <i class="bi bi-x-lg icon_color_change"></i>
+                         </button>
+                         <button type="button" class="btn btn-danger" id="btnUelete" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                            <i class="bi bi-trash-fill icon_color_change"></i>
+                         </button>
+                     </div>
+                      <div class="col-md-6" align="Right">
+                     	<a>
+                           <button type="submit" class="btn btn-primary">
+                               <i class="bi bi-server"></i>
+                            </button>
+                        </a>
+                      </div>
                 </div>
               </form><!-- End Custom Styled Validation -->
 
@@ -215,6 +218,28 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <script>
+	//Uelete
+  document.getElementById("btnUelete").onclick = function(){
+     alert("UELETE 확인");
+     let form = document.querySelector("form[name=form]");
+     form.action = "/xdm/v1/infra/inStaff/inStaffXdmUdel";
+     form.submit();
+  }
+  
+  // Delete
+  document.getElementById("btnDelete").onclick = function(){
+     alert("DELETE 확인");
+     let form = document.querySelector("form[name=form]");
+     form.action = "/xdm/v1/infra/inStaff/inStaffXdmUdel";
+     form.submit();
+  }
+  
+  
+  
+  
+  </script>
 
 </body>
 

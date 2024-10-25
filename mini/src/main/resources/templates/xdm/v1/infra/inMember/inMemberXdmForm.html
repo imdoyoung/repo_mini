@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>Member</h1>
+      <h1>고객관리</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -68,21 +68,21 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">기본정보</h5>
+              <h5 class="card-title">정보입력</h5>
               
               <!-- Custom Styled Validation -->
               <form method="post" action="/xdm/v1/infra/inMember/inMemberXdmInst">
                 <div class="row mb-3">
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">회원번호<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">회원번호</label>
                     <input type="text" class="form-control" id="validationCustom01" name="inmeSeq" disabled>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">회원이름<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">회원이름</label>
                     <input type="text" class="form-control" id="validationCustom01" name="inmeName">
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">성별<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">성별</label>
                     <select class="form-select" id="validationCustom04" name="inmeGender">
                       <option value="">선택하세요</option>
                       <option value="1">남자</option>
@@ -91,7 +91,7 @@
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">전화번호<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">전화번호</label>
                     <input type="text" class="form-control" id="validationCustom01" name="inmeTel">
                   </div>
                 </div>
@@ -110,21 +110,40 @@
                 </div>
                 
                 <div class="row mb-3">
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">우편번호</label>
-                    <input type="text" class="form-control" id="validationCustom01" name="inmeZipCode" placeholder="">
-                    <div class="invalid-feedback">코드를 입력해주세요	</div>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">주소</label>
-                    <input type="text" class="form-control" id="validationCustom01" name="inmeAddr" placeholder="">
-                    <div class="invalid-feedback">코드를 입력해주세요	</div>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">상세주소</label>
-                    <input type="text" class="form-control" id="validationCustom01" name="inmeAddrDetail" placeholder="">
-                    <div class="invalid-feedback">코드를 입력해주세요	</div>
-                  </div>
+                	<div style="display: flex; flex-direction: column; align-items: left; margin-bottom: 15px;">
+			     		<!-- 우편번호와 버튼 -->
+						<div style="display: flex; flex-direction: row; margin-bottom: 5px;">
+							<input type="text" class="form-control" id="inmeZipCode" name="inmeZipCode" placeholder="우편번호" style="width: 240px; margin-right: 5px;">
+						    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="postcodeBtn">
+					    </div>
+							
+					    <!-- 주소  -->
+					    <div style="margin-bottom: 5px;">
+							 <input type="text" class="form-control" id=inmeAddr name="inmeAddr" placeholder="주소" style="width: 345px;">
+						</div>
+							  
+						<!-- 상세주소 -->
+					    <div style="display: flex; flex-direction: row;">
+							  <input type="text" class="form-control" id="inmeAddrDetail" name="inmeAddrDetail" placeholder="상세주소" style="width: 345px;">
+					    </div>
+							  <div class="invalid-feedback" id="userDetailedAddressFeedback">상세주소를 입력해주세요</div>
+					</div>
+                
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">우편번호</label> -->
+<!--                     <input type="text" class="form-control" id="validationCustom01" name="inmeZipCode" placeholder=""> -->
+<!--                     <div class="invalid-feedback">코드를 입력해주세요	</div> -->
+<!--                   </div> -->
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">주소</label> -->
+<!--                     <input type="text" class="form-control" id="validationCustom01" name="inmeAddr" placeholder=""> -->
+<!--                     <div class="invalid-feedback">코드를 입력해주세요	</div> -->
+<!--                   </div> -->
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">상세주소</label> -->
+<!--                     <input type="text" class="form-control" id="validationCustom01" name="inmeAddrDetail" placeholder=""> -->
+<!--                     <div class="invalid-feedback">코드를 입력해주세요	</div> -->
+<!--                   </div> -->
                 </div>
                 
                 <div class="row mb-3">
@@ -144,7 +163,7 @@
                     <div class="invalid-feedback">코드를 입력해주세요	</div>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">등급<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">등급</label>
                     <select class="form-select" id="validationCustom04" name="inmeGrade">
                       <option value="">선택하세요</option>
                       <option value="1">성인</option>
@@ -156,7 +175,7 @@
                 
                 <div class="row mb-3">
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">직업위험군여부<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">직업위험군여부</label>
                     <select class="form-select" id="validationCustom04" name="inmeJobNy">
                       <option value="">선택하세요</option>
                       <option value="0">N</option>
@@ -165,7 +184,7 @@
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">의료수급권자여부<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">의료수급권자여부</label>
                     <select class="form-select" id="validationCustom04" name="inmeDiseaseNy">
                       <option value="">선택하세요</option>
                       <option value="0">N</option>
@@ -174,7 +193,7 @@
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">은행<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">은행</label>
                     <select class="form-select" id="validationCustom04" name="inmeBankType">
                       <option value="">선택하세요</option>
                       <option value="1">우리은행</option>
@@ -192,32 +211,32 @@
                   </div>
                 </div>
                 
-                <div class="row mb-3">
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">약관동의여부<a style="color: red;">*</a></label>
-                    <select class="form-select" id="validationCustom04" name="inmeTosNy" disabled>
-                      <option value="0">N</option>  
-                      <option value="1">Y</option>
-                    </select>
-                    <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">마케팅동의여부<a style="color: red;">*</a></label>
-                    <select class="form-select" id="validationCustom04" name="inmeMktNy" disabled>
-                      <option value="0">N</option>
-                      <option value="1">Y</option>
-                    </select>
-                    <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
-                  </div>  
-                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">삭제여부<a style="color: red;">*</a></label>
-                    <select class="form-select" id="validationCustom04" name="inmeDelNy" disabled>
-                      <option value="0">N</option>
-                      <option value="1">Y</option>
-                    </select>
-                    <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
-                  </div>
-                </div>
+<!--                 <div class="row mb-3"> -->
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">약관동의여부<a style="color: red;">*</a></label> -->
+<!--                     <select class="form-select" id="validationCustom04" name="inmeTosNy" disabled> -->
+<!--                       <option value="0">N</option>   -->
+<!--                       <option value="1">Y</option> -->
+<!--                     </select> -->
+<!--                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div> -->
+<!--                   </div> -->
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">마케팅동의여부<a style="color: red;">*</a></label> -->
+<!--                     <select class="form-select" id="validationCustom04" name="inmeMktNy" disabled> -->
+<!--                       <option value="0">N</option> -->
+<!--                       <option value="1">Y</option> -->
+<!--                     </select> -->
+<!--                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div> -->
+<!--                   </div>   -->
+<!--                   <div class="col-md-3"> -->
+<!--                     <label for="validationCustom01" class="form-label">삭제여부<a style="color: red;">*</a></label> -->
+<!--                     <select class="form-select" id="validationCustom04" name="inmeDelNy" disabled> -->
+<!--                       <option value="0">N</option> -->
+<!--                       <option value="1">Y</option> -->
+<!--                     </select> -->
+<!--                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div> -->
+<!--                   </div> -->
+<!--                 </div> -->
                 
                 <div class="row mb-3">
                   <div class="col-md-1">
@@ -278,6 +297,62 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <!-- 카카오 우편번호 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
+  <script>
+  // 카카오 주소 API
+  function sample6_execDaumPostcode() {
+      new daum.Postcode({
+          oncomplete: function(data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+              var addr = ''; // 주소 변수
+              var extraAddr = ''; // 참고항목 변수
+
+              //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  addr = data.roadAddress;
+              } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  addr = data.jibunAddress;
+              }
+
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              document.getElementById('inmeZipCode').value = data.zonecode;
+              document.getElementById("inmeAddr").value = addr;
+              // 커서를 상세주소 필드로 이동한다.
+              document.getElementById("inmeAddrDetail").focus();
+          }
+      }).open();
+  }
+  
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 </body>
 

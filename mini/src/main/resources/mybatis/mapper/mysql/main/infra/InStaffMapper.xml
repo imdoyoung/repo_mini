@@ -5,19 +5,7 @@
 	
 	<resultMap type="com.universal.infra.inStaff.InStaffDto" id="resultMapObj"></resultMap>
 	
-	<select id="selectStaffList" resultMap="resultMapObj">
-		select
-			d.instSeq,
-			d.instName,
-			d.instGender,
-			d.instposition,
-			d.instId,
-			d.instPw,
-			d.instTel,
-			d.instEmail,
-			d.instRegDate,
-			d.instEdiDate,
-			d.instDelNy
+	<sql id="selectCommon">
 		from 
 			instaff d
 		where 1=1
@@ -36,9 +24,32 @@
 				<when test="shOptionDate == 1">AND d.instRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
 				<when test="shOptionDate == 2">AND d.instEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
 			</choose>
-			
+	</sql>
+	
+	<select id="selectOneCount">  
+		select count(*)
+		<include refid="selectCommon"/>
+	</select>
+	
+	<select id="selectStaffList" resultMap="resultMapObj">
+		select aa.* from (
+		select
+			d.instSeq,
+			d.instName,
+			d.instGender,
+			d.instposition,
+			d.instId,
+			d.instPw,
+			d.instTel,
+			d.instEmail,
+			d.instRegDate,
+			d.instEdiDate,
+			d.instDelNy
+		<include refid="selectCommon"/>
 		order by
 			d.instSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select> 
 	
 	<insert id="staffInsert">
@@ -101,6 +112,14 @@
 		where 1=1
 			and instSeq = #{instSeq}	
 	</update>
+	
+	<update id="stafftUelete">
+      UPDATE instaff
+      SET
+         instDelNy = 1
+      WHERE 1 = 1
+         AND instSeq = #{instSeq}
+    </update>
 	 
 	
 	

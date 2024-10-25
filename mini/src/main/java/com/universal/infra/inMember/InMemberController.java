@@ -3,7 +3,10 @@ package com.universal.infra.inMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.universal.common.util.UtilDateTime;
 
 @Controller
 public class InMemberController { 
@@ -11,14 +14,22 @@ public class InMemberController {
 	@Autowired
 	InMemberService inMemberService;  
 	
-	// list
+	// selectlist
 	@RequestMapping(value="/xdm/v1/infra/inMember/inMemberXdmList")
-	public String inMemberXdmList(InMemberVo inMemberVo, Model model) {
+	public String inMemberXdmList(@ModelAttribute("vo") InMemberVo inMemberVo, Model model) {
 		
-		inMemberVo.setShDateStart(inMemberVo.getShDateStart() + " 00:00:00"); 
-		inMemberVo.setShDateEnd(inMemberVo.getShDateEnd() + " 23:59:59");
+		/* 초기값 세팅이 없는 경우 사용 */
+		// shDateStart 값이 null 이거나 비어 있을 경우 UtilDateTime 클래스를 실행 
+		inMemberVo.setShDateStart(inMemberVo.getShDateStart() == null || inMemberVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inMemberVo.getShDateStart()));
+		// shDateEnd 값이 null 이거나 비어 있을 경우 UtilDateTime 클래스를 실행 
+		inMemberVo.setShDateEnd(inMemberVo.getShDateEnd() == null || inMemberVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inMemberVo.getShDateEnd()));
 		
-		model.addAttribute("memberList", inMemberService.selectMemberList(inMemberVo));
+		inMemberVo.setParamsPaging(inMemberService.selectOneCount(inMemberVo)); // paging 
+		
+		if(inMemberVo.getTotalRows() > 0) {
+			model.addAttribute("memberList", inMemberService.selectMemberList(inMemberVo));
+		}
+		
 		return "/xdm/v1/infra/inMember/inMemberXdmList";
 	}
 	
@@ -51,6 +62,23 @@ public class InMemberController {
 		inMemberService.memberUpdate(inMemberDto);
 		return "redirect:/xdm/v1/infra/inMember/inMemberXdmList";
 	}
+	
+	// update delete
+	@RequestMapping(value="/xdm/v1/infra/inMember/inMemberXdmUdel")
+	public String inMemberXdmUdel(InMemberDto inMemberDto) {
+		
+		inMemberService.membertUelete(inMemberDto);
+		return "redirect:/xdm/v1/infra/inMember/inMemberXdmList";
+	}
+	
+	// delete
+//	@RequestMapping(value="/xdm/v1/infra/inMember/inMemberXdmDel")
+//	public String inMemberXdmDel(InMemberDto inMemberDto) {
+//		
+//		inMemberService.memberDelete(inMemberDto);
+//		return "redirect:/xdm/v1/infra/inMember/inMemberXdmList";
+//	}
+	
 	
 	       
 

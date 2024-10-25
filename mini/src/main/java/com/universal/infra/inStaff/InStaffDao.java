@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.universal.infra.inMember.InMemberDto;
+
 @Repository
 public interface InStaffDao {
 	
@@ -18,5 +20,11 @@ public interface InStaffDao {
 	
 	// update 
 	public int staffUpdate(InStaffDto inStaffDto);
+	
+	// update delete
+	public int stafftUelete(InStaffDto inStaffDto);
+	
+	// paging
+	public int selectOneCount(InStaffVo inStaffVo);
 
 }
