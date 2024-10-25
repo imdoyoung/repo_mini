@@ -9,16 +9,28 @@ import org.springframework.stereotype.Service;
 public class InContractService {
 
 	@Autowired
-	private InContractDao incontractDao;
+	private InContractDao inContractDao;
 	
 	// conSelectList
-	public List<InContractDto> conSelectList() {
-		List<InContractDto> contracts = incontractDao.conSelectList();
+	public List<InContractDto> conSelectList(InContractVo inContractVo) {
+		List<InContractDto> contracts = inContractDao.conSelectList(inContractVo);
 		return contracts;
 	}
 	
 	// conInsert
 	public int conInsert(InContractDto inContractDto) {
-		return incontractDao.conInsert(inContractDto);
+		return inContractDao.conInsert(inContractDto);
 	}
+	
+	// conSelectOne
+	public InContractDto conSelectOne(InContractDto inContractDto) {
+		return inContractDao.conSelectOne(inContractDto);
+	}
+	
+	// conUpdate
+	public int conUpdate(InContractDto inContractDto) {
+		System.out.println("update ss~");
+		return inContractDao.conUpdate(inContractDto);
+	}
+	
 }

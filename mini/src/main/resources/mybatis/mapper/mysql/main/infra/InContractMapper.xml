@@ -22,6 +22,7 @@
 		    c.inmeIdNumberFr,
 		    c.inmeIdNumberBa,
 		    c.inmeJobNy,
+		    d.instId,
 		    e.inappRecBankType,
 		    e.inappRecAccNo,
 		    f.inproName,
@@ -39,6 +40,62 @@
 				ON g.inStaff_instSeq = d.instSeq
 			LEFT JOIN inProduct AS f
 				ON g.inProduct_inproSeq = f.inproSeq
+		WHERE 1=1
+			<if test="shconCondition != null and !shconCondition.equals('')">AND inconCondition = #{shconCondition}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND g.inconRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND g.inconEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inconSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND inmeIdNumberFr LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 5">AND inmeIdNumberBa LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 6">AND instId LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			<if test="shconDelNy != null and !shconDelNy.equals('')">AND inconDelNy = #{shconDelNy}</if>
+		ORDER BY
+			g.inconSeq desc
+	</select>
+	<select id="conSelectOne" resultMap="resultMapObj">
+		SELECT 
+			g.inconSeq,
+			g.inconCondition,
+			g.inconSettleDate,
+		    g.inconRefund,
+		    g.inconRegDate,
+		    g.inconEdiDate,
+		    g.inconDelNy,
+			g.inApplication_inappSeq,
+			g.inMember_inmeSeq,
+			g.inStaff_instSeq,
+			g.inProduct_inproSeq,
+		    e.inappRequType,
+		    c.inmeName,
+		    c.inmeIdNumberFr,
+		    c.inmeIdNumberBa,
+		    c.inmeJobNy,
+		    d.instId,
+		    e.inappRecBankType,
+		    e.inappRecAccNo,
+		    f.inproName,
+		    f.inproGrade,
+		    f.inproContent,
+		    f.inproStartDate,
+		    f.inproEndDate
+		FROM 
+			inContract AS g
+			LEFT JOIN inApplication AS e
+				ON g.inApplication_inappSeq = e.inappSeq
+			LEFT JOIN inMember AS c
+				ON e.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d
+				ON g.inStaff_instSeq = d.instSeq
+			LEFT JOIN inProduct AS f
+				ON g.inProduct_inproSeq = f.inproSeq
+		WHERE 1=1
+			AND g.inconSeq = #{inconSeq}
 	</select>
 	
 	<insert id="conInsert">
@@ -57,14 +114,31 @@
 		    #{inconCondition},
 		    #{inconSettleDate},
 		    #{inconRefund},
-		    #{inconRegDate},
-		    #{inconEdiDate},
-		    #{inconDelNy},
+		    now(),
+		    now(),
+		    0,
 		    #{inApplication_inappSeq},
-		    #{inMember_inmeSeq},
+		    (SELECT 
+	            inMember_inmeSeq
+	         FROM 
+	            inApplication
+	         WHERE
+	            inappSeq = #{inApplication_inappSeq}
+	         ),
 		    #{inStaff_instSeq},
 		    #{inProduct_inproSeq}
 		)
 	</insert>
+	<update id="conUpdate">
+		UPDATE inContract
+		SET
+			inconCondition = #{inconCondition},
+			inconSettleDate = #{inconSettleDate},
+			inconRefund = #{inconRefund},
+			inconEdiDate = now(),
+			inconDelNy = 0
+		WHERE 1=1
+			AND inconSeq = #{inconSeq}
+	</update>
 	  
 </mapper>

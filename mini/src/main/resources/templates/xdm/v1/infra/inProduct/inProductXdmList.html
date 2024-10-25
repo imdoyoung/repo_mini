@@ -63,7 +63,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>보험상품 관리</h1>
+      <h1>보험상품관리</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -74,8 +74,16 @@
               <h1 class="card-title"></h1>
               <form id="form" name="form" method="post" action="/xdm/v1/infra/inProduct/inProductXdmList">
                 <div class="row mb-3">
+                  <div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shproType" name="shproType">
+                    <select class="form-select" aria-label="Default select example" name="shproDelNy" id="shproDelNy">
+                      <option value="" th:selected="${vo.shproDelNy == null}">삭제여부</option>
+                      <option value="0" th:selected="${vo.shproDelNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shproDelNy == 1}">Y</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <select class="form-select" aria-label="Default select example" name="shproType" id="shproType">
                       <option value="" th:selected="${vo.shproType == null}">보험상품타입</option>
                       <option value="1" th:selected="${vo.shproType == 1}">실비</option>
                       <option value="2" th:selected="${vo.shproType == 2}">암</option>
@@ -85,30 +93,28 @@
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shproDelNy" name="shproDelNy">
-                      <option value="" th:selected="${vo.shproDelNy == null}">삭제여부</option>
-                      <option value="1" th:selected="${vo.shproDelNy == 1}">Y</option>
-                      <option value="0" th:selected="${vo.shproDelNy == 0}">N</option>
+                    <select class="form-select" aria-label="Default select example" name="shproGrade" id="shproGrade">
+                      <option value="" th:selected="${vo.shproGrade == null}">가입대상</option>
+                      <option value="1" th:selected="${vo.shproGrade == 1}">어른</option>
+                      <option value="2" th:selected="${vo.shproGrade == 2}">어린이</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shOptionDate" name="shOptionDate">
+                    <select class="form-select" aria-label="Default select example" name="shOptionDate" id="shOptionDate">
                       <option value="" th:selected="${vo.shOptionDate == null}">날짜선택</option>
                       <option value="1" th:selected="${vo.shOptionDate == 1}">보험가입일</option>
                       <option value="2" th:selected="${vo.shOptionDate == 2}">보험종료일</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" id="shDateStart" name="shDateStart"
+                    <input type="text" class="form-control" placeholder="시작일" id="shDateStart" name="shDateStart"
                     th:value="${#strings.substring(vo.shDateStart, 0, 10)}"
-                    class="form-control mb-3 flatpickr-no-config"
-                    autocomplete="off" placeholder="시작일">
+                    autocomplete="off" style="cursor: pointer;">
                   </div>
                   <div class="col-md-2">
-                    <input type="text" id="shDateEnd" name="shDateEnd"
-                    th:value="${#strings.substring(vo.shDateEnd, 0, 10)}"
-                    class="form-control mb-3 flatpickr-no-config"
-                    autocomplete="off" placeholder="종료일">
+                    <input type="text" class="form-control" placeholder="종료일" id="shDateEnd" name="shDateEnd"
+                    th:value="${#strings.substring(vo.shDateStart, 0, 10)}"
+                    autocomplete="off" style="cursor: pointer;">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -120,16 +126,8 @@
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어"
-                    th:value="${vo.shValue}" onkeyup="enterkey()"
-                    id="shValue" name="shValue">
-                  </div>
-                  <div class="col-md-2">
-                  	<select class="form-select" aria-label="Default select example" id="shproGrade" name="shproGrade">
-                      <option value="" th:selected="${vo.shproGrade == null}">가입대상</option>
-                      <option value="1" th:selected="${vo.shproGrade == 1}">어른</option>
-                      <option value="2" th:selected="${vo.shproGrade == 2}">어린이</option>
-                    </select>
+                    <input type="text" class="form-control" placeholder="검색어" name="shValue"
+                    th:value="${vo.shValue}">
                   </div>
                   <div class="col-md-2">
                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
@@ -137,7 +135,6 @@
                   </div>
                 </div>
               </form>
-
               <div class="row mb-3">
                 <div class="col-md-2">
                   <a>Total : 171</a>
@@ -151,7 +148,6 @@
                     <option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
                   </select>
                 </div>
-
                 <!-- Table with stripped rows -->
                 <!-- Default Table -->
               <div class="divHorizontalScroll">
@@ -165,7 +161,6 @@
                       <th>상품 no.</th>
                       <th>보험상품이름</th>
                       <th>보험상품타입</th>
-                      <th>내용</th>
                       <th>납입금액</th>
                       <th>약관</th>
                       <th>가입대상</th>
@@ -192,7 +187,6 @@
                       <td th:if="${list.inproType eq 3}">치아</td>
                       <td th:if="${list.inproType eq 4}">생명</td>
                       <td th:if="${list.inproType eq 5}">여행자</td>
-                      <td th:text="${list.inproContent}"></td>
                       <td th:text="${list.inproPrice}"></td>
                       <td th:if="${list.inproTosNy eq 0}">거부</td>
                       <td th:unless="${list.inproTosNy eq 0}">동의</td>

@@ -18,7 +18,7 @@
 		    f.inproDelNy
 		FROM inproduct f
 		WHERE 1=1
-			<if test="shproType != null and !shproType.equals('')">AND inproType = #{inproType}</if>
+			<if test="shproType != null and !shproType.equals('')">AND inproType = #{shproType}</if>
 			<if test="shproDelNy != null and !shproDelNy.equals('')">AND inproDelNy = #{shproDelNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND f.inproStartDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>

@@ -52,7 +52,6 @@
     <!-- ======= Sidebar ======= -->
       <div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
     <!-- End Sidebar-->
-   
 
   <main id="main" class="main">
 
@@ -64,7 +63,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>신청서 관리</h1>
+      <h1>보험계약관리</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -72,44 +71,42 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">신청서 관리</h1>
+              <h1 class="card-title"></h1>
               <form id="form" name="form" method="post" action="/xdm/v1/infra/inContract/inContractXdmInst">
-                <div class="row mb-3">
+				<!-- search bar start -->
+				<div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shappRequType" name="shappRequType">
-                      <option value="">보험상품타입</option>
-                      <option value="1" th:selected="${vo.shappRequType == 1}">실비</option>
-                      <option value="2" th:selected="${vo.shappRequType == 2}">암</option>
-                      <option value="3" th:selected="${vo.shappRequType == 3}">치아</option>
-                      <option value="4" th:selected="${vo.shappRequType == 4}">생명</option>
-                      <option value="5" th:selected="${vo.shappRequType == 5}">여행자</option>
+                    <select class="form-select" aria-label="Default select example" id="shconDelNy" name="shconDelNy">
+                      <option value="" th:selected="${vo.shconDelNy == null}">삭제여부</option>
+                      <option value="1" th:selected="${vo.shconDelNy == 1}">Y</option>
+                      <option value="0" th:selected="${vo.shconDelNy == 0}">N</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" id="shappDelNy" name="shappDelNy">
-                      <option value="" th:selected="${vo.shappDelNy == null}">삭제여부</option>
-                      <option value="1" th:selected="${vo.shappDelNy == 1}">Y</option>
-                      <option value="0" th:selected="${vo.shappDelNy == 0}">N</option>
+                    <select class="form-select" aria-label="Default select example" id="shconCondition" name="shconCondition">
+                      <option value="" th:selected="${vo.shconCondition == null}">계약상태</option>
+                      <option value="1" th:selected="${vo.shconCondition == 1}">정상</option>
+                      <option value="2" th:selected="${vo.shconCondition == 2}">유예</option>
+                      <option value="3" th:selected="${vo.shconCondition == 3}">해지</option>
+                      <option value="4" th:selected="${vo.shconCondition == 4}">완납</option>
                     </select>
                   </div>
                   <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" id="shOptionDate" name="shOptionDate">
-                      <option value="" th:selected="${vo.shOptionDate == null}">날짜선택</option>
-                      <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+                      <option value="" th:selected="${vo.shOptionDate == null}">검색구분</option>
+                      <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option> 
                       <option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" id="shDateStart" name="shDateStart"
+                    <input type="text" class="form-control" placeholder="시작일" id="shDateStart" name="shDateStart" 
                     th:value="${#strings.substring(vo.shDateStart, 0, 10)}"
-                    class="form-control mb-3 flatpickr-no-config"
-                    autocomplete="off" placeholder="시작일">
+                    autocomplete="off" style="cursor: pointer;">
                   </div>
                   <div class="col-md-2">
-                    <input type="text" id="shDateEnd" name="shDateEnd"
+                    <input type="text" class="form-control" placeholder="종료일" id="shDateEnd" name="shDateEnd"
                     th:value="${#strings.substring(vo.shDateEnd, 0, 10)}"
-                    class="form-control mb-3 flatpickr-no-config"
-                    autocomplete="off" placeholder="종료일">
+                    autocomplete="off" style="cursor: pointer;">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -121,36 +118,19 @@
                       <option value="3" th:selected="${vo.shOption == 3}">전화번호</option>
                       <option value="4" th:selected="${vo.shOption == 4}">주민번호(앞)</option>
                       <option value="5" th:selected="${vo.shOption == 5}">주민번호(뒤)</option>
-                      <option value="6" th:selected="${vo.shOption == 6}">주소</option>
-                      <option value="7" th:selected="${vo.shOption == 7}">이메일</option>
+                      <option value="6" th:selected="${vo.shOption == 6}">담당자ID</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어"
-                    th:value="${vo.shValue}" onkeyup="enterkey()"
-                    id="shValue" name="shValue">
-                  </div>
-                  <div class="col-md-2">
-                  	<select class="form-select" aria-label="Default select example" id="shmeJobNy" name="shmeJobNy">
-                      <option value="" th:selected="${vo.shmeJobNy == null}">직업위험군여부</option>
-                      <option value="1" th:selected="${vo.shmeJobNy == 1}">Y</option>
-                      <option value="2" th:selected="${vo.shmeJobNy == 2}">N</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                  	<select class="form-select" aria-label="Default select example" id="shmeDiseaseNy" name="shmeDiseaseNy">
-                      <option value="" th:selected="${vo.shmeDiseaseNy == null}">의료수급권자여부</option>
-                      <option value="1" th:selected="${vo.shmeDiseaseNy == 1}">Y</option>
-                      <option value="2" th:selected="${vo.shmeDiseaseNy == 2}">N</option>
-                    </select>
+                    <input type="text" class="form-control" placeholder="검색어" 
+                    th:value="${vo.shValue}" id="shValue" name="shValue">
                   </div>
                   <div class="col-md-2">
                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                     <button type="button" class="btn btn-outline-dark"><i class="bi bi-arrow-clockwise"></i></button>
                   </div>
                 </div>
-              </form>
-
+				<!-- search bar end -->
               <div class="row mb-3">
                 <div class="col-md-2">
                   <a>Total : 171</a>
@@ -164,7 +144,6 @@
                     <option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
                   </select>
                 </div>
-
                 <!-- Table with stripped rows -->
                 <!-- Default Table -->
               <div class="divHorizontalScroll">
@@ -175,29 +154,29 @@
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </th>
                       <th>#</th>
-                      <th>NO.</th>
+                      <th>계약번호</th>
                       <th>신청서 NO.</th>
                       <th>보험상품타입</th>
+                      <th>보험상품이름</th>
+                      <th>계약상태</th>
+                      <th>가입조건(대상)</th>
+                      <th>자동이체일자</th>
                       <th>성함</th>
-                      <th>성별</th>
-                      <th>전화번호</th>
                       <th>주민번호(앞)</th>
                       <th>주민번호(뒤)</th>
                       <th>직업위험군여부</th>
-                      <th>의료수급권자여부</th>
-                      <th>우편번호</th>
-                      <th>주소</th>
-                      <th>상세주소</th>
-                      <th>이메일</th>
-                      <th>은행</th>
-                      <th>계좌번호</th>
-                      <th>약관동의여부</th>
+                      <th>납부계좌은행</th>
+                      <th>납부계좌번호</th>
+                      <th>해지환급금</th>
+                      <th>담당자ID</th>
+                      <th>보험가입일</th>
+                      <th>보험종료일</th>
                       <th>등록일</th>
                       <th>수정일</th>
                       <th>삭제여부</th>
                     </tr>
                     <tr th:if="${#lists.isEmpty(list)}">
-					  <td colspan="22">
+					  <td colspan="21">
 						<p class="fs-0" style="padding-top: 12px;">There are no data!</p>
 					  </td>
 					</tr>
@@ -208,36 +187,38 @@
                         <input class="form-check-input" type="checkbox">
                       </td>
                       <td>#</td>
-                      <td th:text="${list.inappSeq}"></td>
-                      <td th:if="${list.inappRequType eq 1}">실비</td>
-                      <td th:if="${list.inappRequType eq 2}">암</td>
-                      <td th:if="${list.inappRequType eq 3}">치아</td>
-                      <td th:if="${list.inappRequType eq 4}">생명</td>
-                      <td th:if="${list.inappRequType eq 5}">여행자</td>
-                      <td th:text="${list.inmeSeq}"></td>
-                      <td><a th:href="@{/xdm/v1/infra/inApplication/inApplicationXdmMForm(inappSeq=${list.inappSeq})}" th:text="${list.inmeName}"></a></td>
-                      <td th:if="${list.inappGender eq 0}">남성</td>
-                      <td th:unless="${list.inappGender eq 0}">여성</td>
-                      <td th:text="${list.inmeTel}"></td>
+                      <td th:text="${list.inconSeq}"></td>
+                      <td th:text="${list.inApplication_inappSeq}"></td>
+                      <td th:text="${list.inappRequType}"></td>
+                      <td><a th:href="@{/xdm/v1/infra/inContract/inContractXdmMForm(inconSeq=${list.inconSeq})}" th:text="${list.inproName}"></a></td>
+                      <td th:if="${list.inconCondition eq 1}">정상</td>
+                      <td th:if="${list.inconCondition eq 2}">유예</td>
+                      <td th:if="${list.inconCondition eq 3}">해지</td>
+                      <td th:if="${list.inconCondition eq 4}">완납</td>
+                      <td th:if="${list.inproGrade eq 1}">어른</td>
+                      <td th:if="${list.inproGrade eq 2}">어린이</td>
+                      <td th:text="${list.inconSettleDate}"></td>
+                      <td th:text="${list.inmeName}"></td>
                       <td th:text="${list.inmeIdNumberFr}"></td>
                       <td th:text="${list.inmeIdNumberBa}"></td>
                       <td th:if="${list.inmeJobNy eq 0}">N</td>
                       <td th:unless="${list.inmeJobNy eq 0}">Y</td>
-                      <td th:if="${list.inmeDiseaseNy eq 0}">N</td>
-                      <td th:unless="${list.inmeDiseaseNy eq 0}">Y</td>
-                      <td th:text="${list.inmeZipCode}"></td>
-                      <td th:text="${list.inmeAddr}"></td>
-                      <td th:text="${list.inmeAddrDetail}"></td>
-                      <td th:text="${list.inmeEmail}"></td>
-                      <td th:if="${list.inappRecBankType eq 0}">은행1</td>
-                      <td th:unless="${list.inappRecBankType eq 0}">은행2</td>
+                      <td th:if="${list.inappRecBankType eq 1}">신한은행</td>
+                      <td th:if="${list.inappRecBankType eq 2}">국민은행</td>
+                      <td th:if="${list.inappRecBankType eq 3}">농협</td>
+                      <td th:if="${list.inappRecBankType eq 4}">수협</td>
+                      <td th:if="${list.inappRecBankType eq 5}">하나은행</td>
+                      <td th:if="${list.inappRecBankType eq 6}">기업은행</td>
+                      <td th:if="${list.inappRecBankType eq 7}">신협</td>
                       <td th:text="${list.inappRecAccNo}"></td>
-                      <td th:if="${list.inappTosNy eq 0}">거부</td>
-                      <td th:unless="${list.inappTosNy eq 0}">동의</td>
-                      <td th:text="${#dates.format(list.inappRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                      <td th:text="${#dates.format(list.inappEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                      <td th:if="${list.inappDelNy eq 0}">N</td>
-                      <td th:unless="${list.inappDelNy eq 0}">Y</td>
+                      <td th:text="${list.inconRefund}"></td>
+                      <td th:text="${list.instId}"></td>
+                      <td th:text="${#dates.format(list.inproStartDate, 'yyyy-MM-dd')}"></td>
+                      <td th:text="${#dates.format(list.inproEndDate, 'yyyy-MM-dd')}"></td>
+                      <td th:text="${#dates.format(list.inconRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                      <td th:text="${#dates.format(list.inconEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                      <td th:if="${list.inconDelNy eq 0}">N</td>
+                      <td th:unless="${list.inconDelNy eq 0}">Y</td>
                     </tr>
                   </tbody>
                 </table>
@@ -283,13 +264,14 @@
                       </a>
                     </button>
                     <button type="button" class="btn btn-primary">
-                      <a href="/xdm/v1/infra/inApplication/inApplicationXdmForm">
+                      <a href="/xdm/v1/infra/inContract/inContractXdmForm">
                         <i class="bi bi-plus-lg icon_color_change"></i>
                       </a>
                     </button>
                   </div>
                 </div>
             </div>
+          </form>
 		</div>
           </div>
         </div>
@@ -338,7 +320,7 @@
 	//search 조건 유지
 	document.getElementById("changeRowNum").onchange = function () {
 		document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-		form.action = "/xdm/v1/infra/inApplication/inApplicationXdmList";
+		form.action = "/xdm/v1/infra/inContract/inContractXdmList";
 		form.submit();
 	}
 	

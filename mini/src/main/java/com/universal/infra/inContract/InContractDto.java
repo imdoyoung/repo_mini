@@ -40,7 +40,7 @@ public class InContractDto {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date inproEndDate;
 	
-	//inStaff
+	//inStaff(d)
 	private String instId;
 
 	// ------- getter/setter ------
