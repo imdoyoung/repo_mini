@@ -50,7 +50,7 @@ public class InClaimDto {
 //	// ===== inClaimAssign(클레임관리-배정) ===== //
 	private String incassSeq;			// 클레임관리배정 Seq
 	private Integer incassRequType;		// 클레임관리배정 청구유형
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date incassAssigndate;		// 클레임관리배정 배정일
 	private Integer incassAssignNy;		// 클레임관리배정 배정현황(상태)
 	private Integer incassCompleteNy;	// 클레임관리배정 클레임완료여부

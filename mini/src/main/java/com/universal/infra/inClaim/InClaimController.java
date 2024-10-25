@@ -17,9 +17,9 @@ public class InClaimController {
 
 	// ClaimAccept: Lsit-inClaimAcceptSelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmList")
-	public String inClaimAcceptXdmList(Model model) {
+	public String inClaimAcceptXdmList(InClaimVo inClaimVo, Model model) {
 		
-		model.addAttribute("list", inClaimService.inClaimAcceptSelectList());
+		model.addAttribute("list", inClaimService.inClaimAcceptSelectList(inClaimVo));
 		
 		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
 	}
@@ -123,8 +123,47 @@ public class InClaimController {
 		return "redirect:/xdm/v1/infra/inClaim/inClaimProcessXdmList";
 	}
 	
+// ==================== inClaimPay ==================== //
+
+	// inClaimPay: Lsit-inClaimPaySelectList
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmList")
+	public String inClaimPayXdmList(Model model) {
+		model.addAttribute("list", inClaimService.inClaimPaySelectList());
+		return "/xdm/v1/infra/inClaim/inClaimPayXdmList";
+	}
 	
-	////////// inClaimAssign (클레임 배정 관리) //////////
+	// inClaimPay: Form
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmForm")
+	public String inClaimPayXdmForm() {
+		return "/xdm/v1/infra/inClaim/inClaimPayXdmForm";
+	}
+	
+	// inClaimPay: Inst
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmInst")
+	public String inClaimPayInsert(InClaimDto inClaimDto) {
+		inClaimService.inClaimPayInsert(inClaimDto);
+		return "redirect:/xdm/v1/infra/inClaim/inClaimPayXdmList";
+	}
+	
+	// inClaimPay: Mfom
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmMfom")
+	public String inClaimPayXdmMfom(InClaimDto inClaimDto, Model model) {
+		model.addAttribute("item", inClaimService.inClaimPaySelectOne(inClaimDto));
+		System.out.println("selectOne 잘 넘어감");
+		return "/xdm/v1/infra/inClaim/inClaimPayXdmMfom";
+	}
+	
+	// inClaimPay: Updt
+	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmUpdt")
+	public String inClaimPayUpdate(InClaimDto inClaimDto) {
+		inClaimService.inClaimPayUpdate(inClaimDto);
+		System.out.println("updt 잘 넘어감");
+		return "redirect:/xdm/v1/infra/inClaim/inClaimPayXdmList";
+	}
+	
+	
+	
+// ==================== inClaimAssign ==================== //
 	
 	// selectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmList")

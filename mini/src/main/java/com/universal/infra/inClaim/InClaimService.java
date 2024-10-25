@@ -13,8 +13,8 @@ public class InClaimService {
 
 // ==================== inCalimAccept ==================== //
 	// ClaimAccept: List
-	public List<InClaimDto> inClaimAcceptSelectList(){
-		return inClaimDao.inClaimAcceptSelectList();
+	public List<InClaimDto> inClaimAcceptSelectList(InClaimVo inClaimVo){
+		return inClaimDao.inClaimAcceptSelectList(inClaimVo);
 	}
 	
 	// ClaimAccept: Insert
@@ -56,7 +56,6 @@ public class InClaimService {
 	
 	// ClaimProcess: SelectOne
 	public InClaimDto inClaimProcessSelectOne(InClaimDto inClaimDto) {
-		System.out.println();
 		return inClaimDao.inClaimProcessSelectOne(inClaimDto);
 	}
 	
@@ -75,6 +74,29 @@ public class InClaimService {
 		return inClaimDao.inClaimProcessDelete(inClaimDto);
 	}
 	
+	
+	
+// ==================== inCalimProcess ==================== //
+	// ClaimPay: List
+	public List<InClaimDto> inClaimPaySelectList(){
+		return inClaimDao.inClaimPaySelectList();
+	}
+	
+	// ClaimPay: Insert
+	public int inClaimPayInsert(InClaimDto inClaimDto) {
+		return inClaimDao.inClaimPayInsert(inClaimDto);
+	}
+	
+	// ClaimPay: SelectOne
+	public InClaimDto inClaimPaySelectOne(InClaimDto inClaimDto) {
+		System.out.println(inClaimDto.getIncpaySeq());
+		return inClaimDao.inClaimPaySelectOne(inClaimDto);
+	}
+	
+	// ClaimPay: Update
+	public int inClaimPayUpdate(InClaimDto inClaimDto) {
+		return inClaimDao.inClaimPayUpdate(inClaimDto);
+	}
 	
 	
 	

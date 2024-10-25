@@ -47,7 +47,9 @@
 	rel="stylesheet">
 
 <!-- by developer -->
-<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" />ㄴ
+<link rel="stylesheet"
+	href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" />
+ㄴ
 
 <!-- =======================================================
   * Template Name: NiceAdmin
@@ -78,7 +80,7 @@
 					<li class="breadcrumb-item active">Default</li>
 				</ol>
 			</nav>
-			<h1>클레임 배정 관리</h1>
+			<h1>클레임 관리-지급</h1>
 		</div>
 		<!-- End Page Title -->
 
@@ -89,101 +91,79 @@
 						<div class="card-body">
 							<h5 class="card-title">정보수정</h5>
 							<!-- Custom Styled Validation -->
-							<form name="form" id="form" method="post" action="/xdm/v1/infra/inClaim/inClaimAssignXdmUpdt">
+							<form name="form" id="form" method="post" action="/xdm/v1/infra/inClaim/inClaimPayXdmUpdt">
 								<div class="row mb-3">
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">배정관리번호<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="incassSeq" name="incassSeq" th:value="${assignItem?.incassSeq}" placeholder="자동생성"
-										 style="background-color: #E9ECEF;" readonly>
-									</div>
-									<div class="col-md-3">  
-                              			<label for="form-label" class="form-label"> 접수번호 </label>
-                              			<input type="text" class="form-control" id="inClaimAccept_incaccSeq" name="inClaimAccept_incaccSeq" 
-                                 		th:value="${assignItem?.inClaimAccept_incaccSeq}" style="background-color: #E9ECEF;" readonly>
-                           			</div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">청구유형<a style="color: red;">*</a></label> 
-										<select class="form-select" id="incassRequType" name="incassRequType">
-											<option value="" th:selected="${assignItem?.incassRequType == null}">청구유형선택</option>
-											<option value="1" th:selected="${assignItem?.incassRequType == 1}">질병</option>
-											<option value="2" th:selected="${assignItem?.incassRequType == 2}">일반상해</option>
-											<option value="3" th:selected="${assignItem?.incassRequType == 3}">교통상해</option>
-											<option value="4" th:selected="${assignItem?.incassRequType == 4}">업무중상해</option>
-										</select>
-										<div class="invalid-feedback"></div>
+										<label for="form-label" class="form-label">
+											클레임지급SEQ
+										</label> 
+										<input type="text" class="form-control" id="incpaySeq" name="incpaySeq" placeholder="자동생성"
+											th:value="${item?.incpaySeq}" style="background-color: #E9ECEF;" readonly>
 									</div>
 									<div class="col-md-3">
-										<label for="form-label01" class="form-label">클레임완료여부<a style="color: red;">*</a></label> 
-										<select class="form-select" id="incassCompleteNy" name="incassCompleteNy">
-											<option value="" th:selected="${assignItem?.incassCompleteNy == null}">클레임완료여부선택</option>
-											<option value="1" th:selected="${assignItem?.incassCompleteNy == 1}">진행전</option>
-											<option value="2" th:selected="${assignItem?.incassCompleteNy == 2}">진행중</option>
-											<option value="3" th:selected="${assignItem?.incassCompleteNy == 3}">완료</option>
-										</select>
-										<div class="invalid-feedback"></div>
+										<label for="form-label" class="form-label"> 접수번호 </label>
+										<input type="text" class="form-control" id="inClaimAccept_incaccSeq" name="inClaimAccept_incaccSeq" 
+											th:value="${item?.inClaimAccept_incaccSeq}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 보험금수령은행 </label> 
+										<input type="text" class="form-control" id="incaccSettleRankType" name="incaccSettleRankType" 
+											th:value="${item?.incaccSettleRankType}" style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 보험금수령계좌번호 </label> 
+										<input type="text" class="form-control" id="incaccSettleAcNo" name="incaccSettleAcNo"
+											th:value="${item?.incaccSettleAcNo}" style="background-color: #E9ECEF;" readonly>
 									</div>
 								</div>
-								
 								<div class="row mb-3">
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">담당자아이디<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="instId" name="instId" th:value="${assignItem?.instId}"
-										style="background-color: #E9ECEF;" readonly>
+										<label for="form-label" class="form-label"> 보험금수령인 </label> 
+										<input type="text" class="form-control" id="inmeName" name="inmeName" 
+											th:value="${item?.inmeName}" style="background-color: #E9ECEF;" readonly>
 									</div>
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">담당자이름<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="instName" name="instName" th:value="${assignItem?.instName}"
-										style="background-color: #E9ECEF;" readonly>
+										<label for="form-label" class="form-label"> 담당직원ID </label> 
+										<input type="text" class="form-control" id="inStaff_instSeq" name="inStaff_instSeq" 
+											th:value="${item?.inStaff_instSeq}" style="background-color: #E9ECEF;" readonly>
 									</div>
 									<div class="col-md-3">
-										<label for="form-label" class="form-label">담당자연락처<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="instTel" name="instTel" th:value="${assignItem?.instTel}"
-										style="background-color: #E9ECEF;" readonly>
-									</div>
-								</div>
-									
-							    <div class="row mb-3">
-									<div class="col-md-3">
-										<label class="form-label">배정일<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="incassAssigndate" name="incassAssigndate" 
-										th:value="${#dates.format(assignItem?.incassAssigndate, 'yyyy-MM-dd HH:mm:ss')}" 
-										placeholder="YYYY-MM-DD" autocomplete="off" readonly> 
-										<div class="invalid-feedback">사고날짜를 입력해 주세요.</div>
+										<label for="form-label" class="form-label"> 담당직원이름 </label> 
+										<input type="text" class="form-control" id="instName" name="instName" 
+											th:value="${item?.instName}" style="background-color: #E9ECEF;" readonly>
 									</div>
 									<div class="col-md-3">
-										<label for="form-label01" class="form-label">배정현황<a style="color: red;">*</a></label> 
-										<select class="form-select" id="incassAssignNy" name="incassAssignNy">
-											<option value="" th:selected="${assignItem?.incassAssignNy == null}">배정현황선택</option>
-											<option value="0" th:selected="${assignItem?.incassAssignNy == 0}">미배정</option>
-											<option value="1" th:selected="${assignItem?.incassAssignNy == 1}">배정</option>
-										</select>
-										<div class="invalid-feedback"></div>
+										<label for="form-label" class="form-label"> 담당직원연락처  </label> 
+										<input type="text" class="form-control" id="instTel" name="instTel" 
+											th:value="${item?.instName}" style="background-color: #E9ECEF;" readonly>
 									</div>
 								</div>
-								
-							    <div class="row mb-3">
-									<div class="col-md-3">
-										<label for="form-label" class="form-label">신청자이름<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="inmeName" name="inmeName" th:value="${assignItem?.inmeName}"
-										style="background-color: #E9ECEF;" readonly>
-									</div>
-									<div class="col-md-3">
-										<label for="form-label" class="form-label">신청자전화번호<a style="color: red;">*</a></label> 
-										<input type="text" class="form-control" id="inmeTel" name="inmeTel" th:value="${assignItem?.inmeTel}"
-										style="background-color: #E9ECEF;" readonly>
-									</div>  
-								</div> 
-								
 								<div class="row mb-3">
-									<div class="col-md-1">
-										<a href="/xdm/v1/infra/inClaim/inClaimAcceptXdmList"> 
-											<button type="button" class="btn btn-outline-dark">
+									<div class="col-md-3">
+										<label class="form-label"> 보험금지급일 </label> 
+										<input type="datetime" class="form-control" name="incpaySettleDate"
+											th:value="${#dates.format(item?.incpaySettleDate, 'yyyy-MM-dd HH:mm:ss')}"
+											style="background-color: #E9ECEF;" readonly>
+									</div>
+									<div class="col-md-3">
+										<label for="form-label" class="form-label"> 지급완료여부 </label> 
+										<select class="form-select" id="incpaySettleNy" name="incpaySettleNy">
+											<option value="">삭제여부</option>
+											<option value="1" th:selected="${item?.incpaySettleNy == 1}">Y</option>
+											<option value="0" th:selected="${item?.incpaySettleNy == 0}">N</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<a href="/xdm/v1/infra/inClaim/inClaimAcceptXdmList">
+											<button type="button" class="btn btn-outline-dark" id="btnList">
 												<i class="bi bi-list-ul"></i>
 											</button>
 										</a>
 									</div>
-									<div class="col-md-11" align="Right">
-										<a> 
+									<div class="col-md-6" align="Right">
+										<a>
 											<button type="submit" class="btn btn-primary">
 												<i class="bi bi-server"></i>
 											</button>
@@ -243,20 +223,24 @@
 	<!-- Template Main JS File -->
 	<script src="/xdm/v1/template/minions/assets/js/main.js"></script>
 
-	<!-- by developer -->	
+	<!-- by developer -->
 	<script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
-	<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-	
+	<script
+		src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
 	<script type="text/javascript">
-	window.addEventListener('load', function() {
+		
+		// 사고날짜선택
+		window.addEventListener('load', function() {
 
-		$.datetimepicker.setLocale('ko');
+			$.datetimepicker.setLocale('ko');
 
-		$("#incassAssigndate").datetimepicker({
-			timepicker : false,
-			format : 'Y-m-d'
+			$("#incaccAccDate").datetimepicker({
+				timepicker : false,
+				format : 'Y-m-d'
+			});
 		});
-	});
+		
 	</script>
 </body>
 

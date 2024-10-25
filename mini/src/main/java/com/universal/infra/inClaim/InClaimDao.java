@@ -9,7 +9,7 @@ public interface InClaimDao {
 // ==================== inCalimAccept ==================== //
 	
 	// ClaimAccept: List
-	public List<InClaimDto> inClaimAcceptSelectList();
+	public List<InClaimDto> inClaimAcceptSelectList(InClaimVo inClaimVo);
 	
 	// ClaimAccept: Insert
 	public int inClaimAcceptInsert(InClaimDto inClaimDto);
@@ -46,9 +46,23 @@ public interface InClaimDao {
 
 	// ClaimProcess: Delete
 	public int inClaimProcessDelete(InClaimDto inClaimDto);
+
 	
+// ==================== inCalimProcess ==================== //
 
-
+	// ClaimPay: List
+	public List<InClaimDto> inClaimPaySelectList();
+	
+	// ClaimProcess: Insert
+	public int inClaimPayInsert(InClaimDto inClaimDto);
+		
+	// ClaimProcess: SelectOne
+	public InClaimDto inClaimPaySelectOne(InClaimDto inClaimDto);
+	
+	// ClaimProcess: Update
+	public int inClaimPayUpdate(InClaimDto inClaimDto);
+	
+	
 // ========== inClaimAssign ========== // 
 	
 	// selectList

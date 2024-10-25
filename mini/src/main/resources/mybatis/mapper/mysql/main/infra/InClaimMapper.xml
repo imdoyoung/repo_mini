@@ -45,6 +45,10 @@
 				ON h.inMember_inmeSeq = c.inmeSeq
 		    LEFT JOIN inStaff AS d 
 		    	ON h.inStaff_instSeq = d.instSeq
+		WHERE 1 = 1
+			<if test="shIncaccProType != null and !shIncaccProType.equals('')">AND incaccProType = #{shIncaccProType}</if><!-- 보험상품타입 -->
+			<if test="shInmeJobNy != null and !shInmeJobNy.equals('')">AND inmeJobNy = #{shInmeJobNy}</if><!-- 위험직군여부 -->
+			<if test="shInmeDiseaseNy != null and !shInmeDiseaseNy.equals('')">AND inmeDiseaseNy = #{shInmeDiseaseNy}</if><!-- 의료수급권자여부 -->
 		ORDER BY
 			h.incaccSeq DESC
 	</select>
@@ -160,9 +164,6 @@
 		WHERE 1 = 1
 			AND incaccSeq = #{incaccSeq}
 	</delete>
-	
-	
-	
 	
 	
 	
@@ -324,7 +325,97 @@
 		WHERE 1 = 1
 			AND incproSeq = #{incproSeq}
 	</delete>
+
 	
+    <!--========== inClaimpay ==========-->
+	<select id="inClaimPaySelectList" resultMap="resultMapObj">
+		SELECT
+			j.incpaySeq,
+			h.incaccSeq,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			c.inmeName,
+			d.instId,
+			d.instName,
+			d.instTel,
+			j.incpaySettleDate, 
+			j.incpaySettleNy, 
+			j.inClaimAccept_incaccSeq, 
+			j.inMember_inmeSeq,
+			j.inStaff_instSeq
+		FROM inClaimPay AS j
+			LEFT JOIN inClaimAccept AS h
+				ON j.inClaimAccept_incaccSeq = h.incaccSeq
+			LEFT JOIN inMember AS c 
+				ON j.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d 
+				ON j.inStaff_instSeq = d.instSeq
+	</select>
+	
+	<insert id="inClaimPayInsert">
+		INSERT INTO inClaimPay (
+			incpaySettleDate,
+			incpaySettleNy,
+			inClaimAccept_incaccSeq,
+			inMember_inmeSeq,
+			inStaff_instSeq
+		) VALUES (
+			now(),
+			0,
+			#{inClaimAccept_incaccSeq},
+			(SELECT 
+				inMember_inmeSeq
+			FROM 
+				inClaimAccept
+			WHERE
+				incaccSeq = #{inClaimAccept_incaccSeq}
+			),
+			(SELECT 
+				inStaff_instSeq 
+			FROM 
+				inClaimAccept 
+			WHERE 
+				incaccSeq = #{inClaimAccept_incaccSeq}
+			)
+		)
+	</insert>
+	
+	<select id="inClaimPaySelectOne" resultMap="resultMapObj">
+		SELECT
+			j.incpaySeq,
+			h.incaccSeq,
+			h.incaccSettleRankType,
+			h.incaccSettleAcNo,
+			c.inmeName,
+			d.instId,
+			d.instName,
+			d.instTel,
+			j.incpaySettleDate, 
+			j.incpaySettleNy, 
+			j.inClaimAccept_incaccSeq, 
+			j.inMember_inmeSeq,
+			j.inStaff_instSeq
+		FROM inClaimPay AS j
+			LEFT JOIN inClaimAccept AS h
+				ON j.inClaimAccept_incaccSeq = h.incaccSeq
+			LEFT JOIN inMember AS c 
+				ON j.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d 
+				ON j.inStaff_instSeq = d.instSeq
+		WHERE 1 = 1
+			AND incpaySeq = #{incpaySeq}
+	</select>
+	
+	<update id="inClaimPayUpdate">
+		UPDATE inClaimPay
+		SET
+			incpaySettleDate = now(),
+			incpaySettleNy = #{incpaySettleNy}
+		WHERE 1 = 1
+			AND incpaySeq = #{incpaySeq}
+	</update>
+
+
 	
 	
     <!--========== inClaimAssign ==========-->
