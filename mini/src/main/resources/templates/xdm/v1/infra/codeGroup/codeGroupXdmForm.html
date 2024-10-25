@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>Code Group</h1>
+      <h1>코드그룹</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -68,7 +68,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">code group Form</h5>
+              <h5 class="card-title">정보입력</h5>
               
               <!-- Custom Styled Validation -->
               <form name="form" method="post" action="/xdm/v1/infra/codeGroup/codeGroupXdmInst">
@@ -105,7 +105,7 @@
                   </div>
                   <div class="col-md-3">
                     <label for="incgOrder" class="form-label">순서<a style="color: red;">*</a></label>
-					<select class="form-select" id="incgOrder" name="incgOrder" required>
+					  <select class="form-select" id="incgOrder" name="incgOrder" required>
 						<option value="" th:selected="${item?.incgOrder==null}">순서</option>
 						<option value="1" th:selected="${item?.incgOrder==1}">1</option>
 						<option value="2" th:selected="${item?.incgOrder==2}">2</option>
@@ -118,7 +118,7 @@
 						<option value="9" th:selected="${item?.incgOrder==9}">9</option>
 						<option value="10" th:selected="${item?.incgOrder==10}">10</option>
 						<option value="11" th:selected="${item?.incgOrder==11}">11</option>
-					</select>
+					  </select>
 					<div class="invalid-feedback">
                       순서를 선택해주세요.
                     </div>

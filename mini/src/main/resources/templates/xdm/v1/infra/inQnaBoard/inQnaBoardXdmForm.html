@@ -60,7 +60,7 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>QnA게시판</h1>
+      <h1>1:1 QnA</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -68,23 +68,22 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">QnA Form</h5>
-              
+              <h5 class="card-title">QnA 게시글</h5>
               <!-- Custom Styled Validation -->
               <form class="needs-validation" name="form" method="post" autocomplete="off" action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst" novalidate>
 				<div class="row mb-3">
-                <div class="col-md-3">
-                 <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
-                   <select class="form-select" name="inqbType">
-                     <option value="">문의종류</option>
-					 <option value="1">상품관련문의</option>
-					 <option value="2">해지관련문의</option>
-					 <option value="3">지급관련문의</option>
-					 <option value="4">가입조건문의</option>
-					 <option value="5">정보변경문의</option>
-					 <option value="6">기타문의</option>
+                 <div class="col-md-3">
+                   <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
+                     <select class="form-select" name="inqbType" id="inqbType">
+                       <option value="" th:selected="${item?.inqbType==null}">문의종류</option>
+					   <option value="1" th:selected="${item?.inqbType==1}">상품관련문의</option>
+					   <option value="2" th:selected="${item?.inqbType==2}">해지관련문의</option>
+					   <option value="3" th:selected="${item?.inqbType==3}">지급관련문의</option>
+					   <option value="4" th:selected="${item?.inqbType==4}">가입조건문의</option>
+					   <option value="5" th:selected="${item?.inqbType==5}">정보변경문의</option>
+					   <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>
                      <!--<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option>--> 
-                   </select>
+                     </select>
                    <div class="invalid-feedback">
                      문의종류를 선택해주세요.
                    </div>
@@ -99,18 +98,18 @@
                     <label for="inqbTitle" class="form-label">제목<a style="color: red;">*</a></label>
                     <input type="text" name="inqbTitle" class="form-control" id="inqbTitle" placeholder="영대소문자,숫자" required>
                     <div class="invalid-feedback">
-                      제목을 입력해주세요.
+                      코드를 입력해주세요.
                     </div>
                   </div>
 				  <div class="col-md-3">
-                   <label for="" class="form-label">작성자ID<a style="color: red;">*</a></label>
-				     <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" required>
+                    <label for="inMember_inmeSeq" class="form-label">작성자ID</label>
+				      <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" required>
 				         <option value="" th:selected="${item?.inMember_inmeSeq==null}">id</option>
 				   		 <option value="1" th:selected="${item?.inMember_inmeSeq==1}">ghjk8795</option>
 				   	     <option value="2" th:selected="${item?.inMember_inmeSeq==2}">rtyu7411</option>
 						 <option value="3" th:selected="${item?.inMember_inmeSeq==3}">gfghk85</option>
 						 <option value="4" th:selected="${item?.inMember_inmeSeq==4}">fgh75</option>
-					 </select>	
+					  </select>	
                   </div>
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label"></label>
@@ -118,7 +117,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-3">
-                    <label for="inqbCompleteNy"  class="form-label">답변여부<a style="color: red;">*</a></label>
+                    <!--<label for="inqbCompleteNy"  class="form-label">답변여부<a style="color: red;">*</a></label>
                     <select class="form-select" id="inqbCompleteNy" name="inqbCompleteNy" required>
 						<option value="">답변여부</option>
 						<option value="1">Y</option>
@@ -126,19 +125,19 @@
                     </select>
                     <div class="invalid-feedback">
                       사용 여부를 선택해주세요.
-                    </div>
+                    </div>-->
                   </div>
                   <div class="col-md-3">
-                    <label for="" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
+                   <!-- <label for="" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
 					<select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" required>
 						<option value="" th:selected="${item?.inStaff_instSeq==null}">id</option>
 						<option value="1" th:selected="${item?.inStaff_instSeq==1}">미작성</option>
 						<option value="2" th:selected="${item?.inStaff_instSeq==2}">001</option>
 						<option value="3" th:selected="${item?.inStaff_instSeq==3}">002</option>
 						<option value="4" th:selected="${item?.inStaff_instSeq==4}">003</option>
-						<option value="5" th:selected="${item?.inStaff_instSeq==5}">004</option>
-						<option value="6" th:selected="${item?.inStaff_instSeq==6}">005</option>
-					</select>
+						<option value="5" th:selected="${item?.inStaff_instSeq==5}">003</option>
+						<option value="6" th:selected="${item?.inStaff_instSeq==6}">004</option>
+					</select>-->
                   </div>
 				  <div class="col-md-3" style="display:none">
 					<label for="inQnaBoard_inqbSeq" class="form-label">원천게시글번호</label>
@@ -147,7 +146,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="inqbContent" class="form-label">내용<a style="color: red;">*</a></label>
+                    <label for="inqbContent" class="form-label">내용</label>
                     <textarea class="form-control" name="inqbContent" style="height: 100px"id="inqbContent" required></textarea>
                     <div class="invalid-feedback">
                       내용을 입력해주세요.
@@ -174,13 +173,10 @@
               </form><!-- End Custom Styled Validation -->
             </div>
           </div>
-
         </div>
       </div>
     </section>
-
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">

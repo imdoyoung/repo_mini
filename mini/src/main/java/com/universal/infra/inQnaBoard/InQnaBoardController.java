@@ -39,36 +39,43 @@ public class InQnaBoardController {
 	}
 	
 	// MForm 
-		@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm")
-		public String inQnaBoardXdmMForm(InQnaBoardDto inQnaBoardDto,Model model) {
-			model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
-			return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm";
-		}
-		//UPDATE
-		@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUpdt")
-		public String inQnaBoardXdmUpdt(InQnaBoardDto inQnaBoardDto) {
-			inQnaBoardService.update(inQnaBoardDto);
-			return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
-		}	
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm")
+	public String inQnaBoardXdmMForm(InQnaBoardDto inQnaBoardDto,Model model) {
+		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
+		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm";
+	}
 		
-		//insert
-		@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst")
-		public String inQnaBoardXdmInst(InQnaBoardDto inQnaBoardDto) {
-			
-			inQnaBoardService.insert(inQnaBoardDto);
-			return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
-		}	
+	//reMForm 
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm")
+	public String inQnaBoardXdmReMForm(InQnaBoardDto inQnaBoardDto,Model model) {
+		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
+		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm";
+	}
+	//UPDATE
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUpdt")
+	public String inQnaBoardXdmUpdt(InQnaBoardDto inQnaBoardDto) {
+		inQnaBoardService.update(inQnaBoardDto);
+		return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+	}	
 		
-		//Delete
-		@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmDele")
-		public String codeGroupXdmDele(InQnaBoardDto inQnaBoardDto) {
-			inQnaBoardService.delete(inQnaBoardDto);
-			return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
-		}
-		//Uelete
-		@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUele")
-		public String codeGroupXdmUele(InQnaBoardDto inQnaBoardDto) {
-			inQnaBoardService.uelete(inQnaBoardDto);
-			return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
-		}
+	//insert
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst")
+	public String inQnaBoardXdmInst(InQnaBoardDto inQnaBoardDto) {
+		
+		inQnaBoardService.insert(inQnaBoardDto);
+		return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+	}	
+		
+	//Delete
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmDele")
+	public String codeGroupXdmDele(InQnaBoardDto inQnaBoardDto) {
+		inQnaBoardService.delete(inQnaBoardDto);
+		return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+	}
+	//Uelete
+	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUele")
+	public String codeGroupXdmUele(InQnaBoardDto inQnaBoardDto) {
+		inQnaBoardService.uelete(inQnaBoardDto);
+		return "redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+	}
 }

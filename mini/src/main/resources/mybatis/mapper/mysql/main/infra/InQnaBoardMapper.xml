@@ -4,9 +4,9 @@
 
   <resultMap type="com.universal.infra.inQnaBoard.InQnaBoardDto" id="resultMapObj"></resultMap>
 
-   <select id="selectList" resultMap="resultMapObj">
-    SELECT aa.* FROM (
-	  SELECT
+    <select id="selectList" resultMap="resultMapObj">
+      SELECT aa.* FROM (
+	    SELECT
 		  	l.inqbSeq,
 		  	l.inqbType,
 		  	l.inqbTitle,
@@ -27,7 +27,7 @@
 		   (case when inQnaBoard_inqbSeq = 0 then inqbSeq else inQnaBoard_inqbSeq end), inqbRegDate	
 		 ) aa limit #{rowNumToShow} offset #{startRnumForMysql}
 		 
- </select>		   	
+    </select>		   	
 	 <!--   FROM 
 		   mini.inqnaboard l
 	    ORDER BY
@@ -35,47 +35,49 @@
 	</select>-->
 	
 	<sql id="selectCommon">
-	FROM 
-		mini.inqnaboard AS l
-		LEFT JOIN inmember AS c
-	     on c.inmeSeq = l.inMember_inmeSeq
-	   LEFT JOIN inStaff AS d
-	     on d.instSeq = l.inStaff_instSeq
-	WHERE 1=1
-	   <if test="shDelNy !=null and !shDelNy.equals('')">AND inqbDelNy = #{shDelNy}</if>
-	   <if test="shCompleteNy !=null and !shCompleteNy.equals('')">AND inqbCompleteNy = #{shCompleteNy}</if>
-	   <choose>
-		    <when test="shOption==1">AND inqbSeq=#{shValue}</when>
-		    <when test="shOption==2">AND inqbTitle LIKE CONCAT('%',shValue},'%')</when>
-		</choose>
-		
-		<choose>
-			<when test="shOptionDate == 1">AND l.inqbRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shOptionDate == 2">AND l.inqbEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-		</choose>
-	</sql>
-
-	<select id="selectOne" resultMap="resultMapObj">
-	SELECT
-			l.inqbSeq,
-		  	l.inqbType,
-		  	l.inqbTitle,
-		  	l.inqbContent,
-		  	l.inqbCompleteNy,
-		  	l.inqbRegDate,
-		  	l.inqbEdiDate, 
-		  	l.inqbDelNy, 
-		  	l.inMember_inmeSeq, 
-		  	l.inStaff_instSeq,
-		  	l.inQnaBoard_inqbSeq
-		FROM
+		FROM 
 			mini.inqnaboard AS l
 			LEFT JOIN inmember AS c
 		     on c.inmeSeq = l.inMember_inmeSeq
 		   LEFT JOIN inStaff AS d
 		     on d.instSeq = l.inStaff_instSeq
+		WHERE 1=1
+		   <if test="shDelNy !=null and !shDelNy.equals('')">AND inqbDelNy = #{shDelNy}</if>
+		   <if test="shCompleteNy !=null and !shCompleteNy.equals('')">AND inqbCompleteNy = #{shCompleteNy}</if>
+		   <choose>
+			    <when test="shOption==1">AND inqbSeq=#{shValue}</when>
+			    <when test="shOption==2">AND inqbTitle LIKE CONCAT('%',#{shValue},'%')</when>
+			    <when test="shOption==3">AND inqbType LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			
+			<choose>
+				<when test="shOptionDate == 1">AND l.inqbRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND l.inqbEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+
+	<select id="selectOne" resultMap="resultMapObj">
+	   SELECT
+		l.inqbSeq,
+	  	l.inqbType,
+	  	l.inqbTitle,
+	  	l.inqbContent,
+	  	l.inqbCompleteNy,
+	  	l.inqbRegDate,
+	  	l.inqbEdiDate, 
+	  	l.inqbDelNy, 
+	  	l.inMember_inmeSeq, 
+	  	l.inStaff_instSeq,
+	  	l.inQnaBoard_inqbSeq,
+	  	c.inmeSeq
+	   FROM
+		mini.inqnaboard AS l
+		LEFT JOIN inmember AS c
+	      on c.inmeSeq = l.inMember_inmeSeq
+	    LEFT JOIN inStaff AS d
+	      on d.instSeq = l.inStaff_instSeq
 	    WHERE 1=1
-			    AND l.inqbSeq = #{inqbSeq}
+			AND l.inqbSeq = #{inqbSeq}
 	</select>
 	
 	<update id="update">

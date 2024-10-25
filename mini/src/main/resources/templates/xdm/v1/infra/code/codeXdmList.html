@@ -195,7 +195,7 @@
                 </table>
                 <!-- End Table with stripped rows -->
 				<!-- paging s  -->
-				<div class="container-fluid px-0 mt-2 mb-2">
+				<!--<div class="container-fluid px-0 mt-2 mb-2">
 					<div class="row">
 						<div class="col">
 							<ul class="pagination justify-content-center">
@@ -225,7 +225,30 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div>-->
+				
+				<!--pagination start-->
+               <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                     <li class="page-item disabled" th:if="${vo.startPage gt vo.pageNumToShow}" style="cursor: pointer;">
+                        <a class="page-link" aria-label="Previous" href="javascript:goList(${vo.startPage - 1})"
+                           th:attr="onclick=|goList('${vo.startPage - 1}')|"> 
+                           <span aria-hidden="true">&laquo;</span>
+                        </a>
+                     </li>
+                     <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+                        th:classappend="${num eq vo.thisPage} ? active : ''" style="cursor: pointer;">
+                        <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+                     </li>
+                     <li class="page-item" th:if="${vo.endPage ne vo.totalPages}" style="cursor: pointer;">
+                        <a class="page-link" aria-label="Next" th:attr="onclick=|goList('${vo.endPage + 1}')|"> 
+                           <span aria-hidden="true">&raquo;</span>
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+				                           <!--pagination end-->
+				
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <button type="button" class="btn btn-danger">

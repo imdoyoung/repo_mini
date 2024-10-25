@@ -51,7 +51,6 @@
 		  <!-- End Sidebar-->
 
   <main id="main" class="main">
-
     <div class="pagetitle">
       <nav>
         <ol class="breadcrumb">
@@ -60,93 +59,79 @@
           <li class="breadcrumb-item active">Default</li>
         </ol>
       </nav>
-      <h1>qna</h1>
+      <h1>1:1 Qna</h1>
     </div><!-- End Page Title -->
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">qnaMForm</h5>
-              
+              <h5 class="card-title">Qna 수정</h5>
               <!-- Custom Styled Validation -->
               <form class="needs-validation" id="form" name="form"  action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUpdt">
 				<div class="row mb-3">
 	                <div class="col-md-3">
 	                 <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
-	                   <select class="form-select" name="inqbType">
-	                     <option value="">문의종류</option>
-						 <option value="1">상품관련문의</option>
-						 <option value="2">해지관련문의</option>
-						 <option value="3">지급관련문의</option>
-						 <option value="4">가입조건문의</option>
-						 <option value="5">정보변경문의</option>
-						 <option value="6">기타문의</option>
+					   <select class="form-select" id="inqbType" name="inqbType" th:value="${item?.inqbType}" disabled>
+		                  <option value="" th:selected="${item?.inqbType==null}">문의종류</option>
+		 				  <option value="1" th:selected="${item?.inqbType==1}">상품관련문의</option>
+		 				  <option value="2" th:selected="${item?.inqbType==2}">해지관련문의</option>
+		 				  <option value="3" th:selected="${item?.inqbType==3}">지급관련문의</option>
+		 				  <option value="4" th:selected="${item?.inqbType==4}">가입조건문의</option>
+		 				  <option value="5" th:selected="${item?.inqbType==5}">정보변경문의</option>
+		 				  <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>
+	                     <!--<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option>--> 
 	                   </select>
-	                   <div class="invalid-feedback">
-	                     문의종류를 선택해주세요.
-	                   </div>
+	                   <div class="invalid-feedback">문의종류를 선택해주세요.</div>
 	                 </div>
 					</div> 
-				
 				<div class="row mb-3">
                   <div class="col-md-3">
                     <label for="inqbSeq" class="form-label">번호<a style="color: red;">*</a></label>
-                    <input type="text" class="form-control" id="inqbSeq" name="inqbSeq"  th:value="${item?.inqbSeq}" placeholder="자동생성" style="background-color: lightgray;"readonly>
+                     <input type="text" class="form-control" id="inqbSeq" name="inqbSeq"  th:value="${item?.inqbSeq}" placeholder="자동생성" style="background-color: lightgray;"readonly>
                   </div>
                   <div class="col-md-3">
                     <label for="inqbTitle" class="form-label">제목</label>
-                    <input type="text" class="form-control" id="inqbTitle" name="inqbTitle" th:value="${item?.inqbTitle}" placeholder="영대소문자,숫자" required>
-                    <div class="invalid-feedback">
-                      코드를 입력해주세요.
-                    </div>
+                     <input type="text" class="form-control" id="inqbTitle" name="inqbTitle" th:value="${item?.inqbTitle}" placeholder="영대소문자,숫자" required>
+                      <div class="invalid-feedback">코드를 입력해주세요.</div>
                   </div>
-                 <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">작성자ID</label>
-				     <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" required>
-				         <option value="" th:selected="${item?.inMember_inmeSeq==null}">id</option>
-				   		 <option value="1" th:selected="${item?.inMember_inmeSeq==1}">ghjk8795</option>
-				   	     <option value="2" th:selected="${item?.inMember_inmeSeq==2}">rtyu7411</option>
-						 <option value="3" th:selected="${item?.inMember_inmeSeq==3}">gfghk85</option>
-						 <option value="4" th:selected="${item?.inMember_inmeSeq==4}">fgh75</option>
-					 </select>
-                  </div>
-                  <!--<div class="col-md-3">
+                 <!--<div class="col-md-3">
+					<label for="inMember_inmeSeq" class="form-label">작성자ID</label>
+					   <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" th:value="${item?.inMember_inmeSeq}" disabled>
+					       <option value="" th:selected="${item?.inmeSeq==null}">id</option>
+					   	   <option value="1" th:selected="${item?.inmeSeq==1}">ghjk8795</option>
+					   	   <option value="2" th:selected="${item?.inmeSeq==2}">rtyu7411</option>
+						   <option value="3" th:selected="${item?.inmeSeq==3}">gfghk85</option>
+						   <option value="4" th:selected="${item?.inmeSeq==4}">fgh75</option>
+					   </select>
+                  </div>-->
+				  <div class="col-md-3">
+				  <label for="form-label01" class="form-label"> 작성자ID </label> <input
+				  type="text" class="form-control" id="inMember_inmeSeq"
+				  name="inMember_inmeSeq" placeholder="이름을 입력해주세요"
+				  th:value="${item?.inMember_inmeSeq}"
+				  style="background-color: #E9ECEF;" readonly>
+				  </div>
+                 <!-- <div class="col-md-3">
                     <label for="validationCustom01" class="form-label"></label>
                   </div>-->
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-3">
-                    <label for="inqbCompleteNy" class="form-label">답변여부<a style="color: red;">*</a></label>
-                    <select class="form-select" id="inqbCompleteNy" name="inqbCompleteNy" th:value="${item?.inqbCompleteNy}" required>
+                    <label for="inqbCompleteNy" class="form-label">작성여부<a style="color: red;">*</a></label>
+                    <select class="form-select" id="inqbCompleteNy" name="inqbCompleteNy" disabled>
 						<option value="1" th:selected="${item?.inqbCompleteNy==1}">Y</option>
 						<option value="0" th:selected="${item?.inqbCompleteNy==0}">N</option>
                     </select>
-                    <div class="invalid-feedback">
-                      사용 여부를 선택해주세요.
-                    </div>
+                    <div class="invalid-feedback">사용 여부를 선택해주세요.</div>
                   </div>
                   <div class="col-md-3">
-                    <label for="inStaff_instSeq" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
-					  <select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" th:value="${item?.inStaff_instSeq}" required>
-						<option value="" th:selected="${item?.inStaff_instSeq==null}">id</option>
-						<option value="1" th:selected="${item?.inStaff_instSeq==1}">미작성</option>
-						<option value="2" th:selected="${item?.inStaff_instSeq==2}">001</option>
-						<option value="3" th:selected="${item?.inStaff_instSeq==3}">002</option>
-						<option value="4" th:selected="${item?.inStaff_instSeq==4}">003</option>
-						<option value="5" th:selected="${item?.inStaff_instSeq==5}">004</option>
-						<option value="6" th:selected="${item?.inStaff_instSeq==6}">005</option>
-                      </select>
-                    <div class="invalid-feedback">
-                      순서를 입력해주세요.
-                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="inqbContent" class="form-label">내용</label>
-                    <textarea class="form-control" style="height: 100px"id="inqbContent" name="inqbContent" th:text="${item?.inqbContent}"></textarea>
+                    <textarea class="form-control" style="height: 100px"id="inqbContent" name="inqbContent" th:text="${item?.inqbContent}" disabled></textarea>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -160,16 +145,13 @@
                   <div class="col-md-3">
                     <label for="inqbRegDate" class="form-label">작성일</label>
                     <input class="form-control" id="validationCustom01" name="inqbRegDate" type="datetime" th:value="${#dates.format(item?.inqbRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
-                   
                   </div>
                   <div class="col-md-3">
                     <label for="inqbEdiDate" class="form-label">수정일</label>
                     <input class="form-control" id="validationCustom01" name="inqbEdiDate" type="datetime" th:value="${#dates.format(item?.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
-                 
                   </div>
                 </div>
                 </div>
-    
                 <div class="row mb-3">
                   <div class="col-md-6">
 					<button type="button" id="btnDelete"  class="btn btn-outline-dark">
@@ -183,25 +165,24 @@
                       </a>
                     </button>
                   </div>
-				  
                   <div class="col-md-11"></div>
                   <div class="col-md-6" align="Right">
 					<button type="button" class="btn btn-primary">
-					<!--	<a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" -->
-                      <a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm(inqbSeq=${item.inqbSeq})}">
-                        	<i class="bi bi-plus-lg icon_color_change"></i>
-                      </a>
+					<!--<a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" -->
+                       <a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm(inqbSeq=${item.inqbSeq})}">
+                          <i class="bi bi-plus-lg icon_color_change"></i>
+                       </a>
                     </button>
                     <!--<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList" class="btn btn-primary">
                       <a>
                         <i class="bi bi-server"></i>
                       </a>
                     </button>-->
-					<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm" class="btn btn-primary">
+					<!--<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm" class="btn btn-primary">
                       <a>
                         <i class="bi bi-server"></i>
                       </a>
-                    </button>
+                    </button>-->
                   </div>
                 </div>
               </form><!-- End Custom Styled Validation -->
@@ -211,9 +192,7 @@
         </div>
       </div>
     </section>
-
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -256,7 +235,6 @@
   <script src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
-
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
 
