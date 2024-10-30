@@ -133,13 +133,18 @@
                 <div class="col-md-2">
                   <a th:text="'Total : ' +${vo.totalRows}"></a>
                 </div>
+                
                 <div class="col-md-8"></div>
+                
                 <div class="col-md-2">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>5</option>
-                    <option value="1">10</option>
-                    <option value="2">15</option>
-                    <option value="3">20</option>
+                  <select class="form-select" aria-label="Default select example" id="changeRowNum">
+						<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+						<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+						<option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
+						<option value="40" th:selected="${vo.rowNumToShow eq 40}">40</option>
+						<option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
+						<option value="60" th:selected="${vo.rowNumToShow eq 60}">60</option>
+						<option value="70" th:selected="${vo.rowNumToShow eq 70}">70</option>
                   </select>
                 </div>
 
@@ -223,26 +228,6 @@
                 </table>
                </div>
                 <!-- End Table with stripped rows -->
-
-<!--                 pagination start -->
-<!--                 <nav aria-label="Page navigation example"> -->
-<!--                   <ul class="pagination justify-content-center"> -->
-<!--                     <li class="page-item disabled"> -->
-<!--                       <a class="page-link" href="#" aria-label="Previous"> -->
-<!--                         <span aria-hidden="true">&laquo;</span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                     <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!--                     <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!--                     <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!--                     <li class="page-item"> -->
-<!--                       <a class="page-link" href="#" aria-label="Next"> -->
-<!--                         <span aria-hidden="true">&raquo;</span> -->
-<!--                       </a> -->
-<!--                     </li> -->
-<!--                   </ul> -->
-<!--                 </nav> -->
-<!--                 pagination end -->
 
 					<!--pagination start-->
                            <nav aria-label="Page navigation example">
@@ -353,6 +338,15 @@
     	  document.querySelector("form[name=form]").action = "/xdm/v1/infra/inMember/inMemberXdmList";
     	  document.querySelector("form[name=form]").submit();
     }
+    
+ 	// 리스트 보여주는 옵션 
+	document.getElementById("changeRowNum").onchange = function () { 
+	    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;  
+	    form.action = "/xdm/v1/infra/inMember/inMemberXdmList";
+	    form.submit();
+	}
+    
+    
   
   
   

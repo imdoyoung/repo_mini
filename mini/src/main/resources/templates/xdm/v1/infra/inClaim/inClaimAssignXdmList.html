@@ -30,6 +30,9 @@
 
   <!-- Template Main CSS File -->
   <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
+  
+  <!-- by developer --> 
+  <link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -69,69 +72,86 @@
           <div class="card">
             <div class="card-body">
               <h1 class="card-title"></h1>
-              <form>
+              <form name="form" method="post" action="/xdm/v1/infra/inClaim/inClaimAssignXdmList">
+              <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+			  <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                 <div class="row mb-3">
-                  <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>N</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                  <div class="col-md-2">  
+                    <select class="form-select" aria-label="Default select example" name="shDelNy">
+                      <option value="" th:selected="${vo.shDelNy == null}">삭제여부</option>
+                      <option value="0" th:selected="${vo.shDelNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shDelNy == 1}">Y</option>  
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Y</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shCompleteDelNy">
+                      <option value="" th:selected="${vo.shCompleteDelNy == null}">클레임완료여부</option>
+                      <option value="1" th:selected="${vo.shCompleteDelNy == 1}">진행전</option>
+                      <option value="2" th:selected="${vo.shCompleteDelNy == 2}">진행중</option>
+                      <option value="3" th:selected="${vo.shCompleteDelNy == 3}">완료</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>수정일</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shAssignNy">
+                      <option value="" th:selected="${vo.shAssignNy == null}">배정현황</option>
+                      <option value="0" th:selected="${vo.shAssignNy == 0}">미배정</option>
+                      <option value="1" th:selected="${vo.shAssignNy == 1}">배정</option>    
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="date" class="form-control">
+                    <select class="form-select" aria-label="Default select example" name="shOptionDate">
+                      <option value="" th:selected="${vo.shOptionDate == null}">선택하세요</option>
+                      <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+                      <option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+                      <option value="3" th:selected="${vo.shOptionDate == 3}">배정일</option>   
+                    </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="date" class="form-control">
+                    <input type="text" class="form-control" placeholder="시작일" id="shDateStart" name="shDateStart"
+                    autocomplete="off" style="cursor:pointer;" th:value="${#strings.substring(vo.shDateStart, 0, 10)}">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="종료일" id="shDateEnd" name="shDateEnd"
+                    autocomplete="off" style="cursor:pointer;" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}">  
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>검색구분</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shOption">
+                      <option value="" th:selected="${vo.shOption == null}">검색구분</option> 
+                      <option value="1" th:selected="${vo.shOption == 1}">배정관리번호</option>
+                      <option value="2" th:selected="${vo.shOption == 2}">접수번호</option>	
+                      <option value="3" th:selected="${vo.shOption == 3}">청구유형</option>
+                      <option value="4" th:selected="${vo.shOption == 4}">담당자ID</option>
+                      <option value="5" th:selected="${vo.shOption == 5}">담당자이름</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어">
+                    <input type="text" class="form-control" placeholder="검색어" name="shValue" th:value="${vo.shValue}">
                   </div>
                   <div class="col-md-2">
-                    <button type="button" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                     <button type="button" class="btn btn-outline-dark"><i class="bi bi-arrow-clockwise"></i></button>
                   </div>
                 </div>
-              </form>
+               
 
               <div class="row mb-3">
                 <div class="col-md-2">
-                  <a>Total : 171</a>
+                  <a th:text="'Total : ' + ${vo.totalRows}"></a>
                 </div>
-                <div class="col-md-8"></div>
+                
+                <div class="col-md-8"></div>   
+                       
                 <div class="col-md-2">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>5</option>
-                    <option value="1">10</option>
-                    <option value="2">15</option>
-                    <option value="3">20</option>
+                  <select class="form-select" aria-label="Default select example" id="changeRowNum">
+						<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+						<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+						<option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
+						<option value="40" th:selected="${vo.rowNumToShow eq 40}">40</option>
+						<option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
+						<option value="60" th:selected="${vo.rowNumToShow eq 60}">60</option>
+						<option value="70" th:selected="${vo.rowNumToShow eq 70}">70</option>
                   </select>
                 </div>
 
@@ -148,7 +168,7 @@
 	                      <th>배정관리번호</th>
 	                      <th>접수번호</th>
 	                      <th>청구유형</th>
-	                      <th>담당자 Id</th>
+	                      <th>담당자 Id</th> 
 	                      <th>담당자 이름</th>
 	                      <th>담당자 연락처</th>
 	                      <th>배정일</th>
@@ -169,13 +189,13 @@
 	                      <td>
 	                        <input class="form-check-input" type="checkbox" id="gridCheck1">
 	                      </td>
-	                      <td></td>
+	                      <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
 	                      <td th:text="${list.incassSeq}"></td>
 	                      <td th:text="${list.incaccSeq}"></td>
-	                      <td th:if="${list.incassRequType eq 1}">질병</td>
-	                      <td th:if="${list.incassRequType eq 2}">일반상해</td>
-	                      <td th:if="${list.incassRequType eq 3}">교통상해</td>
-	                      <td th:if="${list.incassRequType eq 4}">업무중상해</td>
+	                      <td th:if="${list.incaccRequType eq 1}">질병</td>
+	                      <td th:if="${list.incaccRequType eq 2}">일반상해</td>
+	                      <td th:if="${list.incaccRequType eq 3}">교통상해</td>
+	                      <td th:if="${list.incaccRequType eq 4}">업무중상해</td>
 	                      <td th:text="${list.instId}"></td>
 	                      <td>
 	                      <a th:href="@{/xdm/v1/infra/inClaim/inClaimAssignXdmMForm(incassSeq=${list.incassSeq})}"
@@ -183,7 +203,7 @@
 						   </a>
 						   </td> 
 	                      <td th:text="${list.instTel}"></td>
-	                      <td th:text="${#dates.format(list.incassAssigndate, 'yyyy-MM-dd HH:mm:ss')}"></td>  
+	                      <td th:text="${#dates.format(list.incassAssigndate, 'yyyy-MM-dd')}"></td>  
 	                      <td th:if="${list.incassAssignNy eq 0}">미배정</td>
 	                      <td th:unless="${list.incassAssignNy eq 0}">배정</td>
 	                      <td th:text="${list.inmeName}"></td>
@@ -201,25 +221,28 @@
                 </div>
                 <!-- End Table with stripped rows -->
 
-                <!--pagination start-->
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!--pagination end-->
+					<!--pagination start-->
+                           <nav aria-label="Page navigation example">
+                              <ul class="pagination justify-content-center">
+                                 <li class="page-item disabled" th:if="${vo.startPage gt vo.pageNumToShow}" style="cursor: pointer;">
+                                    <a class="page-link" aria-label="Previous" href="javascript:goList(${vo.startPage - 1})"
+                                       th:attr="onclick=|goList('${vo.startPage - 1}')|"> 
+                                       <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                 </li>
+                                 <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}"
+                                    th:classappend="${num eq vo.thisPage} ? active : ''" style="cursor: pointer;">
+                                    <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+                                 </li>
+                                 <li class="page-item" th:if="${vo.endPage ne vo.totalPages}" style="cursor: pointer;">
+                                    <a class="page-link" aria-label="Next" th:attr="onclick=|goList('${vo.endPage + 1}')|"> 
+                                       <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                 </li>
+                              </ul>
+                           </nav>
+                    <!--pagination end-->
+                
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <button type="button" class="btn btn-danger">
@@ -247,7 +270,8 @@
                   </div>
                 </div>
               </div>
-            </div>
+          </form>
+       </div> <!-- card body -->
 
           </div>
         </div>
@@ -278,6 +302,46 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <!-- by developer -->
+  <script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
+  <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+  
+  <script>
+	//달력
+	window.addEventListener('load', function() { // 화면이 로드 될 때 함수 안에 내용을 실행
+		$.datetimepicker.setLocale('ko'); // 언어는 한국어를 사용 
+	
+		$("#shDateStart, #shDateEnd").datetimepicker({ // "시작일, 종료일"
+			timepicker:false, // 시간은 보여주지 말고 
+			format: 'Y-m-d' // 형식은 이렇게 보여줌 
+		});
+	});
+	
+	// paging
+    goList = function (thisPage) {
+		  document.querySelector("input[name=thisPage]").value = thisPage;
+		  form.action = "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+		  form.submit();
+	}
+    	
+    goList = function (thisPage) {
+    	  document.querySelector("input[name=thisPage]").value = thisPage;
+    	  document.querySelector("form[name=form]").action = "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+    	  document.querySelector("form[name=form]").submit();
+    }
+    
+	// 리스트 보여주는 옵션 
+	document.getElementById("changeRowNum").onchange = function () { 
+	    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;  
+	    form.action = "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+	    form.submit();
+	}
+  
+  
+  
+  
+  </script>
 
 </body>
 

@@ -72,18 +72,21 @@ public interface InClaimDao {
 	public int inClaimPaySelectOneCount(InClaimVo inClaimVo);
 	
 	
-// ========== inClaimAssign ========== // 
+	// ========== inClaimAssign ========== // 
 	
-	// selectList
-	public List<InClaimDto> inClaimAssignSelectList();
-	
-	// insert
-	public int inClaimAssignInsert(InClaimDto inClaimDto);
-	
-	// selectOne
-	public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto);
-	
-	// update
-	public int inClaimAssignUpdate(InClaimDto inClaimDto);
+		// selectList
+		public List<InClaimDto> inClaimAssignSelectList(InClaimAssignVo inClaimAssignVo);
+		
+		// insert
+		public int inClaimAssignInsert(InClaimDto inClaimDto);
+		
+		// selectOne
+		public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto);
+		
+		// update
+		public int inClaimAssignUpdate(InClaimDto inClaimDto);
+		
+		// paging
+		public int selectOneCount(InClaimAssignVo inClaimAssignVo);
 	
 }

@@ -113,27 +113,36 @@ public class InClaimService {
 		return inClaimDao.inClaimPaySelectOneCount(inClaimVo);
 	}
 	
-// ========== inClaimAssign ========== //
 	
-	// selectList
-	public List<InClaimDto> inClaimAssignSelectList() {
-		return inClaimDao.inClaimAssignSelectList();
-	}
 	
-	// insert
-	public int inClaimAssignInsert(InClaimDto inClaimDto) {
-		return inClaimDao.inClaimAssignInsert(inClaimDto);
-	}
 	
-	// selectOne
-	public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto) {
-		return inClaimDao.inClaimAssignSelectOne(inClaimDto);
-	}
 	
-	// update
-	public int inClaimAssignUpdate(InClaimDto inClaimDto) {
-		return inClaimDao.inClaimAssignUpdate(inClaimDto);
-	}
+	// ========== inClaimAssign ========== //
+	
+		// selectList
+		public List<InClaimDto> inClaimAssignSelectList(InClaimAssignVo inClaimAssignVo) {
+			return inClaimDao.inClaimAssignSelectList(inClaimAssignVo);
+		}
+		
+		// insert
+		public int inClaimAssignInsert(InClaimDto inClaimDto) {
+			return inClaimDao.inClaimAssignInsert(inClaimDto);
+		}
+		
+		// selectOne
+		public InClaimDto inClaimAssignSelectOne(InClaimDto inClaimDto) {
+			return inClaimDao.inClaimAssignSelectOne(inClaimDto);
+		}
+		
+		// update
+		public int inClaimAssignUpdate(InClaimDto inClaimDto) {
+			return inClaimDao.inClaimAssignUpdate(inClaimDto);
+		}
+		
+		// paging
+		public int selectOneCount(InClaimAssignVo inClaimAssignVo) {
+			return inClaimDao.selectOneCount(inClaimAssignVo);
+		}
 		
 
 

@@ -204,45 +204,63 @@ public class InClaimController {
 	
 	
 	
-// ==================== inClaimAssign ==================== //
 	
-	// selectList
-	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmList")
-	public String inClaimAssignXdmList(Model model) {
-		 
-		model.addAttribute("assignList", inClaimService.inClaimAssignSelectList());
-		return "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
-	}
-	
-	// Form
-	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmForm")
-	public String inClaimAssignXdmForm() {
-		return "/xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
-	}
-	              
-	// insert 
-	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmInst")
-	public String inClaimAssignXdmInst(InClaimDto inClaimDto) {
+	// ==================== inClaimAssign ==================== //
+	 
+		// selectList
+		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmList")  
+		public String inClaimAssignXdmList(@ModelAttribute("vo") InClaimAssignVo inClaimAssignVo, Model model) {
+			
+			// getshDateStart()에 "00:00:00"을 넣고 setShDateStart에서 보여줌 
+			/* 초기값 세팅이 없는 경우 사용 */
+			// shDateStart 값이 null 이거나 비어 있을 경우 UtilDateTime 클래스를 실행 
+			inClaimAssignVo.setShDateStart(inClaimAssignVo.getShDateStart() == null || inClaimAssignVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inClaimAssignVo.getShDateStart()));
+			// shDateEnd 값이 null 이거나 비어 있을 경우 UtilDateTime 클래스를 실행 
+			inClaimAssignVo.setShDateEnd(inClaimAssignVo.getShDateEnd() == null || inClaimAssignVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inClaimAssignVo.getShDateEnd()));
+			
+			inClaimAssignVo.setParamsPaging(inClaimService.selectOneCount(inClaimAssignVo));
+			
+			if(inClaimAssignVo.getTotalRows() > 0) {
+				model.addAttribute("assignList", inClaimService.inClaimAssignSelectList(inClaimAssignVo));
+			}
+			
+			return "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+		}
 		
-		inClaimService.inClaimAssignInsert(inClaimDto);
-		return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
-	}
-	
-	// selectOne
-	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmMForm")
-	public String inClaimAssignXdmMForm(InClaimDto inClaimDto, Model model) {
+		// Form
+		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmForm")
+		public String inClaimAssignXdmForm() {
+			return "/xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
+		}
+		              
+		// insert 
+		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmInst")
+		public String inClaimAssignXdmInst(InClaimDto inClaimDto) {
+			
+			inClaimService.inClaimAssignInsert(inClaimDto);
+			return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+		}
 		
-		model.addAttribute("assignItem", inClaimService.inClaimAssignSelectOne(inClaimDto));
-		return "/xdm/v1/infra/inClaim/inClaimAssignXdmMForm";
-	}
-	
-	// update 
-	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmUpdt")
-	public String inClaimAssignXdmUpdt(InClaimDto inClaimDto) {
+		// selectOne
+		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmMForm")
+		public String inClaimAssignXdmMForm(InClaimDto inClaimDto, Model model) {
+			
+			model.addAttribute("assignItem", inClaimService.inClaimAssignSelectOne(inClaimDto));
+			return "/xdm/v1/infra/inClaim/inClaimAssignXdmMForm";
+		}
 		
-		inClaimService.inClaimAssignUpdate(inClaimDto);
-		return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
-	}
+		// update 
+		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmUpdt")
+		public String inClaimAssignXdmUpdt(InClaimDto inClaimDto) {
+			
+			inClaimService.inClaimAssignUpdate(inClaimDto);
+			return "redirect:/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+		}
+	
+	
+	
+	
+
 	
 	
 	

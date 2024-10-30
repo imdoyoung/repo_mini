@@ -121,13 +121,18 @@
                 <div class="col-md-2">
                   <a th:text="'Total : ' +${vo.totalRows}"></a>
                 </div>
+                
                 <div class="col-md-8"></div>
-                <div class="col-md-2">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>5</option>
-                    <option value="1">10</option>
-                    <option value="2">15</option>
-                    <option value="3">20</option>
+                
+             	<div class="col-md-2">
+                  <select class="form-select" aria-label="Default select example" id="changeRowNum">
+						<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+						<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+						<option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
+						<option value="40" th:selected="${vo.rowNumToShow eq 40}">40</option>
+						<option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
+						<option value="60" th:selected="${vo.rowNumToShow eq 60}">60</option>
+						<option value="70" th:selected="${vo.rowNumToShow eq 70}">70</option>
                   </select>
                 </div>
 
@@ -140,7 +145,7 @@
                       <th>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </th>
-                      <th>#</th>
+                      <th>No</th>
                       <th>직원번호</th>
                       <th>직원이름</th>
                       <th>직급</th>
@@ -163,7 +168,7 @@
                       <td>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </td>
-                      <td></td>
+                      <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
                       <td th:text="${list.instSeq}"></td>
                       <td>
                       	<a th:href="@{/xdm/v1/infra/inStaff/inStaffXdmMForm(instSeq=${list.instSeq})}"
@@ -300,6 +305,13 @@
     	  document.querySelector("form[name=form]").action = "/xdm/v1/infra/inStaff/inStaffXdmList";
     	  document.querySelector("form[name=form]").submit();
     }
+    
+ 	// 리스트 보여주는 옵션 
+	document.getElementById("changeRowNum").onchange = function () { 
+	    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;  
+	    form.action = "/xdm/v1/infra/inStaff/inStaffXdmList";
+	    form.submit();
+	}
   
   
   

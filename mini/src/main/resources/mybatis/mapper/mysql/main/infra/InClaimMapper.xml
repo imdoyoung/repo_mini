@@ -511,11 +511,50 @@
 
 	
 	
-    <!--========== inClaimAssign ==========-->
-	<select id="inClaimAssignSelectList" resultMap="resultMapObj">  
+
+	
+	
+	
+	 <!--========== inClaimAssign(클레임배정관리)==========-->
+    <sql id="selectCommon">
+    	from
+			inClaimAssign as k
+			<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
+			left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
+			left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
+			left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+		where 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND incassDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
+			<if test="shCompleteDelNy != null and !shCompleteDelNy.equals('')">AND incassCompleteNy = #{shCompleteDelNy}</if> <!-- 클레임완료 여부 -->
+			<if test="shAssignNy != null and !shAssignNy.equals('')">AND incassAssignNy = #{shAssignNy}</if> <!-- 배정 현황 -->
+			
+			<!-- 달력 -->
+			<choose>
+				<when test="shOptionDate == 1">AND k.incassRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+				<when test="shOptionDate == 2">AND k.incassEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 3">AND k.incassAssigndate BETWEEN #{shDateStart} AND #{shDateEnd}</when>   
+			</choose>
+			 
+			<!-- 검색 구분 -->
+			<choose> 
+				<when test="shOption == 1">AND incassSeq = #{shValue}</when> <!-- 배정관리번호 -->
+				<when test="shOption == 2">AND incaccSeq = #{shValue}</when> <!-- 접수번호 -->
+				<when test="shOption == 3">AND incassRequType LIKE CONCAT('%',#{shValue},'%')</when> <!-- 청구유형 -->
+				<when test="shOption == 4">AND instId LIKE CONCAT('%',#{shValue},'%')</when> <!-- 담당자ID --> 
+				<when test="shOption == 5">AND instName LIKE CONCAT('%',#{shValue},'%')</when> <!-- 담당자이름 -->
+			</choose>
+    </sql>
+    
+    <select id="selectOneCount">
+		select count(*)
+		<include refid="selectCommon"/>
+	</select>
+    
+	<select id="inClaimAssignSelectList" resultMap="resultMapObj"> 
+		select aa.* from ( 
 		select
 			k.incassSeq,
-			k.incassRequType,    
+			<!-- 청구유형은 클레임 관리/접수에서 가져옴 k.incassRequType  --> 
 			k.incassAssigndate,
 			k.incassAssignNy,
 			k.incassCompleteNy,
@@ -532,18 +571,15 @@
 		    k.inClaimAccept_incaccSeq,
     		k.inMember_inmeSeq,
     		k.inStaff_instSeq
-		from
-			inClaimAssign as k
-		<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
-		left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
-		left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
-		left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+    	<include refid="selectCommon"/>
 		order by   
 			incassSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
 	
-	<insert id="inClaimAssignInsert">
-		INSERT INTO inClaimAssign (
+	<insert id="inClaimAssignInsert">        
+		INSERT INTO inClaimAssign (  
 			incassRequType,
 			incassCompleteNy,
 			incassAssigndate,
@@ -625,6 +661,23 @@
 		where 1=1
 			and incassSeq = #{incassSeq}
 	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 </mapper>
