@@ -30,6 +30,9 @@
 
   <!-- Template Main CSS File -->
   <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
+  
+  <!-- by developer -->
+  <link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" />
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -70,115 +73,123 @@
             <div class="card-body">
               <h1 class="card-title"></h1>
               <form name="form" id="form" method="psot" action="/xdm/v1/infra/inClaim/inClaimAcceptXdmList">
+                <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1" /> 
+				<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
                 <div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" name="shIncaccProType">
-                      <option value="">보험상품타입</option>
-                      <option value="1">실비</option>
-                      <option value="2">암</option>
-                      <option value="3">치아</option>
-                      <option value="4">생명</option>
-                      <option value="5">여행자</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccProType" id="shIncaccProType">
+                      <option value="" th:selected="${vo.shIncaccProType == null}">보험상품타입</option>
+                      <option value="1" th:selected="${vo.shIncaccProType == 1}">실비</option>
+                      <option value="2" th:selected="${vo.shIncaccProType == 2}">암</option>
+                      <option value="3" th:selected="${vo.shIncaccProType == 3}">치아</option>
+                      <option value="4" th:selected="${vo.shIncaccProType == 4}">생명</option>
+                      <option value="5" th:selected="${vo.shIncaccProType == 5}">여행자</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" name="shInmeJobNy">
-                      <option value="">직업위험군여부</option>
-                      <option value="0">N</option>
-                      <option value="1">Y</option>
+                    <select class="form-select" aria-label="Default select example" name="shInmeJobNy" id="shInmeJobNy">
+                      <option value="" th:selected="${vo.shInmeJobNy == null}">직업위험군여부</option>
+                      <option value="0" th:selected="${vo.shInmeJobNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shInmeJobNy == 1}">Y</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example" name="shInmeDiseaseNy">
-                      <option value="">의료수급권자여부</option>
-                      <option value="0">N</option>
-                      <option value="1">Y</option>
+                    <select class="form-select" aria-label="Default select example" name="shInmeDiseaseNy" id="shInmeDiseaseNy">
+                      <option value="" th:selected="${vo.shInmeDiseaseNy == null}">의료수급권자여부</option>
+                      <option value="0" th:selected="${vo.shInmeDiseaseNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shInmeDiseaseNy == 1}">Y</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">청구유형</option>
-                      <option value="1">질병</option>
-                      <option value="2">일반상해</option>
-                      <option value="3">교통상해</option>
-                      <option value="4">업무중상해</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccRequType" id="shIncaccRequType">
+                      <option value="" th:selected="${vo.shIncaccRequType == null}">청구유형</option>
+                      <option value="1" th:selected="${vo.shIncaccRequType == 1}">질병</option>
+                      <option value="2" th:selected="${vo.shIncaccRequType == 2}">일반상해</option>
+                      <option value="3" th:selected="${vo.shIncaccRequType == 3}">교통상해</option>
+                      <option value="4" th:selected="${vo.shIncaccRequType == 4}">업무중상해</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">청구사유</option>
-                      <option value="1">질병</option>
-                      <option value="2">골절</option>
-                      <option value="3">통원</option>
-                      <option value="4">수술</option>
-                      <option value="5">진단</option>
-                      <option value="6">장해</option>
-                      <option value="7">사망</option>
-                      <option value="8">기타</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccRequReason" id="shIncaccRequReason">
+                      <option value="" th:selected="${vo.shIncaccRequReason == null}">청구사유</option>
+                      <option value="1" th:selected="${vo.shIncaccRequReason == 1}">질병</option>
+                      <option value="2" th:selected="${vo.shIncaccRequReason == 2}">골절</option>
+                      <option value="3" th:selected="${vo.shIncaccRequReason == 3}">통원</option>
+                      <option value="4" th:selected="${vo.shIncaccRequReason == 4}">수술</option>
+                      <option value="5" th:selected="${vo.shIncaccRequReason == 5}">진단</option>
+                      <option value="6" th:selected="${vo.shIncaccRequReason == 6}">장해</option>
+                      <option value="7" th:selected="${vo.shIncaccRequReason == 7}">사망</option>
+                      <option value="8" th:selected="${vo.shIncaccRequReason == 8}">기타</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">보험금수령은행</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccSettleRankType" id="shIncaccSettleRankType">
+                      <option value="" th:selected="${vo.shIncaccSettleRankType == null}">보험금수령은행</option>
+                      <option value="1" th:selected="${vo.shIncaccSettleRankType == 1}">신한은행</option>
+                      <option value="2" th:selected="${vo.shIncaccSettleRankType == 2}">국민은행</option>
+                      <option value="3" th:selected="${vo.shIncaccSettleRankType == 3}">농협은행</option>
+                      <option value="4" th:selected="${vo.shIncaccSettleRankType == 4}">수협은행</option>
+                      <option value="5" th:selected="${vo.shIncaccSettleRankType == 5}">하나은행</option>
+                      <option value="6" th:selected="${vo.shIncaccSettleRankType == 6}">기업은행</option>
+                      <option value="7" th:selected="${vo.shIncaccSettleRankType == 7}">신협은행</option>
+                      <option value="8" th:selected="${vo.shIncaccSettleRankType == 8}">카카오뱅크</option>
+                      <option value="9" th:selected="${vo.shIncaccSettleRankType == 9}">우리은행</option>
                     </select>
                   </div>
                 </div>
                 <div class="row mb-3">
                 	<div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">담당자ID</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shInstId" id="shInstId">
+                      <option value="" th:selected="${vo.shInstId == null}">담당자ID</option>
+                      <option value="1" th:selected="${vo.shInstId == 1}">000001</option>
+                      <option value="2" th:selected="${vo.shInstId == 2}">000002</option>
+                      <option value="3" th:selected="${vo.shInstId == 3}">000003</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">접수처리완료여부</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccCompleteNy" id="shIncaccCompleteNy">
+                      <option value="" th:selected="${vo.shIncaccCompleteNy == null}">접수처리완료여부</option>
+                      <option value="0" th:selected="${vo.shIncaccCompleteNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shIncaccCompleteNy == 1}">Y</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">삭제여부</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" name="shIncaccDelNy" id="shIncaccDelNy">
+                      <option value="" th:selected="${vo.shIncaccDelNy == null}">삭제여부</option>
+                      <option value="0" th:selected="${vo.shIncaccDelNy == 0}">N</option>
+                      <option value="1" th:selected="${vo.shIncaccDelNy == 1}">Y</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">날짜검색</option>
-                      <option value="1">사고날짜</option>
-                      <option value="2">등록일</option>
-                      <option value="3">수정일</option>
+                    <select class="form-select" aria-label="Default select example" name="shDateOption" id="shDateOption">
+                      <option value="" th:selected="${vo.shDateOption == null}">날짜검색</option>
+                      <option value="1" th:selected="${vo.shDateOption == 1}">사고날짜</option>
+                      <option value="2" th:selected="${vo.shDateOption == 2}">등록일</option>
+                      <option value="3" th:selected="${vo.shDateOption == 3}">수정일</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="date" class="form-control">
+                    <input type="text" class="form-control" placeholder="시작일" id="shStartDate" name="shStartDate" 
+                    	th:value="${#strings.substring(vo.shStartDate, 0, 10)}" autocomplete="off">
                   </div>
                   <div class="col-md-2">
-                    <input type="date" class="form-control">
+                    <input type="text" class="form-control" placeholder="종료일" id="shEndDate" name="shEndDate" 
+                    	th:value="${#strings.substring(vo.shEndDate, 0, 10)}" autocomplete="off">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option value="">검색구분</option>
-                      <option value="1">고객번호</option>
-                      <option value="2">이름</option>
-                      <option value="3">성별</option>
-                      <option value="3">전화번호</option>
-                      <option value="3">담당자이름</option>
+                    <select class="form-select" aria-label="Default select example" name="shOption" id="shOption">
+                      <option value="" th:selected="${vo.shOption == null}">검색구분</option>
+                      <option value="1" th:selected="${vo.shOption == 1}">고객번호</option>
+                      <option value="2" th:selected="${vo.shOption == 2}">이름</option>
+                      <option value="3" th:selected="${vo.shOption == 3}">성별</option>
+                      <option value="4" th:selected="${vo.shOption == 4}">전화번호</option>
+                      <option value="5" th:selected="${vo.shOption == 5}">담당자이름</option>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어">
+                    <input type="text" class="form-control" placeholder="검색어" name="shValue" id="shValue">
                   </div>
                   <div class="col-md-2">
                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
@@ -187,17 +198,19 @@
                 </div>
 	              <div class="row mb-3">
 	                <div class="col-md-2">
-	                  <a>Total : 171</a>
+	                  <a th:text="'Total: ' + ${vo.totalRows}"></a>
 	                </div>
 	                <div class="col-md-8"></div>
 	                <div class="col-md-2">
-	                  <select class="form-select" aria-label="Default select example">
-	                    <option selected>5</option>
-	                    <option value="1">10</option>
-	                    <option value="2">15</option>
-	                    <option value="3">20</option>
-	                  </select>
-	                </div>
+						<select class="form-select" aria-label="Default select example" id="changeRowNum" name="changeRowNum">
+							<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+							<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+							<option value="15" th:selected="${vo.rowNumToShow eq 15}">15</option>
+							<option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
+							<option value="25" th:selected="${vo.rowNumToShow eq 25}">25</option>
+							<option value="30" th:selected="${vo.rowNumToShow eq 30}">30</option>
+						</select>
+					</div>
 	
 	                <!-- Table with stripped rows -->
 	                <!-- Default Table -->
@@ -237,14 +250,13 @@
 		                      <td>
 		                        <input class="form-check-input" type="checkbox" id="gridCheck1">
 		                      </td>
-		                      <td></td>
+		                      <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
 		                      <td th:text="${list.incaccSeq}"></td>
 		                      <td th:text="${list.incaccProType}"></td>
 		                      <td th:text="${list.inmeSeq}"></td>
 		                      <td>
 		                      	<a th:href="@{/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom(incaccSeq=${list?.incaccSeq})}" th:text="${list.inmeName}"></a>
 		                      </td>
-	<!-- 	                      <td th:text="${list.inmeGender}"></td> -->
 		                      <td th:if="${list.inmeGender eq 1}">남자</td>
 		                      <td th:unless="${list.inmeGender eq 1}">여자</td>
 		                      <td th:text="${list.inmeTel}"></td>
@@ -269,24 +281,26 @@
 	                <!-- End Table with stripped rows -->
 	
 	                <!--pagination start-->
-	                <nav aria-label="Page navigation example">
-	                  <ul class="pagination justify-content-center">
-	                    <li class="page-item disabled">
-	                      <a class="page-link" href="#" aria-label="Previous">
-	                        <span aria-hidden="true">&laquo;</span>
-	                      </a>
-	                    </li>
-	                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	                    <li class="page-item">
-	                      <a class="page-link" href="#" aria-label="Next">
-	                        <span aria-hidden="true">&raquo;</span>
-	                      </a>
-	                    </li>
-	                  </ul>
-	                </nav>
-	                <!--pagination end-->
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled" th:if="${vo.startPage gt vo.pageNumToShow}" style="cursor: pointer;">
+								<a class="page-link" aria-label="Previous" href="javascript:goList(${vo.startPage - 1})" 
+									th:attr="onclick=|goList('${vo.startPage - 1}')|"> 
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" 
+				    			th:classappend="${num eq vo.thisPage} ? active : ''" style="cursor: pointer;">
+							<a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+							</li>
+							<li class="page-item" th:if="${vo.endPage ne vo.totalPages}" style="cursor: pointer;">
+								<a class="page-link" aria-label="Next" th:attr="onclick=|goList('${vo.endPage + 1}')|"> 
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<!--pagination end-->
 	            </form>
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -346,6 +360,37 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <!-- by developer -->
+  <script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
+  <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
+  <script>
+  	// datetimepicker
+		window.addEventListener('load', function() {
+
+			$.datetimepicker.setLocale('ko');
+
+			$("#shStartDate, #shEndDate").datetimepicker({
+				timepicker : false,
+				format : 'Y-m-d'
+			});
+		});
+		
+		// paging
+		goList = function(thisPage) {
+			document.querySelector("input[name=thisPage]").value = thisPage;
+			document.querySelector("form[name=form]").action = "/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+			document.querySelector("form[name=form]").submit();
+		}
+		
+		// RowNum
+		document.getElementById("changeRowNum").onchange = function () {
+		    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+		    form.action = "/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+		    form.submit();
+		}
+  </script>
 
 </body>
 

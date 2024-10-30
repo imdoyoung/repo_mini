@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.universal.common.util.UtilDateTime;
 
 @Controller
 public class InClaimController {
@@ -17,9 +20,21 @@ public class InClaimController {
 
 	// ClaimAccept: Lsit-inClaimAcceptSelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmList")
-	public String inClaimAcceptXdmList(InClaimVo inClaimVo, Model model) {
+	public String inClaimAcceptXdmList(@ModelAttribute("vo") InClaimVo inClaimVo, Model model) {
 		
-		model.addAttribute("list", inClaimService.inClaimAcceptSelectList(inClaimVo));
+		// 날짜 필드에 시간 추가
+//		inClaimVo.setShStartDate(inClaimVo.getShStartDate()+" 00:00:00");			
+//		inClaimVo.setShEndDate(inClaimVo.getShEndDate()+" 23:59:59");
+		// 초기값 세팅이 없는 경우 사용
+		inClaimVo.setShStartDate(inClaimVo.getShStartDate() == null || inClaimVo.getShStartDate() == "" ? null : UtilDateTime.add00TimeString(inClaimVo.getShStartDate()));
+		inClaimVo.setShEndDate(inClaimVo.getShEndDate() == null || inClaimVo.getShEndDate() == "" ? null : UtilDateTime.add59TimeString(inClaimVo.getShEndDate()));
+		
+		// paging
+		inClaimVo.setParamsPaging(inClaimService.inClaimAcceptSelectOneCount(inClaimVo));
+		
+		if(inClaimVo.getTotalRows() > 0) {
+			model.addAttribute("list", inClaimService.inClaimAcceptSelectList(inClaimVo));
+		}
 		
 		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
 	}
@@ -73,9 +88,21 @@ public class InClaimController {
 	
 	// ClaimProcess: Lsit-inClaimProcessSelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmList")
-	public String inClaimProcessXdmList(Model model) {
+	public String inClaimProcessXdmList(@ModelAttribute("vo") InClaimVo inClaimVo, Model model) {
 		
-		model.addAttribute("list", inClaimService.inClaimProcessSelectList());
+		// 날짜 필드에 시간 추가
+//		inClaimVo.setShStartDate(inClaimVo.getShStartDate()+" 00:00:00");			
+//		inClaimVo.setShEndDate(inClaimVo.getShEndDate()+" 23:59:59");
+		// 초기값 세팅이 없는 경우 사용
+		inClaimVo.setShStartDate(inClaimVo.getShStartDate() == null || inClaimVo.getShStartDate() == "" ? null : UtilDateTime.add00TimeString(inClaimVo.getShStartDate()));
+		inClaimVo.setShEndDate(inClaimVo.getShEndDate() == null || inClaimVo.getShEndDate() == "" ? null : UtilDateTime.add59TimeString(inClaimVo.getShEndDate()));
+		
+		// paging
+		inClaimVo.setParamsPaging(inClaimService.inClaimProcessSelectOneCount(inClaimVo));
+		
+		if(inClaimVo.getTotalRows() > 0) {
+			model.addAttribute("list", inClaimService.inClaimProcessSelectList(inClaimVo));
+		}
 		
 		return "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
 	}
@@ -127,8 +154,22 @@ public class InClaimController {
 
 	// inClaimPay: Lsit-inClaimPaySelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmList")
-	public String inClaimPayXdmList(Model model) {
-		model.addAttribute("list", inClaimService.inClaimPaySelectList());
+	public String inClaimPayXdmList(@ModelAttribute("vo") InClaimVo inClaimVo, Model model) {
+		
+		// 날짜 필드에 시간 추가
+//		inClaimVo.setShStartDate(inClaimVo.getShStartDate()+" 00:00:00");			
+//		inClaimVo.setShEndDate(inClaimVo.getShEndDate()+" 23:59:59");
+		// 초기값 세팅이 없는 경우 사용
+		inClaimVo.setShStartDate(inClaimVo.getShStartDate() == null || inClaimVo.getShStartDate() == "" ? null : UtilDateTime.add00TimeString(inClaimVo.getShStartDate()));
+		inClaimVo.setShEndDate(inClaimVo.getShEndDate() == null || inClaimVo.getShEndDate() == "" ? null : UtilDateTime.add59TimeString(inClaimVo.getShEndDate()));
+		
+		// paging
+		inClaimVo.setParamsPaging(inClaimService.inClaimPaySelectOneCount(inClaimVo));
+		
+		if(inClaimVo.getTotalRows() > 0) {
+			model.addAttribute("list", inClaimService.inClaimPaySelectList(inClaimVo));
+		}
+		
 		return "/xdm/v1/infra/inClaim/inClaimPayXdmList";
 	}
 	

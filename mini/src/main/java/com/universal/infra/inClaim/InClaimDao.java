@@ -26,11 +26,14 @@ public interface InClaimDao {
 	// ClaimAccept: Delete
 	public int inClaimAcceptDelete(InClaimDto inClaimDto);
 	
+	// ClaimAccept: paging
+	public int inClaimAcceptSelectOneCount(InClaimVo inClaimVo);
+	
 	
 // ==================== inCalimProcess ==================== //
 	
 	// ClaimProcess: List
-	public List<InClaimDto> inClaimProcessSelectList();
+	public List<InClaimDto> inClaimProcessSelectList(InClaimVo inClaimVo);
 	
 	// ClaimProcess: Insert
 	public int inClaimProcessInsert(InClaimDto inClaimDto);
@@ -46,21 +49,27 @@ public interface InClaimDao {
 
 	// ClaimProcess: Delete
 	public int inClaimProcessDelete(InClaimDto inClaimDto);
+	
+	// ClaimProcess: paging
+	public int inClaimProcessSelectOneCount(InClaimVo inClaimVo);
 
 	
-// ==================== inCalimProcess ==================== //
+// ==================== inCalimPay ==================== //
 
 	// ClaimPay: List
-	public List<InClaimDto> inClaimPaySelectList();
+	public List<InClaimDto> inClaimPaySelectList(InClaimVo inClaimVo);
 	
-	// ClaimProcess: Insert
+	// ClaimPay: Insert
 	public int inClaimPayInsert(InClaimDto inClaimDto);
 		
-	// ClaimProcess: SelectOne
+	// ClaimPay: SelectOne
 	public InClaimDto inClaimPaySelectOne(InClaimDto inClaimDto);
 	
-	// ClaimProcess: Update
+	// ClaimPay: Update
 	public int inClaimPayUpdate(InClaimDto inClaimDto);
+	
+	// ClaimPay: paging
+	public int inClaimPaySelectOneCount(InClaimVo inClaimVo);
 	
 	
 // ========== inClaimAssign ========== // 

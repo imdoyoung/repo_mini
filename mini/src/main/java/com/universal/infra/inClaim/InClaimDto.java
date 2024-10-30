@@ -43,7 +43,7 @@ public class InClaimDto {
 	
 //	// ===== inClaimPay(클레임관리-지급) ===== //
 	private String incpaySeq;			// 클레임관리지급 Seq
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date incpaySettleDate;		// 클레임관리지급 최종지급일
 	private Integer incpaySettleNy;		// 클레임관리지급 지급완료여부
 	

@@ -2,36 +2,53 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tables / Data - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+<title>Tables / Data - NiceAdmin Bootstrap Template</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="/xdm/v1/template/minions/assets/img/favicon.png" rel="icon">
-  <link href="/xdm/v1/template/minions/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<!-- Favicons -->
+<link href="/xdm/v1/template/minions/assets/img/favicon.png" rel="icon">
+<link href="/xdm/v1/template/minions/assets/img/apple-touch-icon.png"
+	rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="/xdm/v1/template/minions/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link
+	href="/xdm/v1/template/minions/assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link href="/xdm/v1/template/minions/assets/vendor/quill/quill.snow.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/quill/quill.bubble.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/remixicon/remixicon.css"
+	rel="stylesheet">
+<link
+	href="/xdm/v1/template/minions/assets/vendor/simple-datatables/style.css"
+	rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="/xdm/v1/template/minions/assets/css/style.css" rel="stylesheet">
+	
+<!-- by developer -->
+<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css" />
 
-  <!-- =======================================================
+<!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Updated: Apr 20 2024 with Bootstrap v5.3.3
@@ -43,271 +60,393 @@
 <body>
 
 	<!-- ======= Header ======= -->
-      <div th:replace="~{/xdm/v1/infra/common/header :: header}"></div>
-    <!-- End Header -->
+	<div th:replace="~{/xdm/v1/infra/common/header :: header}"></div>
+	<!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
-      <div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
-    <!-- End Sidebar-->
+	<!-- ======= Sidebar ======= -->
+	<div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
+	<!-- End Sidebar-->
 
-  <main id="main" class="main">
+	<main id="main" class="main">
 
-    <div class="pagetitle">
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Page 1</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Page 2</a></li>
-          <li class="breadcrumb-item active">Default</li>
-        </ol>
-      </nav>
-      <h1>클레임 관리-검토&처리</h1>
-    </div><!-- End Page Title -->
+		<div class="pagetitle">
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Page 1</a></li>
+					<li class="breadcrumb-item"><a href="index.html">Page 2</a></li>
+					<li class="breadcrumb-item active">Default</li>
+				</ol>
+			</nav>
+			<h1>클레임 관리-검토&처리</h1>
+		</div>
+		<!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title"></h1>
-              <form>
-                <div class="row mb-3">
-                  <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>N</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Y</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>수정일</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control">
-                  </div>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-md-2">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>검색구분</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="검색어">
-                  </div>
-                  <div class="col-md-2">
-                    <button type="button" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
-                    <button type="button" class="btn btn-outline-dark"><i class="bi bi-arrow-clockwise"></i></button>
-                  </div>
-                </div>
-              </form>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="card-title"></h1>
+							<form id="form" name="form" method="post" action="/xdm/v1/infra/inClaim/inClaimProcessXdmList">
+								<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1" /> 
+								<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}" />
+								<div class="row mb-3">
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" id="shIncaccSeq" name="shIncaccSeq">
+											<option value="" th:selected="${vo.shIncaccSeq == null}">접수번호</option>
+											<option value="1" th:selected="${vo.shIncaccSeq == 1}">1</option>
+											<option value="2" th:selected="${vo.shIncaccSeq == 2}">2</option>
+											<option value="3" th:selected="${vo.shIncaccSeq == 3}">3</option>
+											<option value="4" th:selected="${vo.shIncaccSeq == 4}">4</option>
+											<option value="5" th:selected="${vo.shIncaccSeq == 5}">5</option>
+											<option value="6" th:selected="${vo.shIncaccSeq == 6}">6</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" id="shIncproApproveNy" name="shIncproApproveNy">
+											<option value="" th:selected="${vo.shIncproApproveNy == null}">지급승인여부</option>
+											<option value="0" th:selected="${vo.shIncproApproveNy == 0}">N</option>
+											<option value="1" th:selected="${vo.shIncproApproveNy == 1}">Y</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shInmeJobNy" id="shInmeJobNy">
+											<option value="" th:selected="${vo.shInmeJobNy == null}">직업위험군여부</option>
+						                    <option value="0" th:selected="${vo.shInmeJobNy == 0}">N</option>
+						                    <option value="1" th:selected="${vo.shInmeJobNy == 1}">Y</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shInmeDiseaseNy" id="shInmeDiseaseNy">
+											<option value="" th:selected="${vo.shInmeDiseaseNy == null}">의료수급권자여부</option>
+					                      	<option value="0" th:selected="${vo.shInmeDiseaseNy == 0}">N</option>
+					                      	<option value="1" th:selected="${vo.shInmeDiseaseNy == 1}">Y</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncaccProType" id="shIncaccProType">
+											<option value="" th:selected="${vo.shIncaccProType == null}">보험상품타입</option>
+						                    <option value="1" th:selected="${vo.shIncaccProType == 1}">실비</option>
+						                    <option value="2" th:selected="${vo.shIncaccProType == 2}">암</option>
+						                    <option value="3" th:selected="${vo.shIncaccProType == 3}">치아</option>
+						                    <option value="4" th:selected="${vo.shIncaccProType == 4}">생명</option>
+						                    <option value="5" th:selected="${vo.shIncaccProType == 5}">여행자</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncaccRequType" id="shIncaccRequType">
+											<option value="" th:selected="${vo.shIncaccRequType == null}">청구유형</option>
+						                    <option value="1" th:selected="${vo.shIncaccRequType == 1}">질병</option>
+						                    <option value="2" th:selected="${vo.shIncaccRequType == 2}">일반상해</option>
+						                    <option value="3" th:selected="${vo.shIncaccRequType == 3}">교통상해</option>
+						                    <option value="4" th:selected="${vo.shIncaccRequType == 4}">업무중상해</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncaccRequReason" id="shIncaccRequReason">
+											<option value="" th:selected="${vo.shIncaccRequReason == null}">청구사유</option>
+						                    <option value="1" th:selected="${vo.shIncaccRequReason == 1}">질병</option>
+						                    <option value="2" th:selected="${vo.shIncaccRequReason == 2}">골절</option>
+						                    <option value="3" th:selected="${vo.shIncaccRequReason == 3}">통원</option>
+						                    <option value="4" th:selected="${vo.shIncaccRequReason == 4}">수술</option>
+						                    <option value="5" th:selected="${vo.shIncaccRequReason == 5}">진단</option>
+						                    <option value="6" th:selected="${vo.shIncaccRequReason == 6}">장해</option>
+						                    <option value="7" th:selected="${vo.shIncaccRequReason == 7}">사망</option>
+						                    <option value="8" th:selected="${vo.shIncaccRequReason == 8}">기타</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncaccSettleRankType" id="shIncaccSettleRankType">
+					                      <option value="" th:selected="${vo.shIncaccSettleRankType == null}">보험금수령은행</option>
+					                      <option value="1" th:selected="${vo.shIncaccSettleRankType == 1}">신한은행</option>
+					                      <option value="2" th:selected="${vo.shIncaccSettleRankType == 2}">국민은행</option>
+					                      <option value="3" th:selected="${vo.shIncaccSettleRankType == 3}">농협은행</option>
+					                      <option value="4" th:selected="${vo.shIncaccSettleRankType == 4}">수협은행</option>
+					                      <option value="5" th:selected="${vo.shIncaccSettleRankType == 5}">하나은행</option>
+					                      <option value="6" th:selected="${vo.shIncaccSettleRankType == 6}">기업은행</option>
+					                      <option value="7" th:selected="${vo.shIncaccSettleRankType == 7}">신협은행</option>
+					                      <option value="8" th:selected="${vo.shIncaccSettleRankType == 8}">카카오뱅크</option>
+					                      <option value="9" th:selected="${vo.shIncaccSettleRankType == 9}">우리은행</option>
+					                    </select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shInstId" id="shInstId">
+					                      <option value="" th:selected="${vo.shInstId == null}">담당자ID</option>
+					                      <option value="1" th:selected="${vo.shInstId == 1}">000001</option>
+					                      <option value="2" th:selected="${vo.shInstId == 2}">000002</option>
+					                      <option value="3" th:selected="${vo.shInstId == 3}">000003</option>
+					                    </select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncaccCompleteNy" id="shIncaccCompleteNy">
+					                      <option value="" th:selected="${vo.shIncaccCompleteNy == null}">접수처리완료여부</option>
+					                      <option value="0" th:selected="${vo.shIncaccCompleteNy == 0}">N</option>
+					                      <option value="1" th:selected="${vo.shIncaccCompleteNy == 1}">Y</option>
+					                    </select>
+									</div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shIncproDelNy" id="shIncproDelNy">
+											<option value="" th:selected="${vo.shIncproDelNy == null}">삭제여부</option>
+						                    <option value="0" th:selected="${vo.shIncproDelNy == 0}">N</option>
+						                    <option value="1" th:selected="${vo.shIncproDelNy == 1}">Y</option>
+						                </select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shDateOption" id="shDateOption">
+					                      <option value="" th:selected="${vo.shDateOption == null}">날짜검색</option>
+					                      <option value="1" th:selected="${vo.shDateOption == 1}">사고날짜</option>
+					                      <option value="2" th:selected="${vo.shDateOption == 2}">등록일</option>
+					                      <option value="3" th:selected="${vo.shDateOption == 3}">수정일</option>
+					                    </select>
+									</div>
+									<div class="col-md-2">
+					                    <input type="text" class="form-control" placeholder="시작일" id="shStartDate" name="shStartDate" 
+					                    	th:value="${#strings.substring(vo.shStartDate, 0, 10)}" autocomplete="off">
+					                </div>
+					                <div class="col-md-2">
+					                	<input type="text" class="form-control" placeholder="종료일" id="shEndDate" name="shEndDate" 
+					                		th:value="${#strings.substring(vo.shEndDate, 0, 10)}" autocomplete="off">
+					                </div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" name="shOption" id="shOption">
+											<option value="" th:selected="${vo.shOption == null}">검색구분</option>
+											<option value="2" th:selected="${vo.shOption == 1}">고객번호</option>
+											<option value="3" th:selected="${vo.shOption == 2}">이름</option>
+											<option value="4" th:selected="${vo.shOption == 3}">성별</option>
+											<option value="5" th:selected="${vo.shOption == 4}">전화번호</option>
+											<option value="6" th:selected="${vo.shOption == 5}">담당자이름</option>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<input type="text" class="form-control" placeholder="검색어" name="shValue" id="shValue">
+									</div>
+									<div class="col-md-2">
+										<button type="submit" class="btn btn-outline-dark">
+											<i class="bi bi-search"></i>
+										</button>
+										<button type="button" class="btn btn-outline-dark">
+											<i class="bi bi-arrow-clockwise"></i>
+										</button>
+									</div>
+								</div>
 
-              <div class="row mb-3">
-                <div class="col-md-2">
-                  <a>Total : 171</a>
-                </div>
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>5</option>
-                    <option value="1">10</option>
-                    <option value="2">15</option>
-                    <option value="3">20</option>
-                  </select>
-                </div>
 
-                <!-- Table with stripped rows -->
-                <!-- Default Table -->
-                <div class="divHorizontalScroll">
-                	<table class="table tableHorizontalScroll">
-	                  <thead>
-	                    <tr align="center">
-	                      <th>
-	                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-	                      </th>
-	                      <th>#</th>
-	                      <th>Seq</th>
-	                      <th>접수번호</th>
-	                      <th>지급승인여부</th>
-	                      <th>지급반려사유</th>
-	                      <th>보험상품타입</th>
-	                      <th>고객번호</th>
-	                      <th>이름</th>
-	                      <th>성별</th>
-	                      <th>전화번호</th>
-	                      <th>주민등록번호 앞자리</th>
-	                      <th>주민등록번호 뒷자리</th>
-	                      <th>우편번호</th>
-	                      <th>주소</th>
-	                      <th>상세주소</th>
-	                      <th>이메일</th>
-	                      <th>직업위험군여부</th>
-	                      <th>의료수급권자여부</th>
-	                      <th>청구유형</th>
-	                      <th>청구사유</th>
-	                      <th>사고날짜</th>
-	                      <th>사고장소</th>
-	                      <th>사고경위</th>
-	                      <th>병명</th>
-	                      <th>보험금수령은행</th>
-	                      <th>보험금수령계좌번호</th>
-	                      <th>약관동의여부</th>
-	                      <th>담당자ID</th>
-	                      <th>담당자이름</th>
-	                      <th>등록일</th>
-	                      <th>수정일</th>
-	                      <th>접수처리완료여부</th>
-	                      <th>삭제여부</th>
-	                    </tr>
-	                  </thead>
-	                  <tbody>
-	                  	<tr th:if="${#lists.isEmpty(list)}">
-	                  		<td colspan="34" align="center">no data!</td>
-	                  	</tr>
-	                    <tr th:if="!${#lists.isEmpty(list)}" th:each="list : ${list}">
-	                      <td>
-	                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-	                      </td>
-	                      <td></td>
-	                      <td th:text="${list.incproSeq}"></td>
-	                      <td th:text="${list.incaccSeq}"></td>
-	                      <td th:text="${list.incproApproveNy}"></td>
-	                      <td th:text="${list.incproRejectReason}"></td>
-	                      <td th:text="${list.incaccProType}"></td>
-	                      <td th:text="${list.inmeSeq}"></td>
-	                      <td>
-	                      	<a th:href="@{/xdm/v1/infra/inClaim/inClaimProcessXdmMfom(incproSeq=${list?.incproSeq})}" th:text="${list.inmeName}"></a>
-	                      </td>
-	                      <td th:if="${list.inmeGender eq 1}">남자</td>
-	                      <td th:unless="${list.inmeGender eq 1}">여자</td>
-	                      <td th:text="${list.inmeTel}"></td>
-	                      <td th:text="${list.inmeIdNumberFr}"></td>
-	                      <td th:text="${list.inmeIdNumberBa}"></td>
-	                      <td th:text="${list.inmeZipCode}"></td>
-	                      <td th:text="${list.inmeAddr}"></td>
-	                      <td th:text="${list.inmeAddrDetail}"></td>
-	                      <td th:text="${list.inmeEmail}"></td>
-	                      <td th:text="${list.inmeJobNy}"></td>
-	                      <td th:text="${list.inmeDiseaseNy}"></td>
-	                      <td th:text="${list.incaccRequType}"></td>
-	                      <td th:text="${list.incaccRequReason}"></td>
-	                      <td th:text="${#dates.format(list?.incaccAccDate, 'yyyy-MM-dd')}"></td>
-	                      <td th:text="${list.incaccAccPlace}"></td>
-	                      <td th:text="${list.incaccAccDesc}"></td>
-	                      <td th:text="${list.incaccDisease}"></td>
-	                      <td th:text="${list.incaccSettleRankType}"></td>
-	                      <td th:text="${list.incaccSettleAcNo}"></td>
-	                      <td th:if="${list.incaccTosNy eq 0}">N</td>
-	                      <td th:unless="${list.incaccTosNy eq 0}">Y</td>
-	                      <td th:text="${list.instId}"></td>
-	                      <td th:text="${list.instName}"></td>
-	                      <td th:text="${#dates.format(list?.incaccRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-	                      <td th:text="${#dates.format(list?.incproEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-	                      <td th:text="${list.incproCompleteNy}"></td>
-	                      <td th:if="${list.incproDelNy eq 0}">N</td>
-	                      <td th:unless="${list.incproDelNy eq 0}">Y</td>
-	                    </tr>
-	                  </tbody>
-	                </table>
-                </div>
-                <!-- End Table with stripped rows -->
+								<div class="row mb-3">
+									<div class="col-md-2">
+										<a th:text="'Total: ' + ${vo.totalRows}"></a>
+									</div>
+									<div class="col-md-8"></div>
+									<div class="col-md-2">
+										<select class="form-select" aria-label="Default select example" id="changeRowNum" name="changeRowNum">
+											<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+											<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+											<option value="15" th:selected="${vo.rowNumToShow eq 15}">15</option>
+											<option value="20" th:selected="${vo.rowNumToShow eq 20}">20</option>
+											<option value="25" th:selected="${vo.rowNumToShow eq 25}">25</option>
+											<option value="30" th:selected="${vo.rowNumToShow eq 30}">30</option>
+										</select>
+									</div>
 
-                <!--pagination start-->
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!--pagination end-->
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-danger">
-                      <a href="#">
-                        <i class="bi bi-x-lg icon_color_change"></i>
-                      </a>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                      <a href="#">
-                        <i class="bi bi-trash-fill icon_color_change"></i>
-                      </a>
-                    </button>
-                  </div>
-                  <div class="col-md-6" align="Right">
-                    <button type="button" class="btn btn-success">
-                      <a href="#">
-                        <i class="bi bi-file-earmark-x icon_color_change"></i>
-                      </a>
-                    </button>
-                    <a href="/xdm/v1/infra/inClaim/inClaimProcessXdmForm">
-                      <button type="button" class="btn btn-primary">
-                        <i class="bi bi-plus-lg icon_color_change"></i>
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+									<!-- Table with stripped rows -->
+									<!-- Default Table -->
+									<div class="divHorizontalScroll">
+										<table class="table tableHorizontalScroll">
+											<thead>
+												<tr align="center">
+													<th><input class="form-check-input" type="checkbox"
+														id="gridCheck1"></th>
+													<th>#</th>
+													<th>Seq</th>
+													<th>접수번호</th>
+													<th>지급승인여부</th>
+													<th>지급반려사유</th>
+													<th>보험상품타입</th>
+													<th>고객번호</th>
+													<th>이름</th>
+													<th>성별</th>
+													<th>전화번호</th>
+													<th>직업위험군여부</th>
+													<th>의료수급권자여부</th>
+													<th>청구유형</th>
+													<th>청구사유</th>
+													<th>사고날짜</th>
+													<th>보험금수령은행</th>
+													<th>담당자ID</th>
+													<th>담당자이름</th>
+													<th>등록일</th>
+													<th>수정일</th>
+													<th>접수처리완료여부</th>
+													<th>삭제여부</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(list)}">
+													<td colspan="34" align="center">no data!</td>
+												</tr>
+												<tr th:if="!${#lists.isEmpty(list)}"
+													th:each="list : ${list}">
+													<td><input class="form-check-input" type="checkbox" id="gridCheck1"></td>
+													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+													<td th:text="${list.incproSeq}"></td>
+													<td th:text="${list.incaccSeq}"></td>
+													<td th:if="${list.incproApproveNy eq 0}">N</td>
+													<td th:unless="${list.incproApproveNy eq 0}">Y</td>
+													<td th:text="${list.incproRejectReason}"></td>
+													<td th:text="${list.incaccProType}"></td>
+													<td th:text="${list.inmeSeq}"></td>
+													<td><a
+														th:href="@{/xdm/v1/infra/inClaim/inClaimProcessXdmMfom(incproSeq=${list?.incproSeq})}"
+														th:text="${list.inmeName}"></a></td>
+													<td th:if="${list.inmeGender eq 1}">남자</td>
+													<td th:unless="${list.inmeGender eq 1}">여자</td>
+													<td th:text="${list.inmeTel}"></td>
+													<td th:text="${list.inmeJobNy}"></td>
+													<td th:text="${list.inmeDiseaseNy}"></td>
+													<td th:text="${list.incaccRequType}"></td>
+													<td th:text="${list.incaccRequReason}"></td>
+													<td
+														th:text="${#dates.format(list?.incaccAccDate, 'yyyy-MM-dd')}"></td>
+													<td th:text="${list.incaccSettleRankType}"></td>
+													<td th:text="${list.instId}"></td>
+													<td th:text="${list.instName}"></td>
+													<td
+														th:text="${#dates.format(list?.incaccRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td
+														th:text="${#dates.format(list?.incproEdiDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:if="${list.incproCompleteNy eq 0}">N</td>
+													<td th:unless="${list.incproCompleteNy eq 0}">Y</td>
+													<td th:if="${list.incproDelNy eq 0}">N</td>
+													<td th:unless="${list.incproDelNy eq 0}">Y</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- End Table with stripped rows -->
 
-          </div>
-        </div>
-    </section>
+									<!--pagination start-->
+									<nav aria-label="Page navigation example">
+										<ul class="pagination justify-content-center">
+											<li class="page-item disabled" th:if="${vo.startPage gt vo.pageNumToShow}" style="cursor: pointer;">
+												<a class="page-link" aria-label="Previous" href="javascript:goList(${vo.startPage - 1})" 
+													th:attr="onclick=|goList('${vo.startPage - 1}')|"> 
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
+											<li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" 
+								    			th:classappend="${num eq vo.thisPage} ? active : ''" style="cursor: pointer;">
+											<a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+											</li>
+											<li class="page-item" th:if="${vo.endPage ne vo.totalPages}" style="cursor: pointer;">
+												<a class="page-link" aria-label="Next" th:attr="onclick=|goList('${vo.endPage + 1}')|"> 
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+									<!--pagination end-->
+							</form>
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<button type="button" class="btn btn-danger">
+										<a href="#"> <i class="bi bi-x-lg icon_color_change"></i>
+										</a>
+									</button>
+									<button type="button" class="btn btn-danger">
+										<a href="#"> <i class="bi bi-trash-fill icon_color_change"></i>
+										</a>
+									</button>
+								</div>
+								<div class="col-md-6" align="Right">
+									<button type="button" class="btn btn-success">
+										<a href="#"> <i
+											class="bi bi-file-earmark-x icon_color_change"></i>
+										</a>
+									</button>
+									<a href="/xdm/v1/infra/inClaim/inClaimProcessXdmForm">
+										<button type="button" class="btn btn-primary">
+											<i class="bi bi-plus-lg icon_color_change"></i>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-  </main><!-- End #main -->
+				</div>
+			</div>
+		</section>
 
-  <!-- ======= Footer ======= -->
-  
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>ImDoyoung</span></strong>. All Rights Reserved
-    </div>
-  </footer><!-- End Footer -->
+	</main>
+	<!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+	<!-- ======= Footer ======= -->
 
-  <!-- Vendor JS Files -->
-  <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/quill/quill.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
+	<footer id="footer" class="footer">
+		<div class="copyright">
+			&copy; Copyright <strong><span>ImDoyoung</span></strong>. All Rights
+			Reserved
+		</div>
+	</footer>
+	<!-- End Footer -->
 
-  <!-- Template Main JS File -->
-  <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/xdm/v1/template/minions/assets/vendor/quill/quill.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
+	<script
+		src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+	
+	<!-- by developer -->
+  <script src="/xdm/v1/jquery/jquery-3.7.1.min.js"></script>
+  <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+
+  <script>
+  	// datetimepicker
+		window.addEventListener('load', function() {
+
+			$.datetimepicker.setLocale('ko');
+
+			$("#shStartDate, #shEndDate").datetimepicker({
+				timepicker : false,
+				format : 'Y-m-d'
+			});
+		});
+		
+		// paging
+		goList = function(thisPage) {
+			document.querySelector("input[name=thisPage]").value = thisPage;
+			document.querySelector("form[name=form]").action = "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+			document.querySelector("form[name=form]").submit();
+		}
+		
+		// RowNum
+		document.getElementById("changeRowNum").onchange = function () {
+		    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+		    form.action = "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+		    form.submit();
+		}
+  </script>
 
 </body>
 

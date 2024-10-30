@@ -42,11 +42,16 @@ public class InClaimService {
 		return inClaimDao.inClaimAcceptDelete(inClaimDto);
 	}
 	
+	// ClaimAccept: paing
+	public int inClaimAcceptSelectOneCount(InClaimVo inClaimVo) {
+		return inClaimDao.inClaimAcceptSelectOneCount(inClaimVo);
+	}
+	
 
 // ==================== inCalimProcess ==================== //
 	// ClaimProcess: List
-	public List<InClaimDto> inClaimProcessSelectList(){
-		return inClaimDao.inClaimProcessSelectList();
+	public List<InClaimDto> inClaimProcessSelectList(InClaimVo inClaimVo){
+		return inClaimDao.inClaimProcessSelectList(inClaimVo);
 	}
 	
 	// ClaimProcess: Insert
@@ -74,12 +79,17 @@ public class InClaimService {
 		return inClaimDao.inClaimProcessDelete(inClaimDto);
 	}
 	
+	// ClaimProcess: paing
+	public int inClaimProcessSelectOneCount(InClaimVo inClaimVo) {
+		return inClaimDao.inClaimProcessSelectOneCount(inClaimVo);
+	}
 	
 	
-// ==================== inCalimProcess ==================== //
+	
+// ==================== inCalimPay ==================== //
 	// ClaimPay: List
-	public List<InClaimDto> inClaimPaySelectList(){
-		return inClaimDao.inClaimPaySelectList();
+	public List<InClaimDto> inClaimPaySelectList(InClaimVo inClaimVo){
+		return inClaimDao.inClaimPaySelectList(inClaimVo);
 	}
 	
 	// ClaimPay: Insert
@@ -98,7 +108,10 @@ public class InClaimService {
 		return inClaimDao.inClaimPayUpdate(inClaimDto);
 	}
 	
-	
+	// ClaimPay: paing
+	public int inClaimPaySelectOneCount(InClaimVo inClaimVo) {
+		return inClaimDao.inClaimPaySelectOneCount(inClaimVo);
+	}
 	
 // ========== inClaimAssign ========== //
 	

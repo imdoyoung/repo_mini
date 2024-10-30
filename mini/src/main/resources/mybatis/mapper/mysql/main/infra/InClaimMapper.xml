@@ -6,40 +6,8 @@
 	<resultMap type="com.universal.infra.inClaim.InClaimDto" id="resultMapObj"></resultMap>
 	
 <!--========== inClaimAccept ==========-->
-	<select id="inClaimAcceptSelectList" resultMap="resultMapObj">
-		SELECT
-			h.incaccSeq,
-			h.incaccSubmitNo,
-			h.incaccProType,
-		    c.inmeSeq,
-		    c.inmeName,
-			c.inmeGender,
-		    c.inmeTel,
-		    c.inmeIdNumberFr,
-		    c.inmeIdNumberBa,
-		    c.inmeZipCode,
-		    c.inmeAddr,
-		    c.inmeAddrDetail,
-		    c.inmeEmail,
-		    c.inmeJobNy,
-		    c.inmeDiseaseNy,
-			h.incaccCompleteNy,
-			h.incaccRequType,
-			h.incaccRequReason,
-			h.incaccAccDate,
-			h.incaccAccPlace,
-			h.incaccAccDesc,
-			h.incaccDisease,
-			h.incaccSettleRankType,
-			h.incaccSettleAcNo,
-			h.incaccTosNy,
-		    d.instId,
-		    d.instName,
-			h.incaccRegDate,
-			h.incaccEdiDate,
-			h.incaccDelNy,
-			h.inMember_inmeSeq,
-			h.inStaff_instSeq
+
+	<sql id="inClaimAcceptSelectCommon">
 		FROM inClaimAccept AS h
 			LEFT JOIN inMember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
@@ -49,8 +17,71 @@
 			<if test="shIncaccProType != null and !shIncaccProType.equals('')">AND incaccProType = #{shIncaccProType}</if><!-- 보험상품타입 -->
 			<if test="shInmeJobNy != null and !shInmeJobNy.equals('')">AND inmeJobNy = #{shInmeJobNy}</if><!-- 위험직군여부 -->
 			<if test="shInmeDiseaseNy != null and !shInmeDiseaseNy.equals('')">AND inmeDiseaseNy = #{shInmeDiseaseNy}</if><!-- 의료수급권자여부 -->
-		ORDER BY
-			h.incaccSeq DESC
+			<if test="shIncaccRequType != null and !shIncaccRequType.equals('')">AND incaccRequType = #{shIncaccRequType}</if><!-- 청구유형 -->
+			<if test="shIncaccRequReason != null and !shIncaccRequReason.equals('')">AND incaccRequReason = #{shIncaccRequReason}</if><!-- 청구사유 -->
+			<if test="shIncaccSettleRankType != null and !shIncaccSettleRankType.equals('')">AND incaccSettleRankType = #{shIncaccSettleRankType}</if><!-- 보험금수령은행 -->
+			<if test="shInstId != null and !shInstId.equals('')">AND instId = #{shInstId}</if><!-- 담당자ID -->
+			<if test="shIncaccCompleteNy != null and !shIncaccCompleteNy.equals('')">AND incaccCompleteNy = #{shIncaccCompleteNy}</if><!-- 접수처리완료여부 -->
+			<if test="shIncaccDelNy != null and !shIncaccDelNy.equals('')">AND incaccDelNy = #{shIncaccDelNy}</if><!-- 삭제여부 -->
+			<!-- 날짜검색 -->
+			<choose>
+				<when test="shDateOption == 1">AND h.incaccAccDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+				<when test="shDateOption == 2">AND h.incaccRegDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+				<when test="shDateOption == 3">AND h.incaccEdiDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inmeSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND inmeGender = #{shValue}</when>
+				<when test="shOption == 4">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 5">AND instName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	<select id="inClaimAcceptSelectOneCount">
+		SELECT COUNT(*)
+		<include refid="inClaimAcceptSelectCommon"/>
+	</select>
+	
+	<select id="inClaimAcceptSelectList" resultMap="resultMapObj">
+		SELECT aa.* FROM(
+			SELECT
+				h.incaccSeq,
+				h.incaccSubmitNo,
+				h.incaccProType,
+			    c.inmeSeq,
+			    c.inmeName,
+				c.inmeGender,
+			    c.inmeTel,
+			    c.inmeIdNumberFr,
+			    c.inmeIdNumberBa,
+			    c.inmeZipCode,
+			    c.inmeAddr,
+			    c.inmeAddrDetail,
+			    c.inmeEmail,
+			    c.inmeJobNy,
+			    c.inmeDiseaseNy,
+				h.incaccCompleteNy,
+				h.incaccRequType,
+				h.incaccRequReason,
+				h.incaccAccDate,
+				h.incaccAccPlace,
+				h.incaccAccDesc,
+				h.incaccDisease,
+				h.incaccSettleRankType,
+				h.incaccSettleAcNo,
+				h.incaccTosNy,
+			    d.instId,
+			    d.instName,
+				h.incaccRegDate,
+				h.incaccEdiDate,
+				h.incaccDelNy,
+				h.inMember_inmeSeq,
+				h.inStaff_instSeq
+			<include refid="inClaimAcceptSelectCommon"></include>
+			ORDER BY
+				h.incaccSeq DESC
+		) aa limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
 	
 	<insert id="inClaimAcceptInsert">
@@ -169,43 +200,7 @@
 	
 <!--========== inClaimProcess ==========-->
 
-	<select id="inClaimProcessSelectList" resultMap="resultMapObj">
-		SELECT 
-			i.incproSeq, 
-			h.incaccSeq,
-			i.incproApproveNy,
-			i.incproRejectReason,
-			h.incaccProType,
-			c.inmeSeq,
-			c.inmeName,
-			c.inmeGender,
-			c.inmeTel,
-			c.inmeIdNumberFr,
-			c.inmeIdNumberBa,
-			c.inmeZipCode,
-			c.inmeAddr,
-			c.inmeAddrDetail,
-			c.inmeEmail,
-			c.inmeJobNy,
-			c.inmeDiseaseNy,
-			h.incaccRequType,
-			h.incaccRequReason,
-			h.incaccAccDate,
-			h.incaccAccPlace,
-			h.incaccAccDesc,
-			h.incaccDisease,
-			h.incaccSettleRankType,
-			h.incaccSettleAcNo,
-			h.incaccTosNy,
-			d.instId,
-			d.instName,
-			h.incaccRegDate,
-			i.incproEdiDate,
-			i.incproCompleteNy,
-			i.incproDelNy,
-			i.inMember_inmeSeq,
-			i.inStaff_instSeq,
-			i.inClaimAccept_incaccSeq
+	<sql id="inClaimProcessSelectCommon">
 		FROM inClaimProcess AS i
 			LEFT JOIN inClaimAccept AS h
 				ON i.inClaimAccept_incaccSeq = h.incaccSeq
@@ -213,8 +208,80 @@
 				ON h.inMember_inmeSeq = c.inmeSeq
 			LEFT JOIN inStaff AS d 
 				ON h.inStaff_instSeq = d.instSeq
-		ORDER BY 
-			i.incproSeq DESC
+		WHERE 1 = 1
+			<if test="shIncaccSeq != null and !shIncaccSeq.equals('')">AND incaccSeq = #{shIncaccSeq}</if><!-- 접수번호 -->
+			<if test="shIncproApproveNy != null and !shIncproApproveNy.equals('')">AND incproApproveNy = #{shIncproApproveNy}</if><!-- 지급승인여부 -->
+			<if test="shInmeJobNy != null and !shInmeJobNy.equals('')">AND inmeJobNy = #{shInmeJobNy}</if><!-- 직업위험군여부 -->
+			<if test="shInmeDiseaseNy != null and !shInmeDiseaseNy.equals('')">AND inmeDiseaseNy = #{shInmeDiseaseNy}</if><!-- 의료수급자여부 -->
+			<if test="shIncaccProType != null and !shIncaccProType.equals('')">AND incaccProType = #{shIncaccProType}</if><!-- 보험상품타입 -->
+			<if test="shIncaccRequType != null and !shIncaccRequType.equals('')">AND incaccRequType = #{shIncaccRequType}</if><!-- 청구유형 -->
+			<if test="shIncaccRequReason != null and !shIncaccRequReason.equals('')">AND incaccRequReason = #{shIncaccRequReason}</if><!-- 청구사유 -->
+			<if test="shIncaccSettleRankType != null and !shIncaccSettleRankType.equals('')">AND incaccSettleRankType = #{shIncaccSettleRankType}</if><!-- 보험금수령은행 -->
+			<if test="shInstId != null and !shInstId.equals('')">AND instId = #{shInstId}</if><!-- 담당자ID -->
+			<if test="shIncaccCompleteNy != null and !shIncaccCompleteNy.equals('')">AND incaccCompleteNy = #{shIncaccCompleteNy}</if><!-- 접수처리완료여부 -->
+			<if test="shIncproDelNy != null and !shIncproDelNy.equals('')">AND incproDelNy = #{shIncproDelNy}</if><!-- 삭제여부 -->
+			<!-- 날짜검색 -->
+			<choose>
+				<when test="shDateOption == 1">AND h.incaccAccDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+				<when test="shDateOption == 2">AND h.incaccRegDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+				<when test="shDateOption == 3">AND h.incaccEdiDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inmeSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND inmeGender = #{shValue}</when>
+				<when test="shOption == 4">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 5">AND instName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	<select id="inClaimProcessSelectOneCount">
+		SELECT COUNT(*)
+		<include refid="inClaimProcessSelectCommon"/>
+	</select>
+	
+	<select id="inClaimProcessSelectList" resultMap="resultMapObj">
+		SELECT bb.* FROM(
+			SELECT 
+				i.incproSeq, 
+				h.incaccSeq,
+				i.incproApproveNy,
+				i.incproRejectReason,
+				h.incaccProType,
+				c.inmeSeq,
+				c.inmeName,
+				c.inmeGender,
+				c.inmeTel,
+				c.inmeIdNumberFr,
+				c.inmeIdNumberBa,
+				c.inmeZipCode,
+				c.inmeAddr,
+				c.inmeAddrDetail,
+				c.inmeEmail,
+				c.inmeJobNy,
+				c.inmeDiseaseNy,
+				h.incaccRequType,
+				h.incaccRequReason,
+				h.incaccAccDate,
+				h.incaccAccPlace,
+				h.incaccAccDesc,
+				h.incaccDisease,
+				h.incaccSettleRankType,
+				h.incaccSettleAcNo,
+				h.incaccTosNy,
+				d.instId,
+				d.instName,
+				h.incaccRegDate,
+				i.incproEdiDate,
+				i.incproCompleteNy,
+				i.incproDelNy,
+				i.inMember_inmeSeq,
+				i.inStaff_instSeq,
+				i.inClaimAccept_incaccSeq
+				<include refid="inClaimProcessSelectCommon"/>
+			ORDER BY 
+				i.incproSeq DESC
+		) bb limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
 	
 	<insert id="inClaimProcessInsert">
@@ -328,28 +395,54 @@
 
 	
     <!--========== inClaimpay ==========-->
-	<select id="inClaimPaySelectList" resultMap="resultMapObj">
-		SELECT
-			j.incpaySeq,
-			h.incaccSeq,
-			h.incaccSettleRankType,
-			h.incaccSettleAcNo,
-			c.inmeName,
-			d.instId,
-			d.instName,
-			d.instTel,
-			j.incpaySettleDate, 
-			j.incpaySettleNy, 
-			j.inClaimAccept_incaccSeq, 
-			j.inMember_inmeSeq,
-			j.inStaff_instSeq
-		FROM inClaimPay AS j
+    
+    <sql id="inClaimPaySelectCommon">
+    	FROM inClaimPay AS j
 			LEFT JOIN inClaimAccept AS h
 				ON j.inClaimAccept_incaccSeq = h.incaccSeq
 			LEFT JOIN inMember AS c 
 				ON j.inMember_inmeSeq = c.inmeSeq
 			LEFT JOIN inStaff AS d 
 				ON j.inStaff_instSeq = d.instSeq
+		WHERE 1 = 1
+	    	<if test="shIncaccSeq != null and !shIncaccSeq.equals('')">AND incaccSeq = #{shIncaccSeq}</if><!-- 접수번호 -->
+	    	<if test="shIncaccSettleRankType != null and !shIncaccSettleRankType.equals('')">AND incaccSettleRankType = #{shIncaccSettleRankType}</if><!-- 보험금수령은행 -->
+	    	<if test="shInstId != null and !shInstId.equals('')">AND instId = #{shInstId}</if><!-- 담당자ID -->
+	    	<if test="shIncpaySettleNy != null and !shIncpaySettleNy.equals('')">AND incpaySettleNy = #{shIncpaySettleNy}</if><!-- 지급완료여부 -->
+			<!-- 날짜검색 -->
+			<choose>
+				<when test="shDateOption == 1">AND j.incpaySettleDate BETWEEN #{shStartDate} AND #{shEndDate}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND instName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND instTel LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+    </sql>
+    
+    <select id="inClaimPaySelectOneCount">
+    	SELECT COUNT(*)
+		<include refid="inClaimPaySelectCommon"/>
+    </select>
+    
+	<select id="inClaimPaySelectList" resultMap="resultMapObj">
+		SELECT cc.* FROM(
+			SELECT
+				j.incpaySeq,
+				h.incaccSeq,
+				h.incaccSettleRankType,
+				h.incaccSettleAcNo,
+				c.inmeName,
+				d.instId,
+				d.instName,
+				d.instTel,
+				j.incpaySettleDate, 
+				j.incpaySettleNy, 
+				j.inClaimAccept_incaccSeq, 
+				j.inMember_inmeSeq,
+				j.inStaff_instSeq
+				<include refid="inClaimPaySelectCommon"/>
+			) cc limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
 	
 	<insert id="inClaimPayInsert">
