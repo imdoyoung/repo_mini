@@ -31,5 +31,10 @@ public class InProductService {
 	public int ProUpdate(InProductDto inProductDto) {
 		return inproductDao.ProUpdate(inProductDto);
 	}
+	
+	// ProSelectOneCount
+	public int ProSelectOneCount(InProductVo inProductVo) {
+		return inproductDao.ProSelectOneCount(inProductVo);
+	}
 
 }

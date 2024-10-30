@@ -17,10 +17,16 @@ public class InApplicationController {
 	
 	@RequestMapping(value="/xdm/v1/infra/inApplication/inApplicationXdmList")
 	public String inApplicationXdmList(@ModelAttribute("vo") InApplicationVo inApplicationVo, Model model) {
-		model.addAttribute("list", inApplicationService.selectList(inApplicationVo));
 		
 		inApplicationVo.setShDateStart(inApplicationVo.getShDateStart() == null || inApplicationVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inApplicationVo.getShDateStart()));
 		inApplicationVo.setShDateEnd(inApplicationVo.getShDateEnd() == null || inApplicationVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inApplicationVo.getShDateEnd()));
+		
+		//paging
+		inApplicationVo.setParamsPaging(inApplicationService.AppSelectOneCount(inApplicationVo));
+
+		if (inApplicationVo.getTotalRows() > 0) {
+			model.addAttribute("list", inApplicationService.selectList(inApplicationVo));
+		}
 		
 		return "xdm/v1/infra/inApplication/inApplicationXdmList";
 	}

@@ -17,10 +17,17 @@ public class InProductController {
 	
 	@RequestMapping(value="/xdm/v1/infra/inProduct/inProductXdmList")
 	public String inProductXdmList(@ModelAttribute("vo") InProductVo inProductVo, Model model) {
-		model.addAttribute("list", inProductService.ProSelectList(inProductVo));
 		
 		inProductVo.setShDateStart(inProductVo.getShDateStart() == null || inProductVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inProductVo.getShDateStart()));
 		inProductVo.setShDateEnd(inProductVo.getShDateEnd() == null || inProductVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inProductVo.getShDateEnd()));
+		
+		//paging
+		inProductVo.setParamsPaging(inProductService.ProSelectOneCount(inProductVo));
+
+		if (inProductVo.getTotalRows() > 0) {
+			model.addAttribute("list", inProductService.ProSelectList(inProductVo));
+		}
+		
 		return "/xdm/v1/infra/inProduct/inProductXdmList";
 	}
 	

@@ -19,5 +19,8 @@ public interface InContractDao {
 	// conUpdate
 	public int conUpdate(InContractDto inContractDto);
 	
+	// conSelectOneCount
+	public int conSelectOneCount(InContractVo inContractVo);
+	
 
 }

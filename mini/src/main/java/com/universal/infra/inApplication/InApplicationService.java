@@ -31,5 +31,10 @@ public class InApplicationService {
 	public int AppUpdate(InApplicationDto inApplicationDto) {
 		return inApplicationDao.AppUpdate(inApplicationDto);
 	}
+	
+	// AppSelectOneCount
+	public int AppSelectOneCount(InApplicationVo inApplicationVo) {
+		return inApplicationDao.AppSelectOneCount(inApplicationVo);
+	}
 
 }

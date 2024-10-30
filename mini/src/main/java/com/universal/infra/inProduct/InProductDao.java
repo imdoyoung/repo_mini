@@ -18,5 +18,8 @@ public interface InProductDao {
 	
 	// ProUpdate
 	public int ProUpdate(InProductDto inProductDto);
+	
+	// ProSelectOneCount
+	public int ProSelectOneCount(InProductVo inProductVo);
 
 }

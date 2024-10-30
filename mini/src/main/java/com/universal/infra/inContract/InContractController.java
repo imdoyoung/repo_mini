@@ -19,10 +19,16 @@ public class InContractController {
 	
 	@RequestMapping(value="/xdm/v1/infra/inContract/inContractXdmList")
 	public String inContractXdmList(@ModelAttribute("vo") InContractVo inContractVo, Model model) {
-		model.addAttribute("list", inContractService.conSelectList(inContractVo));
 		
 		inContractVo.setShDateStart(inContractVo.getShDateStart() == null || inContractVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(inContractVo.getShDateStart()));
 		inContractVo.setShDateEnd(inContractVo.getShDateEnd() == null || inContractVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(inContractVo.getShDateEnd()));
+		
+		//paging
+		inContractVo.setParamsPaging(inContractService.conSelectOneCount(inContractVo));
+
+		if (inContractVo.getTotalRows() > 0) {
+			model.addAttribute("list", inContractService.conSelectList(inContractVo));
+		}
 		
 		return "/xdm/v1/infra/inContract/inContractXdmList";
 	}

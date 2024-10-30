@@ -3,20 +3,10 @@
 
 <mapper namespace="com.universal.infra.inProduct.InProductDao">
 	<resultMap type="com.universal.infra.inProduct.InProductDto" id="resultMapObj"></resultMap>
-
-	<select id="ProSelectList" resultMap="resultMapObj">
-		SELECT 
-			f.inproSeq,
-		    f.inproType,
-		    f.inproName,
-		    f.inproContent,
-		    f.inproPrice,
-		    f.inproTosNy,
-		    f.inproGrade,
-		    f.inproStartDate,
-		    f.inproEndDate,
-		    f.inproDelNy
-		FROM inproduct f
+	
+	<sql id="ProSelectCommon">
+		FROM
+			inproduct f
 		WHERE 1=1
 			<if test="shproType != null and !shproType.equals('')">AND inproType = #{shproType}</if>
 			<if test="shproDelNy != null and !shproDelNy.equals('')">AND inproDelNy = #{shproDelNy}</if>
@@ -29,8 +19,31 @@
 				<when test="shOption == 2">AND inproName LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 			<if test="shproGrade != null and !shproGrade.equals('')">AND inproGrade = #{shproGrade}</if>
+	</sql>
+	
+	<select id="ProSelectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="ProSelectCommon"/>
+	</select>
+	
+	<select id="ProSelectList" resultMap="resultMapObj">
+		select aa.* from(
+		SELECT 
+			f.inproSeq,
+		    f.inproType,
+		    f.inproName,
+		    f.inproContent,
+		    f.inproPrice,
+		    f.inproTosNy,
+		    f.inproGrade,
+		    f.inproStartDate,
+		    f.inproEndDate,
+		    f.inproDelNy
+		    <include refid="ProSelectCommon"/>
 		ORDER BY
 			f.inproSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
 	<select id="ProSelectOne" resultMap="resultMapObj">

@@ -17,5 +17,8 @@ public interface InApplicationDao {
 	
 	// AppUpdate
 	public int AppUpdate(InApplicationDto inApplicationDto);
+	
+	// AppSelectOneCount
+	public int AppSelectOneCount(InApplicationVo inApplicationVo);
 
 }

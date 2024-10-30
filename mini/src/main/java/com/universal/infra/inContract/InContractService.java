@@ -13,8 +13,7 @@ public class InContractService {
 	
 	// conSelectList
 	public List<InContractDto> conSelectList(InContractVo inContractVo) {
-		List<InContractDto> contracts = inContractDao.conSelectList(inContractVo);
-		return contracts;
+		return inContractDao.conSelectList(inContractVo);
 	}
 	
 	// conInsert
@@ -29,8 +28,12 @@ public class InContractService {
 	
 	// conUpdate
 	public int conUpdate(InContractDto inContractDto) {
-		System.out.println("update ss~");
 		return inContractDao.conUpdate(inContractDto);
+	}
+	
+	// conSelectOneCount
+	public int conSelectOneCount(InContractVo inContractVo) {
+		return inContractDao.conSelectOneCount(inContractVo);
 	}
 	
 }

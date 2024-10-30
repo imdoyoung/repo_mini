@@ -4,7 +4,38 @@
 <mapper namespace="com.universal.infra.inApplication.InApplicationDao">
 	<resultMap type="com.universal.infra.inApplication.InApplicationDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+		FROM
+			inapplication e
+		LEFT JOIN inmember c
+			ON e.inMember_inmeSeq = c.inmeSeq
+		WHERE 1=1
+			<if test="shappRequType != null and !shappRequType.equals('')">AND inappRequType = #{shappRequType}</if>
+			<if test="shappDelNy != null and !shappDelNy.equals('')">AND inappDelNy = #{shappDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND e.inappRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND e.inappEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inappSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND inmeIdNumberFr LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 5">AND inmeIdNumberBa LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 6">AND inmeAddr LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 7">AND inmeEmail LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+			<if test="shmeJobNy != null and !shmeJobNy.equals('')">AND inmeJobNy = #{shmeJobNy}</if>
+			<if test="shmeDiseaseNy != null and !shmeDiseaseNy.equals('')">AND inmeDiseaseNy = #{shmeDiseaseNy}</if>
+	</sql>
+	
+	<select id="AppSelectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon"/>
+	</select>
+	
 	<select id="AppselectList" resultMap="resultMapObj">
+		select aa.* from (
 		SELECT
 			e.inappSeq,
 		    e.inappRequType,
@@ -26,29 +57,11 @@
 		    e.inappRegDate,
 		    e.inappEdiDate,
 		    e.inappDelNy
-		FROM inapplication e
-		LEFT JOIN inmember c
-		ON e.inMember_inmeSeq = c.inmeSeq
-		WHERE 1=1
-			<if test="shappRequType != null and !shappRequType.equals('')">AND inappRequType = #{shappRequType}</if>
-			<if test="shappDelNy != null and !shappDelNy.equals('')">AND inappDelNy = #{shappDelNy}</if>
-			<choose>
-				<when test="shOptionDate == 1">AND e.inappRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				<when test="shOptionDate == 2">AND e.inappEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			</choose>
-			<choose>
-				<when test="shOption == 1">AND inappSeq = #{shValue}</when>
-				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 3">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 4">AND inmeIdNumberFr LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 5">AND inmeIdNumberBa LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 6">AND inmeAddr LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 7">AND inmeEmail LIKE CONCAT('%',#{shValue},'%')</when>
-			</choose>
-			<if test="shmeJobNy != null and !shmeJobNy.equals('')">AND inmeJobNy = #{shmeJobNy}</if>
-			<if test="shmeDiseaseNy != null and !shmeDiseaseNy.equals('')">AND inmeDiseaseNy = #{shmeDiseaseNy}</if>
+		<include refid="selectCommon"/>
 		ORDER BY
 			e.inappSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
 	<select id="AppselectOne" resultMap="resultMapObj">
@@ -73,9 +86,10 @@
 		    e.inappRegDate,
 		    e.inappEdiDate,
 		    e.inappDelNy
-		FROM inapplication e
+		FROM
+			inapplication e
 		LEFT JOIN inmember c
-		ON e.inMember_inmeSeq = c.inmeSeq
+			ON e.inMember_inmeSeq = c.inmeSeq
 		WHERE 1=1
 			AND e.inappSeq = #{inappSeq}
 	</select>

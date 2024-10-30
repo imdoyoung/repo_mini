@@ -4,7 +4,45 @@
 <mapper namespace="com.universal.infra.inContract.InContractDao">
 	<resultMap type="com.universal.infra.inContract.InContractDto" id="resultMapObj"></resultMap>
 	
+	<sql id="conSelectCommon">
+		FROM 
+			inContract AS g
+			LEFT JOIN inApplication AS e
+				ON g.inApplication_inappSeq = e.inappSeq
+			LEFT JOIN inMember AS c
+				ON e.inMember_inmeSeq = c.inmeSeq
+			LEFT JOIN inStaff AS d
+				ON g.inStaff_instSeq = d.instSeq
+			LEFT JOIN inProduct AS f
+				ON g.inProduct_inproSeq = f.inproSeq
+		WHERE 1=1
+			<if test="shconDelNy != null and !shconDelNy.equals('')">AND inconDelNy = #{shconDelNy}</if>
+			<if test="shconCondition != null and !shconCondition.equals('')">AND inconCondition = #{shconCondition}</if>
+			<if test="shproGrade != null and !shproGrade.equals('')">AND inproGrade = #{shproGrade}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND g.inconSettleDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND f.inproStartDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 3">AND f.inproEndDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 4">AND g.inconRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 5">AND g.inconEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND inconSeq = #{shValue}</when>
+				<when test="shOption == 2">AND inproName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND inmeIdNumberFr LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 5">AND inmeIdNumberBa LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 6">AND instId LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	<select id="conSelectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="conSelectCommon" />
+	</select>
+	
 	<select id="conSelectList" resultMap="resultMapObj">
+		select aa.* from (
 		SELECT 
 			g.inconSeq,
 			g.inconCondition,
@@ -30,36 +68,15 @@
 		    f.inproContent,
 		    f.inproStartDate,
 		    f.inproEndDate
-		FROM 
-			inContract AS g
-			LEFT JOIN inApplication AS e
-				ON g.inApplication_inappSeq = e.inappSeq
-			LEFT JOIN inMember AS c
-				ON e.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d
-				ON g.inStaff_instSeq = d.instSeq
-			LEFT JOIN inProduct AS f
-				ON g.inProduct_inproSeq = f.inproSeq
-		WHERE 1=1
-			<if test="shconCondition != null and !shconCondition.equals('')">AND inconCondition = #{shconCondition}</if>
-			<choose>
-				<when test="shOptionDate == 1">AND g.inconRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				<when test="shOptionDate == 2">AND g.inconEdiDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			</choose>
-			<choose>
-				<when test="shOption == 1">AND inconSeq = #{shValue}</when>
-				<when test="shOption == 2">AND inmeName LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 3">AND inmeTel LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 4">AND inmeIdNumberFr LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 5">AND inmeIdNumberBa LIKE CONCAT('%',#{shValue},'%')</when>
-				<when test="shOption == 6">AND instId LIKE CONCAT('%',#{shValue},'%')</when>
-			</choose>
-			<if test="shconDelNy != null and !shconDelNy.equals('')">AND inconDelNy = #{shconDelNy}</if>
+		<include refid="conSelectCommon" />
 		ORDER BY
 			g.inconSeq desc
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
+	
 	<select id="conSelectOne" resultMap="resultMapObj">
-		SELECT 
+		SELECT
 			g.inconSeq,
 			g.inconCondition,
 			g.inconSettleDate,
@@ -129,6 +146,7 @@
 		    #{inProduct_inproSeq}
 		)
 	</insert>
+	
 	<update id="conUpdate">
 		UPDATE inContract
 		SET
