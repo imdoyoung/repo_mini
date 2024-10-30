@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.universal.infra.code.CodeDto;
 import com.universal.infra.codeGroup.CodeGroupDto;
 import com.universal.infra.codeGroup.CodeGroupVo;
 
@@ -47,5 +48,13 @@ public class InQnaBoardService {
 	 public int selectOneCount(InQnaBoardVo inQnaBoardvo) { 
 	     return inQnaBoardDao.selectOneCount(inQnaBoardvo); 
 	 } 
+	 //member
+	 public List<InQnaBoardDto> selectListInQnaBoard() {
+			return inQnaBoardDao.selectListInQnaBoard();
+	} 
+	 //staff
+	 public List<InQnaBoardDto> selectstaffInQnaBoard() {
+			return inQnaBoardDao.selectstaffInQnaBoard();
+	}  
 
 }

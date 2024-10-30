@@ -62,7 +62,6 @@
       </nav>
       <h1>1:1 QnA</h1>
     </div><!-- End Page Title -->
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -104,11 +103,8 @@
 				  <div class="col-md-3">
                     <label for="inMember_inmeSeq" class="form-label">작성자ID</label>
 				      <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" required>
-				         <option value="" th:selected="${item?.inMember_inmeSeq==null}">id</option>
-				   		 <option value="1" th:selected="${item?.inMember_inmeSeq==1}">ghjk8795</option>
-				   	     <option value="2" th:selected="${item?.inMember_inmeSeq==2}">rtyu7411</option>
-						 <option value="3" th:selected="${item?.inMember_inmeSeq==3}">gfghk85</option>
-						 <option value="4" th:selected="${item?.inMember_inmeSeq==4}">fgh75</option>
+				         <option value="" >ID</option>
+				   		 <option th:each="list:${listMember}" th:value="${list.inmeSeq}" th:text="${list.inmeId}" ></option>
 					  </select>	
                   </div>
                   <div class="col-md-3">
@@ -128,16 +124,6 @@
                     </div>-->
                   </div>
                   <div class="col-md-3">
-                   <!-- <label for="" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
-					<select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" required>
-						<option value="" th:selected="${item?.inStaff_instSeq==null}">id</option>
-						<option value="1" th:selected="${item?.inStaff_instSeq==1}">미작성</option>
-						<option value="2" th:selected="${item?.inStaff_instSeq==2}">001</option>
-						<option value="3" th:selected="${item?.inStaff_instSeq==3}">002</option>
-						<option value="4" th:selected="${item?.inStaff_instSeq==4}">003</option>
-						<option value="5" th:selected="${item?.inStaff_instSeq==5}">003</option>
-						<option value="6" th:selected="${item?.inStaff_instSeq==6}">004</option>
-					</select>-->
                   </div>
 				  <div class="col-md-3" style="display:none">
 					<label for="inQnaBoard_inqbSeq" class="form-label">원천게시글번호</label>

@@ -101,18 +101,9 @@
                     </div>
                   </div>
                  <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">작성자ID<a style="color: red;">*</a></label>
-				     <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq" th:value="${item?.inMember_inmeSeq}" required>
-				        <option value="" th:selected="${item?.inMember_inmeSeq==null}">id</option>
-				   		<option value="1" th:selected="${item?.inMember_inmeSeq==1}">ghjk8795</option>
-				   	    <option value="2" th:selected="${item?.inMember_inmeSeq==2}">rtyu7411</option>
-						<option value="3" th:selected="${item?.inMember_inmeSeq==3}">gfghk85</option>
-					    <option value="4" th:selected="${item?.inMember_inmeSeq==4}">fgh75</option>
-					 </select>
+                    <label for="inmeId" class="form-label">작성자ID<a style="color: red;">*</a></label>
+					<input type="text" class="form-control" id="inmeId" name="inmeId" placeholder="이름을 입력해주세요" th:value="${item?.inmeId}" style="background-color: #E9ECEF;" >
                   </div>
-                  <!--<div class="col-md-3">
-                    <label for="validationCustom01" class="form-label"></label>
-                  </div>-->
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-3">
@@ -127,14 +118,9 @@
                   </div>
                   <div class="col-md-3">
                     <label for="inStaff_instSeq" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
-					  <select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" th:value="${item?.inStaff_instSeq}" required>
-						<option value="" >id</option>
-						<option value="1">미작성</option>
-						<option value="2">001</option>
-						<option value="3">002</option>
-						<option value="4">003</option>
-						<option value="5">004</option>
-						<option value="6">005</option>
+					  <select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" required>
+						<option value="" >ID</option>
+						<option th:each="list:${listStep}" th:value="${list.instSeq}" th:text="${list.instId}"></option>
                       </select>
                     <div class="invalid-feedback">
                       순서를 입력해주세요.
@@ -153,8 +139,8 @@
                 </div>
 				<div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="inqbContent" class="form-label">댓글내용</label>
-                    <textarea class="form-control" style="height: 100px"id="inqbContent" name="inqbContent" ></textarea>
+                    <label for="inqbReContent" class="form-label">댓글내용</label>
+                    <textarea class="form-control" style="height: 100px"id="inqbReContent" name="inqbReContent" ></textarea>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -167,35 +153,30 @@
                   </div>
                   <div class="col-md-3">
                     <label for="inqbRegDate" class="form-label">작성일</label>
-                    <input class="form-control" id="validationCustom01" name="inqbRegDate" type="datetime" th:value="${#dates.format(item?.inqbRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
-                   
+                    <input class="form-control" id="validationCustom01" name="inqbRegDate" type="datetime" th:value="${#dates.format(item?.inqbRegDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>      
                   </div>
                   <div class="col-md-3">
                     <label for="inqbEdiDate" class="form-label">수정일</label>
                     <input class="form-control" id="validationCustom01" name="inqbEdiDate" type="datetime" th:value="${#dates.format(item?.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
-                 
                   </div>
                 </div>
                 </div>
-    
                 <div class="row mb-3">
                   <div class="col-md-6">
-					<button type="button" id="btnDelete"  class="btn btn-outline-dark">
-                      <a>
+					<button type="button" class="btn btn-outline-dark">
+                      <a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList">
                         <i class="bi bi-list-ul"></i>
                       </a>
                     </button>
-     
                   </div>
-				  
-                  <div class="col-md-11"></div>
                   <div class="col-md-6" align="Right">
 					<!--<button type="button" class="btn btn-primary">
 					<--	<a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" -->
+					<!--<button>
                       <a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm(inqbSeq=${item.inqbSeq})}">
                         	<i class="bi bi-plus-lg icon_color_change"></i>
                       </a>
-                    </button>
+                    </button>-->
                     <!--<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList" class="btn btn-primary">
                       <a>
                         <i class="bi bi-server"></i>
@@ -211,11 +192,9 @@
               </form><!-- End Custom Styled Validation -->
             </div>
           </div>
-
         </div>
       </div>
     </section>
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -236,7 +215,7 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script>
+ <!--<script>
 		//uelete
 		document.getElementById("btnUelete").onclick = function(){
 			alert("uelete");
@@ -251,7 +230,7 @@
 		form.action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmDele";
 		form.submit();
 		}
-	</script>
+	</script>-->
   <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>

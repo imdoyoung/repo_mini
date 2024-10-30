@@ -8,6 +8,7 @@ public class InQnaBoardDto {
 	private Integer inqbType; 
 	private String inqbTitle; 
 	private String inqbContent; 
+	private String inqbReContent;
 	private Integer inqbCompleteNy; 
 	private Integer inqbDelNy; 
 	private Date inqbRegDate; 
@@ -23,6 +24,12 @@ public class InQnaBoardDto {
 	
 	
 	
+	public String getInqbReContent() {
+		return inqbReContent;
+	}
+	public void setInqbReContent(String inqbReContent) {
+		this.inqbReContent = inqbReContent;
+	}
 	public String getInmeSeq() {
 		return inmeSeq;
 	}

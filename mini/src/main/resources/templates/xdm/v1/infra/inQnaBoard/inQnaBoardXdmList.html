@@ -163,10 +163,9 @@
                       <th>코드</th>
                       <th>문의종류</th>
                       <th>제목</th>
-                      <!--<th>내용</th>-->
-                      <!--<th>작성자</th>-->
+					  <th>작성자</th>
+					  <th>댓글작성자</th>
 					  <th>삭제여부</th>
-					  <!--<th>댓글작성자</th>-->
 					  <th>작성일</th>
 					  <th>수정일</th>
 					  <th>상태</th>
@@ -190,15 +189,12 @@
 					  <td th:if="${list.inqbType eq 4}">가입조건문의</td>
 					  <td th:if="${list.inqbType eq 5}">정보변경문의</td>
 					  <td th:if="${list.inqbType eq 6}">기타문의</td>
-					 <!-- <td th:text="${list.inqbType}"></td>-->
 					 <!-- <td th:if="${list.inqbType != null}" th:text="${@codeService.selectOneCachedCode(list.inqbType)}"></td>
 					  <td th:unless="${list.inqbType != null}"></td>-->
                       <td><a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" th:text="${list.inqbTitle}"></a></td>
-                      <!--<td th:text="${list.inqbContent}"></td>-->
-                      <td th:if="${list.inMember_inmeSeq eq 1}">ghjk8795</td>		
-					  <td th:if="${list.inMember_inmeSeq eq 2}">dthb7655</td>					 
-					  <td th:if="${list.inMember_inmeSeq eq 3}">gfghk85</td>		
-					  <td th:if="${list.inMember_inmeSeq eq 4}">fgh75</td>
+					  <td th:text="${list.inmeId}"></td>
+					  <td><a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm(inqbSeq=${list.inqbSeq})}" th:text="${list.instId}"></a></td>
+					 <!-- <td th:text="${list.instId}"></td>-->
 					  <td th:if="${list.inqbDelNy eq 0}">N</td>
 					  <td th:unless="${list.inqbDelNy eq 0}">Y</td>
 					  <!--<td th:if="${list.inStaff_instSeq eq 0}">000001</td>		

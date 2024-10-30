@@ -11,6 +11,7 @@
 		  	l.inqbType,
 		  	l.inqbTitle,
 		  	l.inqbContent,
+		  	l.inqbReContent,
 		  	l.inqbCompleteNy,
 		  	l.inqbRegDate,
 		  	l.inqbEdiDate, 
@@ -62,6 +63,7 @@
 	  	l.inqbType,
 	  	l.inqbTitle,
 	  	l.inqbContent,
+	  	l.inqbReContent,
 	  	l.inqbCompleteNy,
 	  	l.inqbRegDate,
 	  	l.inqbEdiDate, 
@@ -69,7 +71,10 @@
 	  	l.inMember_inmeSeq, 
 	  	l.inStaff_instSeq,
 	  	l.inQnaBoard_inqbSeq,
-	  	c.inmeSeq
+	  	c.inmeSeq,
+	  	c.inmeId,
+	  	d.instSeq,
+		d.instId
 	   FROM
 		mini.inqnaboard AS l
 		LEFT JOIN inmember AS c
@@ -85,6 +90,7 @@
 	    SET
 	  	    inqbTitle = #{inqbTitle}
 			,inqbContent = #{inqbContent}
+			,inqbReContent = #{inqbReContent}
 			,inqbCompleteNy = #{inqbCompleteNy}
 			,inqbEdiDate = sysdate()
 		WHERE 1=1
@@ -96,6 +102,7 @@
 		    inqbType,
 		    inqbTitle,
 		    inqbContent,
+		    inqbReContent,
 		    inqbCompleteNy,
 		    inqbRegDate,
 		    inqbEdiDate,
@@ -107,12 +114,13 @@
 		      #{inqbType},
 			  #{inqbTitle},
 			  #{inqbContent},
+			  #{inqbReContent},
 			  0,
 			  now(),
 			  now(),
 			  0,
-			  #{inMember_inmeSeq},
-			  #{inStaff_instSeq},
+			  IFNULL(#{inMember_inmeSeq},0),
+			  IFNULL(#{inStaff_instSeq},0),
 			  IFNULL(#{inQnaBoard_inqbSeq},0)
 		      )
 	     <selectKey resultType="String" keyProperty="inqbSeq" order="AFTER">
@@ -138,5 +146,27 @@
 	  	SELECT COUNT(*)
 	  	<include refid="selectCommon"/>
 	  </select>
-
+	  
+	  <select id="selectListInQnaBoard" resultMap="resultMapObj">
+      SELECT
+		  c.inmeSeq,
+		  c.inmeId
+	  FROM
+		    mini.inmember c
+	  WHERE 1=1
+		  AND c.inmeDelNy = 0
+	  ORDER BY
+          c.inmeSeq DESC
+      </select>
+      <select id="selectstaffInQnaBoard" resultMap="resultMapObj">
+       SELECT
+		  d.instSeq,
+		  d.instId
+       FROM
+		    mini.inStaff d
+	  WHERE 1=1
+		  AND d.instDelNy = 0
+	  ORDER BY
+          d.instSeq DESC 
+     </select>
 </mapper>

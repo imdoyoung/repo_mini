@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.universal.infra.code.CodeDto;
+
 
 @Repository
 public interface InQnaBoardDao {
@@ -21,4 +23,8 @@ public interface InQnaBoardDao {
 	public int uelete(InQnaBoardDto inQnaBoardDto); 
 	//selectOneCount
 	public int selectOneCount(InQnaBoardVo inQnaBoardvo); 
+	//member
+	public List<InQnaBoardDto>selectListInQnaBoard();
+	//staff
+	public List<InQnaBoardDto>selectstaffInQnaBoard();
 }
