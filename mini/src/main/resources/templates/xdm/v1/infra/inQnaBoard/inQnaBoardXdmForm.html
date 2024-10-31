@@ -75,13 +75,13 @@
                    <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
                      <select class="form-select" name="inqbType" id="inqbType">
                        <option value="" th:selected="${item?.inqbType==null}">문의종류</option>
-					   <option value="1" th:selected="${item?.inqbType==1}">상품관련문의</option>
+					   <!--<option value="1" th:selected="${item?.inqbType==1}">상품관련문의</option>
 					   <option value="2" th:selected="${item?.inqbType==2}">해지관련문의</option>
 					   <option value="3" th:selected="${item?.inqbType==3}">지급관련문의</option>
 					   <option value="4" th:selected="${item?.inqbType==4}">가입조건문의</option>
 					   <option value="5" th:selected="${item?.inqbType==5}">정보변경문의</option>
-					   <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>
-                     <!--<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option>--> 
+					   <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>-->
+                       <option th:each="list : ${@codeService.selectListCachedCode(8)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option> 
                      </select>
                    <div class="invalid-feedback">
                      문의종류를 선택해주세요.

@@ -69,7 +69,7 @@ public class CodeService {
 	public static List<CodeDto> selectListCachedCode(String inCodegroup_incgSeq){
 		List<CodeDto> rt = new ArrayList<CodeDto>();
 		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
-			if (codeRow.getIncgSeq().equals(inCodegroup_incgSeq)) {
+			if (codeRow.getInCodegroup_incgSeq().equals(inCodegroup_incgSeq)) {
 				rt.add(codeRow);
 			} else {
 				// by pass

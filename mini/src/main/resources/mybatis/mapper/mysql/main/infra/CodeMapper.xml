@@ -142,14 +142,14 @@
 	<select id="selectListCachedCodeArrayList"
 		resultMap="resultMapObj">
 		SELECT
-		b.incdSeq,
-		b.incdName,
-		b.inCodegroup_incgSeq
+			incdSeq,
+			incdName,
+			inCodegroup_incgSeq
 		FROM
-		incode b
+			incode 
 		WHERE 1=1
-		AND incdDelNy = 0
-		AND incdUseNy = 1
+			AND incdDelNy = 0
+			AND incdUseNy = 1
 		<!-- AND inCodegroup_incgSeq=8 -->
 	</select>
 

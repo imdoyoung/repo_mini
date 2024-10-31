@@ -83,11 +83,8 @@
 						 <option value="5" th:selected="${item?.inqbType==5}">정보변경문의</option>
 						 <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>
 	                   </select>
-	                   <div class="invalid-feedback">
-	                     문의종류를 선택해주세요.
-	                   </div>
 	                 </div>
-					</div> 
+				  </div> 
 				<div class="row mb-3">
                   <div class="col-md-3">
                     <label for="inqbSeq" class="form-label">번호<a style="color: red;">*</a></label>
@@ -95,10 +92,7 @@
                   </div>
                   <div class="col-md-3">
                     <label for="inqbTitle" class="form-label">제목<a style="color: red;">*</a></label>
-                    <input type="text" class="form-control" id="inqbTitle" name="inqbTitle" th:value="${item?.inqbTitle}" placeholder="영대소문자,숫자" required>
-                    <div class="invalid-feedback">
-                      코드를 입력해주세요.
-                    </div>
+                    <input type="text" class="form-control" id="inqbTitle" name="inqbTitle" th:value="${item?.inqbTitle}" placeholder="영대소문자,숫자" required>  
                   </div>
                  <div class="col-md-3">
                     <label for="inmeId" class="form-label">작성자ID<a style="color: red;">*</a></label>
@@ -112,14 +106,10 @@
 						<option value="1" th:selected="${item?.inqbCompleteNy==1}">Y</option>
 						<option value="0" th:selected="${item?.inqbCompleteNy==0}">N</option>
                     </select>
-                    <div class="invalid-feedback">
-                      사용 여부를 선택해주세요.
-                    </div>
                   </div>
                   <div class="col-md-3">
                     <label for="instId" class="form-label">댓글 작성자 ID<a style="color: red;">*</a></label>
 					<input type="text" class="form-control" id="instId" name="instId" placeholder="이름을 입력해주세요" th:value="${item?.instId}" style="background-color: #E9ECEF;" readonly>
-                 
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -137,10 +127,10 @@
                 <div class="row mb-3">
                   <div class="col-md-3">
                     <label for="inqbDelNy" class="form-label">삭제여부</label>
-					<select class="form-select" name="inqbDelNy" disabled>
+					  <select class="form-select" name="inqbDelNy" disabled>
 						<option value="1" th:selected="${item?.inqbDelNy==1}">Y</option>
 						<option value="0" th:selected="${item?.inqbDelNy==0}">N</option>
-					</select>
+					  </select>
                   </div>
                   <div class="col-md-3">
                     <label for="inqbRegDate" class="form-label">작성일</label>
@@ -155,14 +145,10 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
 					<button type="button" id="btnDelete"  class="btn btn-outline-dark">
-                      <a>
-                        <i class="bi bi-list-ul"></i>
-                      </a>
+                      <a><i class="bi bi-list-ul"></i></a>
                     </button>
 					<button type="button" id="btnUelete"  class="btn btn-outline-dark">
-					   <a>
-					     <i class="bi bi-list-ul"></i>
-					   </a>
+					   <a><i class="bi bi-list-ul"></i></a>
 					</button>
                   </div>
                   <div class="col-md-6" align="Right">
@@ -188,8 +174,7 @@
         </div>
       </div>
     </section>
-  </main><!-- End #main -->
-
+  </main>
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -204,9 +189,7 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <!-- Vendor JS Files -->
   <script>
 		//uelete
@@ -232,10 +215,8 @@
   <script src="/xdm/v1/template/minions/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/php-email-form/validate.js"></script>
-
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
-
 </body>
 
 </html>

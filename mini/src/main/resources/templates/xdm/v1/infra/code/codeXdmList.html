@@ -150,9 +150,10 @@
                 </div>
                 <!-- Table with stripped rows -->
                 <!-- Default Table -->
-                <table class="table">
+				<div class="divHorizontalScroll">
+                <table class="table tableHorizontalScroll">
                   <thead>
-                    <tr>
+                    <tr align="center">
                       <th>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </th>
@@ -167,13 +168,13 @@
                       <th>등록일</th>
                       <th>수정일</th>
                     </tr>
-                  </thead>
-                  <tbody>
 					<tr th:if="${#lists.isEmpty(list)}">
-						<td colspan="14" align="center">
-							<p style="padding-top: 12px;">There is no data!</p>
+						<td colspan="21" align="center">
+							<p style="padding-top: 12px;">There are no data!</p>
 						</td>
 					</tr>
+					</thead>
+					<tbody>
                     <tr th:if="!${#lists.isEmpty(list)}" th:each="list:${list}">
                       <td>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
@@ -193,6 +194,7 @@
                     </tr>
                   </tbody>
                 </table>
+				</div>
                 <!-- End Table with stripped rows -->
 				<!-- paging s  -->
 				<!--<div class="container-fluid px-0 mt-2 mb-2">

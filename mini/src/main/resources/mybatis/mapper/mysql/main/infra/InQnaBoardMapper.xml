@@ -127,6 +127,8 @@
 			SELECT last_insert_id()
 	     </selectKey>
 	  </insert>
+	  
+	  
 	      
 	  <delete id="delete">
 	  	DELETE FROM inqnaboard
