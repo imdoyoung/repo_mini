@@ -78,18 +78,16 @@
                     <label for="validationCustom01" class="form-label">보험상품 타입<a style="color: red;">*</a></label>
                     <select class="form-select" id="inappRequType" name="inappRequType">
                       <option value="">선택하세요</option>
-                      <option value="1">실비</option>
-                      <option value="2">암</option>
-                      <option value="3">치아</option>
-                      <option value="4">생명</option>
-                      <option value="5">여행자</option>
+                      <option th:each="list : ${@codeService.selectListCachedCode(5)}"
+                      	th:value="${list.incdSeq}" th:text="${list.incdName}"
+                        th:selected="${list.incdSeq} == ${item?.inappRequType}"></option>
                     </select>
                     <div class="invalid-feedback">
                       코드 그룹을 선택해주세요.
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <label for="validationCustom01" class="form-label">신청 no.<a style="color: red;">*</a></label>
+                    <label for="validationCustom01" class="form-label">신청번호<a style="color: red;">*</a></label>
                     <input type="text" class="form-control"
                     id="inappSeq" name="inappSeq" placeholder="자동생성" 
                     style="background-color: #E9ECEF;" required readonly>
@@ -100,8 +98,10 @@
                 <div class="row mb-3">
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label">회원번호<a style="color: red;">*</a></label>
-                    <input type="text" class="form-control"
-                    id="inMember_inmeSeq" name="inMember_inmeSeq" placeholder="회원번호">
+                    <select class="form-select" id="inMember_inmeSeq" name="inMember_inmeSeq">
+                      <option value="">선택하세요</option>
+                      <option th:each="list : ${listMember}" th:value="${list.inmeSeq}" th:text="${list.inmeSeq}"></option>
+                    </select>
                   </div>
 <!--                   <div class="col-md-3"> -->
 <!--                     <label for="validationCustom01" class="form-label">성함<a style="color: red;">*</a></label> -->
@@ -114,8 +114,9 @@
                     <label for="validationCustom01" class="form-label">성별<a style="color: red;">*</a></label>
                     <select class="form-select" id="inappGender" name="inappGender">
                       <option value="">선택하세요</option>
-                      <option value="1">여성</option>
-                      <option value="2">남성</option>
+                      <option th:each="list : ${@codeService.selectListCachedCode(1)}"
+                      	th:value="${list.incdSeq}" th:text="${list.incdName}"
+                        th:selected="${list.incdSeq} == ${item?.inappGender}"></option>
                     </select>
                     <div class="invalid-feedback">
                       코드 그룹을 선택해주세요.
@@ -208,15 +209,9 @@
                     <label for="validationCustom01" class="form-label">은행<a style="color: red;">*</a></label>
                     <select class="form-select" id="inappRecBankType" name="inappRecBankType">
                       <option value="">선택하세요</option>
-                      <option value="1">신한은행</option>
-                      <option value="2">국민은행</option>
-                      <option value="3">농협은행</option>
-                      <option value="4">수협</option>
-                      <option value="5">하나은행</option>
-                      <option value="6">기업은행</option>
-                      <option value="7">신협은행</option>
-                      <option value="8">카카오뱅크</option>
-                      <option value="9">우리은행</option>
+                      <option th:each="list : ${@codeService.selectListCachedCode(4)}"
+                      	th:value="${list.incdSeq}" th:text="${list.incdName}"
+                        th:selected="${list.incdSeq} == ${item?.inappRecBankType}"></option>
                     </select>
                     <div class="invalid-feedback">
                       코드 그룹을 선택해주세요.
@@ -233,8 +228,8 @@
                     <label for="validationCustom01" class="form-label">약관동의 여부<a style="color: red;">*</a></label>
                     <select class="form-select" id="inappTosNy" name="inappTosNy">
                       <option value="">선택하세요</option>
-                      <option value="0">거부</option>
                       <option value="1">동의</option>
+                      <option value="0">거부</option>
                     </select>
                     <div class="invalid-feedback">
                       코드 그룹을 선택해주세요.
@@ -256,8 +251,8 @@
                     <label for="validationCustom01" class="form-label">삭제여부</label>
                     <select class="form-select" id="inappDelNy" name="inappDelNy">
                       <option value="">선택하세요</option>
-                      <option value="0">N</option>
                       <option value="1">Y</option>
+                      <option value="0">N</option>
                     </select>
                   </div>
                 </div>
@@ -317,6 +312,28 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <script type="text/javascript">
+  // LogoutProc
+  document.getElementById("SignoutBtn").onclick = function (){
+      alert("로그아웃 성공");
+      $.ajax({
+         async: true 
+         ,cache: false
+         ,type: "post"
+         /* ,dataType:"json" */
+         ,url: "/xdm/v1/infra/common/SignoutProc"
+         /* ,data : $("#formLogin").serialize() */
+         ,success: function(response) {
+            if(response.rt == "success") {
+                  location.href = "/xdm/v1/infra/common/signin";
+            } else {
+               // by pass
+            }
+         }
+      });
+   }
+  </script>
 
 </body>
 

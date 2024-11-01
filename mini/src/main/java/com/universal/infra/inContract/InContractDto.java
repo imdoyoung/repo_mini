@@ -27,11 +27,13 @@ public class InContractDto {
 	private Integer inmeJobNy;
 	
 	// inApplication(e)
+	private String inappSeq;
 	private Integer inappRequType;
 	private Integer inappRecBankType;
 	private String inappRecAccNo;
 	
 	// inProduct(f)
+	private String inproSeq;
 	private String inproName;
 	private Integer inproGrade;
 	private String inproContent;
@@ -41,6 +43,7 @@ public class InContractDto {
 	private Date inproEndDate;
 	
 	//inStaff(d)
+	private String instSeq;
 	private String instId;
 
 	// ------- getter/setter ------
@@ -235,5 +238,30 @@ public class InContractDto {
 	public void setInstId(String instId) {
 		this.instId = instId;
 	}
+
+	public String getInappSeq() {
+		return inappSeq;
+	}
+
+	public void setInappSeq(String inappSeq) {
+		this.inappSeq = inappSeq;
+	}
+
+	public String getInproSeq() {
+		return inproSeq;
+	}
+
+	public void setInproSeq(String inproSeq) {
+		this.inproSeq = inproSeq;
+	}
+
+	public String getInstSeq() {
+		return instSeq;
+	}
+
+	public void setInstSeq(String instSeq) {
+		this.instSeq = instSeq;
+	}
+	
 	
 }

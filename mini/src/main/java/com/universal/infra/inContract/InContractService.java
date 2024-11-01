@@ -36,4 +36,19 @@ public class InContractService {
 		return inContractDao.conSelectOneCount(inContractVo);
 	}
 	
+	// selectListApplication
+	public List<InContractDto> selectListApplication() {
+		return inContractDao.selectListApplication();
+	}
+	
+	// selectListStaff
+	public List<InContractDto> selectListStaff() {
+		return inContractDao.selectListStaff();
+	}
+	
+	// selectListProduct
+	public List<InContractDto> selectListProduct() {
+		return inContractDao.selectListProduct();
+	}
+	
 }

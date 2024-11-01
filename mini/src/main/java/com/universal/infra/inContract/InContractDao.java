@@ -22,5 +22,13 @@ public interface InContractDao {
 	// conSelectOneCount
 	public int conSelectOneCount(InContractVo inContractVo);
 	
+	// selectListApplication
+	public List<InContractDto> selectListApplication();
+	
+	// selectListStaff
+	public List<InContractDto> selectListStaff();
+	
+	// selectListProduct
+	public List<InContractDto> selectListProduct();
 
 }

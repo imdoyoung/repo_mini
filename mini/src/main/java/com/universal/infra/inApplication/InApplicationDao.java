@@ -20,5 +20,9 @@ public interface InApplicationDao {
 	
 	// AppSelectOneCount
 	public int AppSelectOneCount(InApplicationVo inApplicationVo);
-
+	
+	// selectListMember
+	public List<InApplicationDto> selectListMember();
+	
+	
 }

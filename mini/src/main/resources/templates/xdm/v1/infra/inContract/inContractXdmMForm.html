@@ -76,9 +76,12 @@
                 <div class="row mb-3">
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label">보험상품타입<a style="color: red;">*</a></label>
-                    <input type="text" class="form-control"
-                    id="inappRequType" name="inappRequType" th:value="${item?.inappRequType}"
-                    placeholder="보험상품타입" style="background-color: #E9ECEF;" readonly>
+                      <select class="form-select" id="inappRequType" name="inappRequType" disabled>
+                      	<option value="">선택하세요</option>
+                      	<option th:each="list : ${@codeService.selectListCachedCode(5)}"
+                      		th:value="${list.incdSeq}" th:text="${list.incdName}"
+                        	th:selected="${list.incdSeq} == ${item?.inappRequType}"></option>
+                      </select>
                     <div class="invalid-feedback">
                       코드 이름 (영문)을 입력해주세요.
                     </div>
@@ -318,6 +321,30 @@
 
   <!-- Template Main JS File -->
   <script src="/xdm/v1/template/minions/assets/js/main.js"></script>
+  
+  <script type="text/javascript">
+  
+    //LogoutProc
+	document.getElementById("SignoutBtn").onclick = function (){
+	    alert("로그아웃 성공");
+	    $.ajax({
+	       async: true 
+	       ,cache: false
+	       ,type: "post"
+	       /* ,dataType:"json" */
+	       ,url: "/xdm/v1/infra/common/SignoutProc"
+	       /* ,data : $("#formLogin").serialize() */
+	       ,success: function(response) {
+	          if(response.rt == "success") {
+	                location.href = "/xdm/v1/infra/common/signin";
+	          } else {
+	          // by pass
+	          }
+	       }
+	    });
+	 }
+  
+  </script>
 
 </body>
 

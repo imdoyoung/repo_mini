@@ -34,7 +34,17 @@ public class InContractController {
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inContract/inContractXdmForm")
-	public String inContractXdmForm() {
+	public String inContractXdmForm(Model model) {
+		
+		List<InContractDto> contracts = inContractService.selectListApplication();
+		model.addAttribute("listApplication", inContractService.selectListApplication());
+		
+		List<InContractDto> staffs = inContractService.selectListStaff();
+		model.addAttribute("listStaff", inContractService.selectListStaff());
+		
+		List<InContractDto> products = inContractService.selectListProduct();
+		model.addAttribute("listProduct", inContractService.selectListProduct());
+		
 		return "/xdm/v1/infra/inContract/inContractXdmForm";
 	}
 	

@@ -174,7 +174,7 @@
                       <th>
                         <input class="form-check-input" type="checkbox" id="gridCheck1">
                       </th>
-                      <th>#</th>
+                      <th>NO</th>
                       <th>신청번호</th>
                       <th>보험상품타입</th>
                       <th>고객번호</th>
@@ -207,17 +207,14 @@
                       <td>
                         <input class="form-check-input" type="checkbox">
                       </td>
-                      <td>#</td>
+                      <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
                       <td th:text="${list.inappSeq}"></td>
-                      <td th:if="${list.inappRequType eq 1}">실비</td>
-                      <td th:if="${list.inappRequType eq 2}">암</td>
-                      <td th:if="${list.inappRequType eq 3}">치아</td>
-                      <td th:if="${list.inappRequType eq 4}">생명</td>
-                      <td th:if="${list.inappRequType eq 5}">여행자</td>
+                      <td th:if="${list.inappRequType != null}" th:text="${@codeService.selectOneCachedCode(list.inappRequType)}"></td>
+                      <td th:unless="${list.inappRequType != null}"></td>
                       <td th:text="${list.inmeSeq}"></td>
                       <td><a th:href="@{/xdm/v1/infra/inApplication/inApplicationXdmMForm(inappSeq=${list.inappSeq})}" th:text="${list.inmeName}"></a></td>
-                      <td th:if="${list.inappGender eq 0}">남성</td>
-                      <td th:unless="${list.inappGender eq 0}">여성</td>
+                      <td th:if="${list.inappGender != null}" th:text="${@codeService.selectOneCachedCode(list.inappGender)}"></td>
+                      <td th:unless="${list.inappGender != null}"></td>
                       <td th:text="${list.inmeTel}"></td>
                       <td th:text="${list.inmeIdNumberFr}"></td>
                       <td th:text="${list.inmeIdNumberBa}"></td>
@@ -229,8 +226,8 @@
                       <td th:text="${list.inmeAddr}"></td>
                       <td th:text="${list.inmeAddrDetail}"></td>
                       <td th:text="${list.inmeEmail}"></td>
-                      <td th:if="${list.inappRecBankType eq 0}">은행1</td>
-                      <td th:unless="${list.inappRecBankType eq 0}">은행2</td>
+                      <td th:if="${list.inappRecBankType != null}" th:text="${@codeService.selectOneCachedCode(list.inappRecBankType)}"></td>
+                      <td th:unless="${list.inappRecBankType != null}"></td>
                       <td th:text="${list.inappRecAccNo}"></td>
                       <td th:if="${list.inappTosNy eq 0}">거부</td>
                       <td th:unless="${list.inappTosNy eq 0}">동의</td>
@@ -350,6 +347,26 @@
 		document.querySelector("form[name=form]").action = "/xdm/v1/infra/inApplication/inApplicationXdmList";
 		document.querySelector("form[name=form]").submit();
 	}
+	
+	// LogoutProc
+	document.getElementById("SignoutBtn").onclick = function (){
+	    alert("로그아웃 성공");
+	    $.ajax({
+	       async: true 
+	       ,cache: false
+	       ,type: "post"
+	       /* ,dataType:"json" */
+	       ,url: "/xdm/v1/infra/common/SignoutProc"
+	       /* ,data : $("#formLogin").serialize() */
+	       ,success: function(response) {
+	          if(response.rt == "success") {
+	                location.href = "/xdm/v1/infra/common/signin";
+	          } else {
+	          // by pass
+	          }
+	       }
+	    });
+	 }
 	
 </script>
 

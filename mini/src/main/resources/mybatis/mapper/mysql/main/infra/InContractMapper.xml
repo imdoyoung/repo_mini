@@ -158,5 +158,37 @@
 		WHERE 1=1
 			AND inconSeq = #{inconSeq}
 	</update>
+	
+	<!-- contract에 Application 연결 -->
+	<select id="selectListApplication" resultMap="resultMapObj">
+		SELECT
+			e.inappSeq
+		FROM
+			inApplication e
+		WHERE 1 = 1
+			AND e.inappDelNy = 0
+	</select>
+	
+	<!-- contract에 product 연결 -->
+	<select id="selectListProduct" resultMap="resultMapObj">
+		SELECT
+			f.inproSeq,
+			f.inproName
+		FROM
+			inProduct f
+		WHERE 1 = 1
+			AND f.inproDelNy = 0
+	</select>
+	
+	<!-- contract에 staff 연결 -->
+	<select id="selectListStaff" resultMap="resultMapObj">
+		SELECT
+			d.instSeq,
+			d.instId
+		FROM
+			inStaff d
+		WHERE 1 = 1
+			AND d.instDelNy = 0
+	</select>
 	  
 </mapper>

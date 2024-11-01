@@ -1,9 +1,12 @@
 package com.universal.infra.inApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class InApplicationService {
@@ -35,6 +38,11 @@ public class InApplicationService {
 	// AppSelectOneCount
 	public int AppSelectOneCount(InApplicationVo inApplicationVo) {
 		return inApplicationDao.AppSelectOneCount(inApplicationVo);
+	}
+	
+	// selectListMember
+	public List<InApplicationDto> selectListMember() {
+		return inApplicationDao.selectListMember();
 	}
 
 }

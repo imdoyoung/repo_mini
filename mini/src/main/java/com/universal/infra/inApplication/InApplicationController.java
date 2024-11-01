@@ -1,5 +1,7 @@
 package com.universal.infra.inApplication;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,9 @@ public class InApplicationController {
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inApplication/inApplicationXdmForm")
-	public String inApplicationXdmForm() {
+	public String inApplicationXdmForm(Model model) {
+		List<InApplicationDto> applications = inApplicationService.selectListMember();
+		model.addAttribute("listMember", inApplicationService.selectListMember());
 		return "xdm/v1/infra/inApplication/inApplicationXdmForm";
 	}
 	
