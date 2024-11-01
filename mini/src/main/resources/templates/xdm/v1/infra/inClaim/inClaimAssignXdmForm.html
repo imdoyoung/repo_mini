@@ -99,23 +99,21 @@
 		                              <label for="form-label" class="form-label">접수번호<a style="color: red;">*</a></label> 
 		                              <select class="form-select" id="inClaimAccept_incaccSeq" name="inClaimAccept_incaccSeq">
 		                                 <option value="">접수번호선택</option>
-		                                 <option value="1">1</option>
-		                                 <option value="2">2</option>
-		                                 <option value="3">3</option>
+		                                 <option th:each="list:${listInClaimAccept}" th:value="${list.incaccSeq}" th:text="${list.incaccSeq}"></option>
 		                              </select>
 		                              <div class="invalid-feedback">고객번호를 선택해주세요.</div>
 		                           </div>
-									<div class="col-md-3">
-										<label for="form-label01" class="form-label">청구유형<a style="color: red;">*</a></label> 
-										<select class="form-select" id="incaccRequType" name="incaccRequType">
-											<option value="">청구유형선택</option>
-											<option value="1">질병</option>
-											<option value="2">일반상해</option>
-											<option value="3">교통상해</option>
-											<option value="4">업무중상해</option>
-										</select>
-										<div class="invalid-feedback"></div>
-									</div>
+<!-- 									<div class="col-md-3"> -->
+<!-- 										<label for="form-label01" class="form-label">청구유형<a style="color: red;">*</a></label>  -->
+<!-- 										<select class="form-select" id="incaccRequType" name="incaccRequType"> -->
+<!-- 											<option value="">청구유형선택</option> -->
+<!-- 											<option value="1">질병</option> -->
+<!-- 											<option value="2">일반상해</option> -->
+<!-- 											<option value="3">교통상해</option> -->
+<!-- 											<option value="4">업무중상해</option> -->
+<!-- 										</select> -->
+<!-- 										<div class="invalid-feedback"></div> -->
+<!-- 									</div> -->
 									<div class="col-md-3">
 										<label for="form-label01" class="form-label">클레임완료여부<a style="color: red;">*</a></label> 
 										<select class="form-select" id="incassCompleteNy" name="incassCompleteNy">
@@ -254,6 +252,26 @@
 			format : 'Y-m-d'
 		});
 	});
+	
+	
+	  //LogoutProc
+	  document.getElementById("SignoutBtn").onclick = function (){
+	      $.ajax({
+	         async: true 
+	         ,cache: false
+	         ,type: "post"
+	         /* ,dataType:"json" */
+	         ,url: "/xdm/v1/infra/common/SignoutProc"
+	         /* ,data : $("#formLogin").serialize() */
+	         ,success: function(response) {
+	            if(response.rt == "success") {
+	                  location.href = "/xdm/v1/infra/common/signin";
+	            } else {
+	               // by pass
+	            }
+	         }
+	      });
+	   }
 	</script>
 </body>
 

@@ -1,6 +1,8 @@
 package com.universal.infra.inMember;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -163,6 +165,7 @@ public class InMemberDto {
 	public void setInmeDelNy(Integer inmeDelNy) {
 		this.inmeDelNy = inmeDelNy;
 	}
+
 	
 	
 	

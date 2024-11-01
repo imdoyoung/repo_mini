@@ -62,7 +62,7 @@
 		) aa
 		limit #{rowNumToShow} offset #{startRnumForMySql}
 	</select>
-
+ 
 	<insert id="memberInsert">
 		insert into inmember(
 			inmeName,
@@ -176,12 +176,7 @@
          AND inmeSeq = #{inmeSeq}
     </update>
     
-    <!-- 삭제 -->
-<!--     <delete id="memberDelete"> -->
-<!--       DELETE FROM inmember -->
-<!--       WHERE 1 = 1 -->
-<!--          AND inmeSeq = #{inmeSeq} -->
-<!--     </delete> -->
+
   
 
  

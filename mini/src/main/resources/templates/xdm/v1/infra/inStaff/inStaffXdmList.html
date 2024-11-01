@@ -175,14 +175,9 @@
 						th:text="${list.instName}">
 						</a>
 					  </td>
-   					  <td th:if="${list.instposition eq 1}">사원</td>
-                      <td th:if="${list.instposition eq 2}">주임</td>
-                      <td th:if="${list.instposition eq 3}">대리</td>
-                      <td th:if="${list.instposition eq 4}">과장</td>
-                      <td th:if="${list.instposition eq 5}">차장</td>
-                      <td th:if="${list.instposition eq 6}">부장</td>
-                      <td th:if="${list.instGender eq 1}">남자</td>
-                      <td th:unless="${list.instGender eq 1}">여자</td>
+					  <td th:text="${@codeService.selectOneCachedCode(list.instposition)}"></td> <!-- 직급 -->
+					  <td th:if="${list.instGender != null}" th:text="${@codeService.selectOneCachedCode(list.instGender)}"></td> <!-- 성별 -->
+					  <td th:unless="${list.instGender != null}"></td> <!-- 성별 -->
                       <td th:text="${list.instTel}"></td>
                       <td th:text="${list.instEmail}"></td>
                       <td th:text="${list.instId}"></td>
@@ -313,7 +308,24 @@
 	    form.submit();
 	}
   
-  
+	  //LogoutProc
+	  document.getElementById("SignoutBtn").onclick = function (){
+	      $.ajax({
+	         async: true 
+	         ,cache: false
+	         ,type: "post"
+	         /* ,dataType:"json" */
+	         ,url: "/xdm/v1/infra/common/SignoutProc"
+	         /* ,data : $("#formLogin").serialize() */
+	         ,success: function(response) {
+	            if(response.rt == "success") {
+	                  location.href = "/xdm/v1/infra/common/signin";
+	            } else {
+	               // by pass
+	            }
+	         }
+	      });
+	   }
   
   
   

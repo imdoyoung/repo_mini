@@ -120,6 +120,34 @@
       WHERE 1 = 1
          AND instSeq = #{instSeq}
     </update>
+    
+    
+    
+        <!-- 로그인 -->
+      <select id="selectOneSignin" resultMap="resultMapObj">
+         SELECT 
+            d.instSeq,
+            d.instId,
+            d.instPw
+         FROM
+            instaff d
+         WHERE 1 = 1
+            AND d.instId = #{instId}
+            AND d.instPw = #{instPw}
+      </select>
+      
+      <!-- 로그인 세션 유지 -->
+      <select id="selectOneId" resultMap="resultMapObj">
+         SELECT
+            d.instSeq,
+            d.instId,
+            d.instName 
+         FROM
+            instaff d
+         WHERE 1 = 1
+            AND d.instId = #{instId}
+      </select>
+    
 	 
 	
 	

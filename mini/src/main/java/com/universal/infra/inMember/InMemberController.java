@@ -1,12 +1,19 @@
 package com.universal.infra.inMember;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.universal.common.constants.Constants;
 import com.universal.common.util.UtilDateTime;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class InMemberController { 
@@ -71,13 +78,16 @@ public class InMemberController {
 		return "redirect:/xdm/v1/infra/inMember/inMemberXdmList";
 	}
 	
-	// delete
-//	@RequestMapping(value="/xdm/v1/infra/inMember/inMemberXdmDel")
-//	public String inMemberXdmDel(InMemberDto inMemberDto) {
-//		
-//		inMemberService.memberDelete(inMemberDto);
-//		return "redirect:/xdm/v1/infra/inMember/inMemberXdmList";
-//	}
+	
+	
+	
+
+	   
+	
+	
+	
+	
+
 	
 	
 	       

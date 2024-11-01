@@ -43,6 +43,16 @@ public class InStaffService {
 		return inStaffDao.selectOneCount(inStaffVo);
 	}
 	
+	// login
+    public InStaffDto selectOneSignin(InStaffDto inStaffDto){
+        return inStaffDao.selectOneSignin(inStaffDto);
+    }
+     
+    public InStaffDto selectOneId(InStaffDto inStaffDto) {
+        return inStaffDao.selectOneId(inStaffDto);
+    }
+    
+	
 	
 	
 	

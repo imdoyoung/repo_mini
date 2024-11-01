@@ -161,6 +161,7 @@
                       <th>회원번호</th>
                       <th>회원이름</th>
                       <th>성별</th>
+                      <th>등급</th>
                       <th>전화번호</th>
                       <th>주민번호 앞자리</th>
                       <th>주민번호 뒷자리</th>
@@ -197,9 +198,10 @@
                       	<a th:href="@{/xdm/v1/infra/inMember/inMemberXdmMForm(inmeSeq=${list.inmeSeq})}"
 						th:text="${list.inmeName}">
 						</a>
-					  </td>
-                      <td th:if="${list.inmeGender eq 1}">남자</td>
-                      <td th:unless="${list.inmeGender eq 1}">여자</td>
+					  </td> 
+					  <td th:if="${list.inmeGender != null}" th:text="${@codeService.selectOneCachedCode(list.inmeGender)}"></td>
+					  <td th:unless="${list.inmeGender != null}"></td>
+					  <td th:text="${@codeService.selectOneCachedCode(list.inmeGrade)}"></td>
                       <td th:text="${list.inmeTel}"></td>
                       <td th:text="${list.inmeIdNumberFr}"></td>
                       <td th:text="${list.inmeIdNumberBa}"></td>
@@ -213,7 +215,8 @@
                       <td th:unless="${list.inmeJobNy eq 0}">Y</td>
                       <td th:if="${list.inmeDiseaseNy eq 0}">N</td>	
                       <td th:unless="${list.inmeDiseaseNy eq 0}">Y</td>
-                      <td th:text="${list.inmeBankType}"></td>
+                      <td th:text="${@codeService.selectOneCachedCode(list.inmeBankType)}"></td>
+<!--                       <td th:text="${list.inmeBankType}"></td> -->
                       <td th:text="${list.inmeAccNo}"></td>
                       <td th:text="${#dates.format(list.inmeRegDate	, 'yyyy-MM-dd HH:mm:ss')}"></td>
                       <td th:text="${#dates.format(list.inmeEdiDate	, 'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -346,6 +349,24 @@
 	    form.submit();
 	}
     
+	 //LogoutProc
+	  document.getElementById("SignoutBtn").onclick = function (){
+	      $.ajax({
+	         async: true 
+	         ,cache: false
+	         ,type: "post"
+	         /* ,dataType:"json" */
+	         ,url: "/xdm/v1/infra/common/SignoutProc"
+	         /* ,data : $("#formLogin").serialize() */
+	         ,success: function(response) {
+	            if(response.rt == "success") {
+	                  location.href = "/xdm/v1/infra/common/signin";
+	            } else {
+	               // by pass
+	            }
+	         }
+	      });
+	   }
     
   
   

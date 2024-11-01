@@ -192,10 +192,12 @@
 	                      <td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
 	                      <td th:text="${list.incassSeq}"></td>
 	                      <td th:text="${list.incaccSeq}"></td>
-	                      <td th:if="${list.incaccRequType eq 1}">질병</td>
-	                      <td th:if="${list.incaccRequType eq 2}">일반상해</td>
-	                      <td th:if="${list.incaccRequType eq 3}">교통상해</td>
-	                      <td th:if="${list.incaccRequType eq 4}">업무중상해</td>
+	                      <td th:if="${list.incaccRequType != null}" th:text="${@codeService.selectOneCachedCode(list.incaccRequType)}"></td>
+						  <td th:unless="${list.incaccRequType != null}"></td>
+<!-- 	                      <td th:if="${list.incaccRequType eq 1}">질병</td>      -->
+<!-- 	                      <td th:if="${list.incaccRequType eq 2}">일반상해</td> -->
+<!-- 	                      <td th:if="${list.incaccRequType eq 3}">교통상해</td> -->
+<!-- 	                      <td th:if="${list.incaccRequType eq 4}">업무중상해</td> -->
 	                      <td th:text="${list.instId}"></td>
 	                      <td>
 	                      <a th:href="@{/xdm/v1/infra/inClaim/inClaimAssignXdmMForm(incassSeq=${list.incassSeq})}"
@@ -337,7 +339,25 @@
 	    form.action = "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
 	    form.submit();
 	}
-  
+	
+	  //LogoutProc
+	  document.getElementById("SignoutBtn").onclick = function (){
+	      $.ajax({
+	         async: true 
+	         ,cache: false
+	         ,type: "post"
+	         /* ,dataType:"json" */
+	         ,url: "/xdm/v1/infra/common/SignoutProc"
+	         /* ,data : $("#formLogin").serialize() */
+	         ,success: function(response) {
+	            if(response.rt == "success") {
+	                  location.href = "/xdm/v1/infra/common/signin";
+	            } else {
+	               // by pass
+	            }
+	         }
+	      });
+	   }
   
   
   

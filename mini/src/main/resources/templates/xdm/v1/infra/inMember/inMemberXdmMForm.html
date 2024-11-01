@@ -84,9 +84,11 @@
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label">성별<a style="color: red;">*</a></label>
                     <select class="form-select" id="validationCustom04" name="inmeGender" th:value="${memberItem?.inmeGender}">
-                      <option value="" th:selected="${memberItem?.inmeGender == null}">선택하세요</option>
-                      <option value="1" th:selected="${memberItem?.inmeGender == 1}">남자</option>
-                      <option value="2" th:selected="${memberItem?.inmeGender == 2}">여자</option>  
+                      <option value="">선택하세요</option>
+                         <option th:each="list : ${@codeService.selectListCachedCode(1)}"
+                              th:value="${list.incdSeq}" th:text="${list.incdName}"
+                              th:selected="${list.incdSeq} == ${memberItem?.inmeGender}">
+                      </option>
                     </select>
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
@@ -168,9 +170,11 @@
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label">등급<a style="color: red;">*</a></label>
                     <select class="form-select" id="validationCustom04" name="inmeGrade" th:value="${memberItem?.inmeGrade}">
-                      <option value="" th:selected="${memberItem?.inmeGrade == null}">선택하세요</option>
-                      <option value="1" th:selected="${memberItem?.inmeGrade == 1}">성인</option>
-                      <option value="2" th:selected="${memberItem?.inmeGrade == 2}">어린이</option>
+                      <option value="">선택하세요</option>
+                      <option th:each="list : ${@codeService.selectListCachedCode(2)}"
+                              th:value="${list.incdSeq}" th:text="${list.incdName}"
+                              th:selected="${list.incdSeq} == ${memberItem?.inmeGrade}">
+                      </option>
                     </select>
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
@@ -198,12 +202,11 @@
                   <div class="col-md-3">
                     <label for="validationCustom01" class="form-label">은행<a style="color: red;">*</a></label>
                     <select class="form-select" id="validationCustom04" name="inmeBankType" th:value="${memberItem?.inmeBankType}">
-                      <option value="" th:selected="${memberItem?.inmeBankType == null}">선택하세요</option>
-                      <option value="1" th:selected="${memberItem?.inmeBankType == 1}">우리은행</option>
-                      <option value="2" th:selected="${memberItem?.inmeBankType == 2}">신한은행</option>
-                      <option value="3" th:selected="${memberItem?.inmeBankType == 3}">농협은행</option>
-                      <option value="4" th:selected="${memberItem?.inmeBankType == 4}">국민은행</option>     
-                      <option value="5" th:selected="${memberItem?.inmeBankType == 5}">카카오뱅크</option>
+                      <option value="">선택하세요</option>
+                      <option th:each="list : ${@codeService.selectListCachedCode(4)}"
+                              th:value="${list.incdSeq}" th:text="${list.incdName}"
+                              th:selected="${list.incdSeq} == ${memberItem?.inmeBankType}">
+                      </option>
                     </select>
                     <div class="invalid-feedback">코드 그룹을 선택해주세요</div>
                   </div>
@@ -365,6 +368,26 @@
 	     form.action = "/xdm/v1/infra/inMember/inMemberXdmDel";
 	     form.submit();
 	  }
+	  
+	  
+	  //LogoutProc
+	  document.getElementById("SignoutBtn").onclick = function (){
+	      $.ajax({
+	         async: true 
+	         ,cache: false
+	         ,type: "post"
+	         /* ,dataType:"json" */
+	         ,url: "/xdm/v1/infra/common/SignoutProc"
+	         /* ,data : $("#formLogin").serialize() */
+	         ,success: function(response) {
+	            if(response.rt == "success") {
+	                  location.href = "/xdm/v1/infra/common/signin";
+	            } else {
+	               // by pass
+	            }
+	         }
+	      });
+	   }
   
    
   </script>

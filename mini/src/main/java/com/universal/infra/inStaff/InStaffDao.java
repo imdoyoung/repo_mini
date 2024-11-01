@@ -26,5 +26,10 @@ public interface InStaffDao {
 	
 	// paging
 	public int selectOneCount(InStaffVo inStaffVo);
+	
+	// login
+	public InStaffDto selectOneSignin(InStaffDto inStaffDto);
+	   
+	public InStaffDto selectOneId(InStaffDto inStaffDto);
 
 }

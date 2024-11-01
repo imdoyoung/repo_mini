@@ -25,9 +25,7 @@ public interface InMemberDao {
 	// update delete
 	public int membertUelete(InMemberDto inMemberDto);
 	
-	// delete
-//	public int memberDelete(InMemberDto inMemberDto);      
-	
+
 	
 	
 	
