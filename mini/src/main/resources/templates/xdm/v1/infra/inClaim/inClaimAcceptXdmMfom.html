@@ -102,11 +102,14 @@
 											th:value="${item?.incaccSeq}"
 											style="background-color: #E9ECEF;" readonly>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-3" >
 										<label for="form-label01" class="form-label"> 보험상품타입 </label>
-										<input type="text" class="form-control" id="incaccProType"
-											name="incaccProType" th:value="${item?.incaccProType}"
-											style="background-color: #E9ECEF;" readonly>
+										<select class="form-select" id="incaccProType" name="incaccProType" disabled>
+											<option value="">보험상품타입선택</option>
+											<option th:each="list:${@codeService.selectListCachedCode(5)}" th:value="${list.incdSeq}" th:text="${list.incdName}" 
+												th:selected="${list.incdSeq} == ${item?.incaccProType}">
+											</option>
+										</select>
 									</div>
 									<div class="col-md-3">
 										<label for="form-label01" class="form-label"> 고객번호 </label> <input
@@ -180,7 +183,8 @@
 								<div class="row mb-3">
 									<div class="col-md-3">
 										<label for="form-label01" class="form-label"> 직업위험군여부
-										</label> <input type="text" class="form-control" id="inmeJobNy"
+										</label> 
+										<input type="text" class="form-control" id="inmeJobNy"
 											name="inmeJobNy" th:value="${item?.inmeJobNy}"
 											style="background-color: #E9ECEF;" readonly>
 									</div>
@@ -193,12 +197,11 @@
 									<div class="col-md-3">
 										<label for="form-label" class="form-label"> 청구유형 <a
 											style="color: red;">*</a>
-										</label> <select class="form-select" id="incaccRequType"
-											name="incaccRequType">
-											<option value="1" th:selected="${item?.incaccRequType == 1}">질병</option>
-											<option value="2" th:selected="${item?.incaccRequType == 2}">일반상해</option>
-											<option value="3" th:selected="${item?.incaccRequType == 3}">교통상해</option>
-											<option value="4" th:selected="${item?.incaccRequType == 4}">업무중상해</option>
+										</label> 
+										<select class="form-select" id="incaccRequType" name="incaccRequType">
+											<option th:each="list:${@codeService.selectListCachedCode(6)}" th:value="${list.incdSeq}" th:text="${list.incdName}" 
+												th:selected="${list.incdSeq} == ${item?.incaccRequType}">
+											</option>
 										</select>
 										<div class="invalid-feedback">청구유형을 선택해주세요.</div>
 									</div>
@@ -207,22 +210,9 @@
 											style="color: red;">*</a>
 										</label> <select class="form-select" id="incaccRequReason"
 											name="incaccRequReason">
-											<option value="1"
-												th:selected="${item?.incaccRequReason == 1}">입원</option>
-											<option value="2"
-												th:selected="${item?.incaccRequReason == 2}">골절</option>
-											<option value="3"
-												th:selected="${item?.incaccRequReason == 3}">통원</option>
-											<option value="4"
-												th:selected="${item?.incaccRequReason == 4}">수술</option>
-											<option value="5"
-												th:selected="${item?.incaccRequReason == 5}">진단</option>
-											<option value="6"
-												th:selected="${item?.incaccRequReason == 6}">장해</option>
-											<option value="7"
-												th:selected="${item?.incaccRequReason == 7}">사망</option>
-											<option value="8"
-												th:selected="${item?.incaccRequReason == 8}">기타</option>
+											<option th:each="list:${@codeService.selectListCachedCode(7)}" th:value="${list.incdSeq}" th:text="${list.incdName}" 
+												th:selected="${list.incdSeq} == ${item?.incaccRequReason}">
+											</option>
 										</select>
 										<div class="invalid-feedback">청구사유를 선택해주세요.</div>
 									</div>
@@ -259,26 +249,11 @@
 									<div class="col-md-3">
 										<label for="form-label01" class="form-label"> 보험금수령은행
 											<a style="color: red;">*</a>
-										</label> <select class="form-select" id="incaccSettleRankType"
-											name="incaccSettleRankType">
-											<option value="1"
-												th:selected="${item?.incaccSettleRankType == 1}">신한은행</option>
-											<option value="2"
-												th:selected="${item?.incaccSettleRankType == 2}">국민은행</option>
-											<option value="3"
-												th:selected="${item?.incaccSettleRankType == 3}">농협은행</option>
-											<option value="4"
-												th:selected="${item?.incaccSettleRankType == 4}">수협은행</option>
-											<option value="5"
-												th:selected="${item?.incaccSettleRankType == 5}">하나은행</option>
-											<option value="6"
-												th:selected="${item?.incaccSettleRankType == 6}">기업은행</option>
-											<option value="7"
-												th:selected="${item?.incaccSettleRankType == 7}">신협</option>
-											<option value="8"
-												th:selected="${item?.incaccSettleRankType == 8}">카카오뱅크</option>
-											<option value="9"
-												th:selected="${item?.incaccSettleRankType == 9}">우리은행</option>
+										</label> 
+										<select class="form-select" id="incaccSettleRankType" name="incaccSettleRankType">
+											<option th:each="list:${@codeService.selectListCachedCode(4)}" th:value="${list.incdSeq}" th:text="${list.incdName}" 
+												th:selected="${list.incdSeq} == ${item?.incaccSettleRankType}">
+											</option>
 										</select>
 										<div class="invalid-feedback">보험금수령은행을 선택해주세요.</div>
 									</div>
@@ -293,9 +268,10 @@
 									<div class="col-md-3">
 										<label for="form-label" class="form-label"> 담당직원ID <a
 											style="color: red;">*</a>
-										</label> <input type="text" class="form-control" id="inStaff_instSeq"
-											name="inStaff_instSeq" th:value="${item?.inStaff_instSeq}"
-											style="background-color: #E9ECEF;" readonly>
+										</label> 
+										<select class="form-select" id="inStaff_instSeq" name="inStaff_instSeq" disabled>
+											<option th:each="list:${listInStaff}" th:value="${list.instSeq}" th:text="${list.instId}">
+										</select>
 									</div>
 									<div class="col-md-3">
 										<label for="form-label" class="form-label"> 담당직원이름 <a
@@ -468,6 +444,26 @@
 			form.submit();
 		}
 		
+		// LogoutProc
+		  document.getElementById("SignoutBtn").onclick = function (){
+		      alert("로그아웃 성공");
+		      $.ajax({
+		         async: true 
+		         ,cache: false
+		         ,type: "post"
+		         /* ,dataType:"json" */
+		         ,url: "/xdm/v1/infra/common/SignoutProc"
+		         /* ,data : $("#formLogin").serialize() */
+		         ,success: function(response) {
+		            if(response.rt == "success") {
+		                  location.href = "/xdm/v1/infra/common/signin";
+		            } else {
+		               // by pass
+		            }
+		         }
+		      });
+		   }
+
 	</script>
 </body>
 

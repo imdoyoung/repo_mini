@@ -197,10 +197,9 @@
 												<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
 												<td th:text="${list.incpaySeq}"></td>
 												<td th:text="${list.incaccSeq}"></td>
-												<td th:text="${list.incaccSettleRankType}"></td>
-												<td><a
-													th:href="@{/xdm/v1/infra/inClaim/inClaimPayXdmMfom(incpaySeq=${list?.incpaySeq})}"
-													th:text="${list.inmeName}"></a></td>
+												<td th:if="${list.incaccSettleRankType != null}" th:text="${@codeService.selectOneCachedCode(list.incaccSettleRankType)}"></td>
+							  					<td th:unless="${list.incaccSettleRankType != null}"></td>
+												<td><a th:href="@{/xdm/v1/infra/inClaim/inClaimPayXdmMfom(incpaySeq=${list?.incpaySeq})}" th:text="${list.inmeName}"></a></td>
 												<td th:text="${list.instId}"></td>
 												<td th:text="${list.instName}"></td>
 												<td th:text="${list.instTel}"></td>

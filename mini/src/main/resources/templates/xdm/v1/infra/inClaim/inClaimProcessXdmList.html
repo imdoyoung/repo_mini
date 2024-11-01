@@ -259,7 +259,7 @@
 												<tr align="center">
 													<th><input class="form-check-input" type="checkbox"
 														id="gridCheck1"></th>
-													<th>#</th>
+													<th>No</th>
 													<th>Seq</th>
 													<th>접수번호</th>
 													<th>지급승인여부</th>
@@ -296,21 +296,26 @@
 													<td th:if="${list.incproApproveNy eq 0}">N</td>
 													<td th:unless="${list.incproApproveNy eq 0}">Y</td>
 													<td th:text="${list.incproRejectReason}"></td>
-													<td th:text="${list.incaccProType}"></td>
+													<td th:if="${list.incaccProType != null}" th:text="${@codeService.selectOneCachedCode(list.incaccProType)}"></td>
+		                      						<td th:unless="${list.incaccProType != null}"></td>
 													<td th:text="${list.inmeSeq}"></td>
 													<td><a
 														th:href="@{/xdm/v1/infra/inClaim/inClaimProcessXdmMfom(incproSeq=${list?.incproSeq})}"
 														th:text="${list.inmeName}"></a></td>
 													<td th:if="${list.inmeGender eq 1}">남자</td>
-													<td th:unless="${list.inmeGender eq 1}">여자</td>
+								 					<td th:unless="${list.inmeGender eq 1}">여자</td>
 													<td th:text="${list.inmeTel}"></td>
-													<td th:text="${list.inmeJobNy}"></td>
-													<td th:text="${list.inmeDiseaseNy}"></td>
-													<td th:text="${list.incaccRequType}"></td>
-													<td th:text="${list.incaccRequReason}"></td>
-													<td
-														th:text="${#dates.format(list?.incaccAccDate, 'yyyy-MM-dd')}"></td>
-													<td th:text="${list.incaccSettleRankType}"></td>
+													<td th:if="${list.inmeJobNy eq 0}">N</td>
+		                      						<td th:unless="${list.inmeJobNy eq 0}">Y</td>
+		                      						<td th:if="${list.inmeDiseaseNy eq 0}">N</td>
+		                      						<td th:unless="${list.inmeDiseaseNy eq 0}">Y</td>
+													<td th:if="${list.incaccRequType != null}" th:text="${@codeService.selectOneCachedCode(list.incaccRequType)}"></td>
+							  						<td th:unless="${list.incaccRequType != null}"></td>
+		                      						<td th:if="${list.incaccRequReason != null}" th:text="${@codeService.selectOneCachedCode(list.incaccRequReason)}"></td>
+							  						<td th:unless="${list.incaccRequReason != null}"></td>
+													<td th:text="${#dates.format(list?.incaccAccDate, 'yyyy-MM-dd')}"></td>
+													<td th:if="${list.incaccSettleRankType != null}" th:text="${@codeService.selectOneCachedCode(list.incaccSettleRankType)}"></td>
+							  						<td th:unless="${list.incaccSettleRankType != null}"></td>
 													<td th:text="${list.instId}"></td>
 													<td th:text="${list.instName}"></td>
 													<td
@@ -446,6 +451,27 @@
 		    form.action = "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
 		    form.submit();
 		}
+		
+		// LogoutProc
+		  document.getElementById("SignoutBtn").onclick = function (){
+		      alert("로그아웃 성공");
+		      $.ajax({
+		         async: true 
+		         ,cache: false
+		         ,type: "post"
+		         /* ,dataType:"json" */
+		         ,url: "/xdm/v1/infra/common/SignoutProc"
+		         /* ,data : $("#formLogin").serialize() */
+		         ,success: function(response) {
+		            if(response.rt == "success") {
+		                  location.href = "/xdm/v1/infra/common/signin";
+		            } else {
+		               // by pass
+		            }
+		         }
+		      });
+		   }
+
   </script>
 
 </body>

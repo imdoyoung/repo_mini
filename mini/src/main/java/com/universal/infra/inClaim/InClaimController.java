@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.universal.common.util.UtilDateTime;
+import com.universal.infra.inMember.InMemberDto;
+import com.universal.infra.inStaff.InStaffDto;
 
 @Controller
 public class InClaimController {
@@ -41,7 +43,14 @@ public class InClaimController {
 	
 	// ClaimAccept: Form
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmForm")
-	public String inClaimAcceptXdmForm() {
+	public String inClaimAcceptXdmForm(Model model) {
+
+		List<InMemberDto> inMember = inClaimService.selectListMember();
+		model.addAttribute("listInMember", inMember);
+		
+		List<InStaffDto> inStaff = inClaimService.selectListStaff();
+		model.addAttribute("listInStaff", inStaff);
+		
 		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmForm";
 	}
 	
@@ -57,6 +66,10 @@ public class InClaimController {
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom")
 	public String inClaimAcceptXdmMfom(InClaimDto inClaimDto, Model model) {
 		model.addAttribute("item", inClaimService.inClaimAcceptSelectOne(inClaimDto));
+		List<InMemberDto> inMember = inClaimService.selectListMember();
+		model.addAttribute("listInMember", inMember);
+		List<InStaffDto> inStaff = inClaimService.selectListStaff();
+		model.addAttribute("listInStaff", inStaff);
 		System.out.println("selectOne 잘 넘어감");
 		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom";
 	}
@@ -109,7 +122,9 @@ public class InClaimController {
 	
 	// ClaimProcess: Form
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimProcessXdmForm")
-	public String inClaimProcessXdmForm() {
+	public String inClaimProcessXdmForm(Model model) {
+		List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
+		model.addAttribute("listInClaimAccept", inClaimAccept);
 		return "/xdm/v1/infra/inClaim/inClaimProcessXdmForm";
 	}
 	
@@ -175,7 +190,9 @@ public class InClaimController {
 	
 	// inClaimPay: Form
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimPayXdmForm")
-	public String inClaimPayXdmForm() {
+	public String inClaimPayXdmForm(Model model) {
+		List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
+		model.addAttribute("listInClaimAccept", inClaimAccept);
 		return "/xdm/v1/infra/inClaim/inClaimPayXdmForm";
 	}
 	
@@ -229,7 +246,9 @@ public class InClaimController {
 		
 		// Form
 		@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAssignXdmForm")
-		public String inClaimAssignXdmForm() {
+		public String inClaimAssignXdmForm(Model model) {
+			List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
+			model.addAttribute("listInClaimAccept", inClaimAccept);
 			return "/xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
 		}
 		              

@@ -5,6 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.universal.infra.inMember.InMemberDto;
+import com.universal.infra.inStaff.InStaffDto;
+
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class InClaimService {
 	
@@ -47,6 +52,16 @@ public class InClaimService {
 		return inClaimDao.inClaimAcceptSelectOneCount(inClaimVo);
 	}
 	
+	// selectListMember
+	public List<InMemberDto> selectListMember(){
+		return inClaimDao.selectListMember();
+	}
+
+	// selectListStaff
+	public List<InStaffDto> selectListStaff(){
+		return inClaimDao.selectListStaff();
+	}
+	
 
 // ==================== inCalimProcess ==================== //
 	// ClaimProcess: List
@@ -84,6 +99,10 @@ public class InClaimService {
 		return inClaimDao.inClaimProcessSelectOneCount(inClaimVo);
 	}
 	
+	// selectListClaimAccept
+	public List<InClaimDto> selectListClaimAccept(){
+		return inClaimDao.selectListClaimAccept();
+	}
 	
 	
 // ==================== inCalimPay ==================== //

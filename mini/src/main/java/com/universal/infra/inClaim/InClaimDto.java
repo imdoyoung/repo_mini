@@ -1,6 +1,8 @@
 package com.universal.infra.inClaim;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -78,10 +80,7 @@ public class InClaimDto {
 	private String instName;			// 담당자 이름
 	private String instId;				// 담당자 이름
 	private String instTel;				// 담당자 연락처
-	
-	
-	
-	
+
 	
 
 	

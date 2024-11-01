@@ -196,6 +196,28 @@
 			AND incaccSeq = #{incaccSeq}
 	</delete>
 	
+	<!-- accept에 member 연결 -->
+	<select id="selectListMember" resultMap="resultMapObj">
+		SELECT
+			c.inmeSeq,
+			c.inmeName
+		FROM
+			inMember as c
+		WHERE 1 = 1
+			AND c.inmeDelNy = 0
+	</select>
+	<!-- accept에 staff 연결 -->
+	<select id="selectListStaff" resultMap="resultMapObj">
+		SELECT
+			d.instSeq,
+			d.instName,
+			d.instId,
+			d.instTel
+		FROM
+			inStaff as d
+		WHERE 1 = 1
+			AND d.instDelNy = 0
+	</select>
 	
 	
 <!--========== inClaimProcess ==========-->
@@ -393,6 +415,15 @@
 			AND incproSeq = #{incproSeq}
 	</delete>
 
+	<!-- process에 accept 연결 -->
+	<select id="selectListClaimAccept" resultMap="resultMapObj">
+		SELECT
+			h.incaccSeq
+		FROM
+			inClaimAccept as h
+		WHERE 1 = 1
+			AND h.incaccDelNy = 0
+	</select>
 	
     <!--========== inClaimpay ==========-->
     

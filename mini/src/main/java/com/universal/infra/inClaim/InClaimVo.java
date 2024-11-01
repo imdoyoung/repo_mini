@@ -78,16 +78,6 @@ public class InClaimVo {
 			setStartRnumForMySql((getRowNumToShow() * (getThisPage()-1)));	// 쿼리 시작 row = 화면에 보여줄 데이터 줄 갯수 -1
 		}
 		
-		// 내용 출력
-		System.out.println("thisPage : " + getThisPage());
-		System.out.println("rowNumToShow : " + getRowNumToShow());
-		System.out.println("pageNumToShow : " + getPageNumToShow());
-		System.out.println("totalRows : " + getTotalRows());
-		System.out.println("totalPages : " + getTotalPages());
-		System.out.println("startPage : " + getStartPage());
-		System.out.println("endPage : " + getEndPage());
-		System.out.println("startRnumForMySql : " + getStartRnumForMySql());
-		
 	}
 
 // ---------- getter/setter ---------- //

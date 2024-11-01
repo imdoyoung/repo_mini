@@ -110,7 +110,7 @@
 										<input type="text" class="form-control" id="incaccProType" name="incaccProType" 
 											th:value="${item?.incaccProType}" style="background-color: #E9ECEF;" readonly>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-3" th:each="list:${@codeService.selectListCachedCode(5)}">
 										<label for="form-label" class="form-label"> 고객번호 </label> 
 										<input type="text" class="form-control" id="inMember_inmeSeq" name="inMember_inmeSeq" placeholder="이름을 입력해주세요" 
 											th:value="${item?.inMember_inmeSeq}" style="background-color: #E9ECEF;" readonly>
@@ -408,6 +408,46 @@
 			form.submit();
 		}
 		
+		// LogoutProc
+		  document.getElementById("SignoutBtn").onclick = function (){
+		      alert("로그아웃 성공");
+		      $.ajax({
+		         async: true 
+		         ,cache: false
+		         ,type: "post"
+		         /* ,dataType:"json" */
+		         ,url: "/xdm/v1/infra/common/SignoutProc"
+		         /* ,data : $("#formLogin").serialize() */
+		         ,success: function(response) {
+		            if(response.rt == "success") {
+		                  location.href = "/xdm/v1/infra/common/signin";
+		            } else {
+		               // by pass
+		            }
+		         }
+		      });
+		   }
+
+		// LogoutProc
+		  document.getElementById("SignoutBtn").onclick = function (){
+		      alert("로그아웃 성공");
+		      $.ajax({
+		         async: true 
+		         ,cache: false
+		         ,type: "post"
+		         /* ,dataType:"json" */
+		         ,url: "/xdm/v1/infra/common/SignoutProc"
+		         /* ,data : $("#formLogin").serialize() */
+		         ,success: function(response) {
+		            if(response.rt == "success") {
+		                  location.href = "/xdm/v1/infra/common/signin";
+		            } else {
+		               // by pass
+		            }
+		         }
+		      });
+		   }
+
 	</script>
 </body>
 

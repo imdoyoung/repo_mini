@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.universal.infra.inMember.InMemberDto;
+import com.universal.infra.inStaff.InStaffDto;
+
 @Repository
 public interface InClaimDao {
 // ==================== inCalimAccept ==================== //
@@ -29,6 +32,12 @@ public interface InClaimDao {
 	// ClaimAccept: paging
 	public int inClaimAcceptSelectOneCount(InClaimVo inClaimVo);
 	
+	// selectListMember
+	public List<InMemberDto> selectListMember();
+	
+	// selectListStaff
+	public List<InStaffDto> selectListStaff();
+	
 	
 // ==================== inCalimProcess ==================== //
 	
@@ -52,6 +61,9 @@ public interface InClaimDao {
 	
 	// ClaimProcess: paging
 	public int inClaimProcessSelectOneCount(InClaimVo inClaimVo);
+	
+	// selectListClaimAccept
+	public List<InClaimDto> selectListClaimAccept();
 
 	
 // ==================== inCalimPay ==================== //
