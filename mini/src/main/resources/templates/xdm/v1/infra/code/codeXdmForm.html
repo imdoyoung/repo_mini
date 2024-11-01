@@ -186,6 +186,28 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script type="text/javascript">
+  // LogoutProc
+    document.getElementById("SignoutBtn").onclick = function (){
+        alert("로그아웃 성공");
+        $.ajax({
+           async: true 
+           ,cache: false
+           ,type: "post"
+           /* ,dataType:"json" */
+           ,url: "/xdm/v1/infra/common/SignoutProc"
+           /* ,data : $("#formLogin").serialize() */
+           ,success: function(response) {
+              if(response.rt == "success") {
+                    location.href = "/xdm/v1/infra/common/signin";
+              } else {
+                 // by pass
+              }
+           }
+        });
+     }
+
+     </script>
   <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>

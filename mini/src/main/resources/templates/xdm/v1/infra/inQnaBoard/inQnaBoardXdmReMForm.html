@@ -70,18 +70,14 @@
             <div class="card-body">
               <h5 class="card-title">QnA 댓글작성</h5>
               <!-- Custom Styled Validation -->
-              <form class="needs-validation" id="form" name="form"  action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst">
+              <form class="needs-validation" id="form" name="form"  action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUpdt">
 				<div class="row mb-3">
 	                <div class="col-md-3">
 	                 <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
 	                   <select class="form-select" id="inqbType" name="inqbType" th:value="${item?.inqbType}">
 	                     <option value="" th:selected="${item?.inqbType==null}">문의종류</option>
-						 <option value="1" th:selected="${item?.inqbType==1}">상품관련문의</option>
-						 <option value="2" th:selected="${item?.inqbType==2}">해지관련문의</option>
-						 <option value="3" th:selected="${item?.inqbType==3}">지급관련문의</option>
-						 <option value="4" th:selected="${item?.inqbType==4}">가입조건문의</option>
-						 <option value="5" th:selected="${item?.inqbType==5}">정보변경문의</option>
-						 <option value="6" th:selected="${item?.inqbType==6}">기타문의</option>
+						 <option th:each="list : ${@codeService.selectListCachedCode(8)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option> 
+
 	                   </select>
 	                 </div>
 				  </div> 
@@ -115,7 +111,7 @@
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label for="inqbContent" class="form-label">원글내용</label>
-                    <textarea class="form-control" style="height: 100px"id="inqbContent" name="inqbContent" th:text="${item?.inqbContent}" disabled></textarea>
+                    <textarea class="form-control" style="height: 100px"id="inqbContent" name="inqbContent" th:text="${item?.inqbContent}"></textarea>
                   </div>
                 </div>
 				<div class="row mb-3">
@@ -141,15 +137,17 @@
                     <input class="form-control" id="validationCustom01" name="inqbEdiDate" type="datetime" th:value="${#dates.format(item?.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                   </div>
                 </div>
-                </div>
+               <!-- </div>-->
                 <div class="row mb-3">
                   <div class="col-md-6">
-					<button type="button" id="btnDelete"  class="btn btn-outline-dark">
-                      <a><i class="bi bi-list-ul"></i></a>
-                    </button>
-					<button type="button" id="btnUelete"  class="btn btn-outline-dark">
+					<a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList">
+					  <button type="button" class="btn btn-outline-dark">
+                        <i class="bi bi-list-ul"></i>
+                      </button>
+					</a>
+					<!--<button type="button" id="btnUelete"  class="btn btn-outline-dark">
 					   <a><i class="bi bi-list-ul"></i></a>
-					</button>
+					</button>-->
                   </div>
                   <div class="col-md-6" align="Right">
 					<!--<button type="button" class="btn btn-primary">
@@ -191,22 +189,28 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <!-- Vendor JS Files -->
-  <script>
-		//uelete
-		document.getElementById("btnUelete").onclick = function(){
-			alert("uelete");
-		let form=document.querySelector("form[name=form]");	
-		form.action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUele";
-		form.submit();
-		}
-		//delete
-		document.getElementById("btnDelete").onclick = function(){
-			alert("delete");
-		let form=document.querySelector("form[name=form]");	
-		form.action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmDele";
-		form.submit();
-		}
-	</script>
+  <script type="text/javascript">
+  // LogoutProc
+    document.getElementById("SignoutBtn").onclick = function (){
+        alert("로그아웃 성공");
+        $.ajax({
+           async: true 
+           ,cache: false
+           ,type: "post"
+           /* ,dataType:"json" */
+           ,url: "/xdm/v1/infra/common/SignoutProc"
+           /* ,data : $("#formLogin").serialize() */
+           ,success: function(response) {
+              if(response.rt == "success") {
+                    location.href = "/xdm/v1/infra/common/signin";
+              } else {
+                 // by pass
+              }
+           }
+        });
+     }
+
+     </script>
   <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>

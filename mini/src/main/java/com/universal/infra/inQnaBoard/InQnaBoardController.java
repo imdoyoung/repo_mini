@@ -44,6 +44,8 @@ public class InQnaBoardController {
 	// MForm 
 	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm")
 	public String inQnaBoardXdmMForm(InQnaBoardDto inQnaBoardDto,Model model) {
+		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
+		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
 		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm";
 	}
@@ -53,12 +55,16 @@ public class InQnaBoardController {
 	public String inQnaBoardXdmReForm(InQnaBoardDto inQnaBoardDto,Model model) {
 		List<InQnaBoardDto>inQnaBoard=inQnaBoardService.selectstaffInQnaBoard();
 		model.addAttribute("listStep", inQnaBoard);
+		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
+		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
 		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm";
 	}
 	//reMForm 
 	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm")
 	public String inQnaBoardXdmReMForm(InQnaBoardDto inQnaBoardDto,Model model) {
+		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
+		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
 		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm";
 	}

@@ -179,76 +179,27 @@
 
   <!-- Vendor JS Files -->
   <script type="text/javascript">
-	document.getElementById("btnSubmit").onclick = function (){
-				//코드이름	
-			    var incgName = document.getElementById("incgName");
-			    var incgNameValue = document.getElementById("incgName").value.trim();
-				var incgNameRegExp = /^[가-힣A-Za-z0-9]+$/;
-				var incgNameFeedback=document.getElementById("invalid-feedback");
-				var incgNameRegExpFeedback=document.getElementById("incgNameRegExpFeedback");
-				
-				incgName.classList.remove('is-vaild','is-invalid');
-				incgNameFeedback.style.display='none';
-			    incgNameRegExpFeedback.style.display='none';
-				
-			    if (incgNameValue == "" || incgNameValue == null) {
-					incgNameFeedback.style.display='block';
-					incgName.classList.add('is-invaild');
-					incgName.focus();
-					return false;
-			    } else {
-				}
+  // LogoutProc
+    document.getElementById("SignoutBtn").onclick = function (){
+        alert("로그아웃 성공");
+        $.ajax({
+           async: true 
+           ,cache: false
+           ,type: "post"
+           /* ,dataType:"json" */
+           ,url: "/xdm/v1/infra/common/SignoutProc"
+           /* ,data : $("#formLogin").serialize() */
+           ,success: function(response) {
+              if(response.rt == "success") {
+                    location.href = "/xdm/v1/infra/common/signin";
+              } else {
+                 // by pass
+              }
+           }
+        });
+     }
 
-				if(!incgNameRegExp.test(incgNameValue)){
-					incgNameRegExpFeedback.style.display='block';
-					incgName.classList.add('is-invaild');
-					incgName.focus();
-					return false;
-				} else {
-					incgName.classList.add('is-vaild');
-				}
-				
-				//사용여부	
-			    var incgUseNy = document.getElementById("incgUseNy");
-			    var incgUseNyValue = document.getElementById("incgUseNy").value.trim();
-				
-			    if (incgUseNyValue == "" || incgUseNyValue == null) {
-					incgUseNy.classList.add('is-invaild');
-					incgUseNy.focus();
-					return false;
-				} else {
-					incgUseNy.classList.remove('is-invaild');
-				}
-				
-				//순서	
-			    var incgOrder = document.getElementById("incgOrder");
-			    var incgOrderValue = document.getElementById("incgOrder").value.trim();
-				
-			    if (incgOrderValue == "" || incgOrderValue == null) {
-					incgOrder.classList.add('is-invaild');
-					incgOrder.focus();
-					return false;
-				} else {
-					incgOrder.classList.remove('is-invaild');
-				}
-				form.action = "/xdm/v1/infra/codeGroup/codeGroupXdmInst";
-				form.submit();
-			}
-	     //needsvalid
-	  		var needsValidation = document.querySelectorAll('.needs-validation')
-	
-	  		Array.prototype.slice.call(needsValidation)
-	  		  .forEach(function (form) {
-	  		    form.addEventListener('submit', function (event) {
-	  		      if (!form.checkValidity()) {
-	  		        event.preventDefault()
-	  		        event.stopPropagation()
-	  		      }
-	
-	  		      form.classList.add('was-validated')
-	  		    }, false)
-	  		})
-  </script>
+     </script>
   <script src="/xdm/v1/template/minions/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/xdm/v1/template/minions/assets/vendor/chart.js/chart.umd.js"></script>

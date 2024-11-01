@@ -49,6 +49,8 @@
 			    <when test="shOption==1">AND inqbSeq=#{shValue}</when>
 			    <when test="shOption==2">AND inqbTitle LIKE CONCAT('%',#{shValue},'%')</when>
 			    <when test="shOption==3">AND inqbType LIKE CONCAT('%',#{shValue},'%')</when>
+			    <when test="shOption==4">AND inmeId LIKE CONCAT('%',#{shValue},'%')</when>
+			    <when test="shOption==5">AND instId LIKE CONCAT('%',#{shValue},'%')</when>
 			</choose>
 			
 			<choose>
@@ -59,28 +61,28 @@
 
 	<select id="selectOne" resultMap="resultMapObj">
 	   SELECT
-		l.inqbSeq,
-	  	l.inqbType,
-	  	l.inqbTitle,
-	  	l.inqbContent,
-	  	l.inqbReContent,
-	  	l.inqbCompleteNy,
-	  	l.inqbRegDate,
-	  	l.inqbEdiDate, 
-	  	l.inqbDelNy, 
-	  	l.inMember_inmeSeq, 
-	  	l.inStaff_instSeq,
-	  	l.inQnaBoard_inqbSeq,
-	  	c.inmeSeq,
-	  	c.inmeId,
-	  	d.instSeq,
-		d.instId
+			l.inqbSeq,
+		  	l.inqbType,
+		  	l.inqbTitle,
+		  	l.inqbContent,
+		  	l.inqbReContent,
+		  	l.inqbCompleteNy,
+		  	l.inqbRegDate,
+		  	l.inqbEdiDate, 
+		  	l.inqbDelNy, 
+		  	l.inMember_inmeSeq, 
+		  	l.inStaff_instSeq,
+		  	l.inQnaBoard_inqbSeq,
+		  	c.inmeSeq,
+		  	c.inmeId,
+		  	d.instSeq,
+			d.instId
 	   FROM
-		mini.inqnaboard AS l
+			mini.inqnaboard AS l
 		LEFT JOIN inmember AS c
-	      on c.inmeSeq = l.inMember_inmeSeq
+	    	  on c.inmeSeq = l.inMember_inmeSeq
 	    LEFT JOIN inStaff AS d
-	      on d.instSeq = l.inStaff_instSeq
+	    	  on d.instSeq = l.inStaff_instSeq
 	    WHERE 1=1
 			AND l.inqbSeq = #{inqbSeq}
 	</select>
@@ -110,26 +112,24 @@
 		    inMember_inmeSeq,
 		    inStaff_instSeq,
 		    inQnaBoard_inqbSeq 
-		  )VALUE(
-		      #{inqbType},
-			  #{inqbTitle},
-			  #{inqbContent},
-			  #{inqbReContent},
-			  0,
-			  now(),
-			  now(),
-			  0,
-			  IFNULL(#{inMember_inmeSeq},0),
-			  IFNULL(#{inStaff_instSeq},0),
-			  IFNULL(#{inQnaBoard_inqbSeq},0)
-		      )
+		)VALUE(
+	       #{inqbType},
+		   #{inqbTitle},
+		   #{inqbContent},
+		   #{inqbReContent},
+		   0,
+		   now(),
+		   now(),
+		   0,
+		   IFNULL(#{inMember_inmeSeq},0),
+		   IFNULL(#{inStaff_instSeq},0),
+		   IFNULL(#{inQnaBoard_inqbSeq},0)
+	       )
 	     <selectKey resultType="String" keyProperty="inqbSeq" order="AFTER">
 			SELECT last_insert_id()
 	     </selectKey>
 	  </insert>
 	  
-	  
-	      
 	  <delete id="delete">
 	  	DELETE FROM inqnaboard
 	  	WHERE 1=1
