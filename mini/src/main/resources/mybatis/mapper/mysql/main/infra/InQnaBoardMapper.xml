@@ -40,7 +40,7 @@
 			mini.inqnaboard AS l
 			LEFT JOIN inmember AS c
 		     on c.inmeSeq = l.inMember_inmeSeq
-		   LEFT JOIN inStaff AS d
+		   LEFT JOIN instaff AS d
 		     on d.instSeq = l.inStaff_instSeq
 		WHERE 1=1
 		   <if test="shDelNy !=null and !shDelNy.equals('')">AND inqbDelNy = #{shDelNy}</if>
@@ -81,7 +81,7 @@
 			mini.inqnaboard AS l
 		LEFT JOIN inmember AS c
 	    	  on c.inmeSeq = l.inMember_inmeSeq
-	    LEFT JOIN inStaff AS d
+	    LEFT JOIN instaff AS d
 	    	  on d.instSeq = l.inStaff_instSeq
 	    WHERE 1=1
 			AND l.inqbSeq = #{inqbSeq}

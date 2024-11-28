@@ -95,7 +95,7 @@
 	</select>
 	
 	<insert id="AppInsert">
-		INSERT INTO inApplication (
+		INSERT INTO inapplication (
 			inappRequType,
 			inappGender,
 			inappRecBankType,
@@ -119,7 +119,7 @@
 	</insert>
 	
 	<update id="AppUpdate">
-		UPDATE inApplication
+		UPDATE inapplication
 		SET 
 			inappRequType = #{inappRequType},
 			inappGender = #{inappGender},

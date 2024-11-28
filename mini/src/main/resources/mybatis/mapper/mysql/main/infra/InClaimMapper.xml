@@ -8,10 +8,10 @@
 <!--========== inClaimAccept ==========-->
 
 	<sql id="inClaimAcceptSelectCommon">
-		FROM inClaimAccept AS h
-			LEFT JOIN inMember AS c 
+		FROM inclaimaccept AS h
+			LEFT JOIN inmember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
-		    LEFT JOIN inStaff AS d 
+		    LEFT JOIN instaff AS d 
 		    	ON h.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 			<if test="shIncaccProType != null and !shIncaccProType.equals('')">AND incaccProType = #{shIncaccProType}</if><!-- 보험상품타입 -->
@@ -85,7 +85,7 @@
 	</select>
 	
 	<insert id="inClaimAcceptInsert">
-		INSERT INTO inClaimAccept (
+		INSERT INTO inclaimaccept (
 			incaccProType,
 			incaccCompleteNy,
 			incaccRequType,
@@ -156,17 +156,17 @@
 			h.incaccDelNy,
 			h.inMember_inmeSeq,
 			h.inStaff_instSeq
-		FROM inClaimAccept AS h
-			LEFT JOIN inMember AS c 
+		FROM inclaimaccept AS h
+			LEFT JOIN inmember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
-		    LEFT JOIN inStaff AS d 
+		    LEFT JOIN instaff AS d 
 		    	ON h.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 			AND h.incaccSeq = #{incaccSeq}
 	</select>
 	
 	<update id="inClaimAcceptUpdate">
-		UPDATE inClaimAccept
+		UPDATE inclaimaccept
 		SET 
 			incaccRequType = #{incaccRequType},
 			incaccRequReason = #{incaccRequReason},
@@ -183,7 +183,7 @@
 	</update>
 	
 	<update id="inClaimAcceptUelete">
-		UPDATE inClaimAccept
+		UPDATE inclaimaccept
 		SET
 			incaccDelNy = 1
 		WHERE 1 = 1
@@ -191,7 +191,7 @@
 	</update>
 	
 	<delete id="inClaimAcceptDelete">
-		DELETE FROM inClaimAccept
+		DELETE FROM inclaimaccept
 		WHERE 1 = 1
 			AND incaccSeq = #{incaccSeq}
 	</delete>
@@ -223,12 +223,12 @@
 <!--========== inClaimProcess ==========-->
 
 	<sql id="inClaimProcessSelectCommon">
-		FROM inClaimProcess AS i
-			LEFT JOIN inClaimAccept AS h
-				ON i.inClaimAccept_incaccSeq = h.incaccSeq
-			LEFT JOIN inMember AS c 
+		FROM inclaimprocess AS i
+			LEFT JOIN inclaimaccept AS h
+				ON i.inclaimaccept_incaccSeq = h.incaccSeq
+			LEFT JOIN inmember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d 
+			LEFT JOIN instaff AS d 
 				ON h.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 			<if test="shIncaccSeq != null and !shIncaccSeq.equals('')">AND incaccSeq = #{shIncaccSeq}</if><!-- 접수번호 -->
@@ -307,7 +307,7 @@
 	</select>
 	
 	<insert id="inClaimProcessInsert">
-		INSERT INTO inClaimProcess (
+		INSERT INTO inclaimprocess (
 			incproApproveNy,
 			incproRejectReason,
 			incproEdiDate,
@@ -326,14 +326,14 @@
 			(SELECT 
 				inMember_inmeSeq
 			FROM 
-				inClaimAccept
+				inclaimaccept
 			WHERE
 				incaccSeq = #{inClaimAccept_incaccSeq}
 			),
 			(SELECT 
 				inStaff_instSeq 
 			FROM 
-				inClaimAccept 
+				inclaimaccept 
 			WHERE 
 				incaccSeq = #{inClaimAccept_incaccSeq}
 			)
@@ -378,19 +378,19 @@
 			i.inMember_inmeSeq,
 			i.inStaff_instSeq,
 			i.inClaimAccept_incaccSeq
-		FROM inClaimProcess AS i
-			LEFT JOIN inClaimAccept AS h
+		FROM inclaimprocess AS i
+			LEFT JOIN inclaimAccept AS h
 				ON i.inClaimAccept_incaccSeq = h.incaccSeq
-			LEFT JOIN inMember AS c 
+			LEFT JOIN inmember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d 
+			LEFT JOIN instaff AS d 
 				ON i.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 			AND i.incproSeq = #{incproSeq}
 	</select>
 	
 	<update id="inClaimProcessUpdate">
-		UPDATE inClaimProcess
+		UPDATE inclaimprocess
 		SET
 			incproApproveNy = #{incproApproveNy},
 			incproRejectReason = #{incproRejectReason},
@@ -402,7 +402,7 @@
 	</update>
 	
 	<update id="inClaimProcessUelete">
-		UPDATE inClaimProcess
+		UPDATE inclaimprocess
 		SET
 			incproDelNy = 1
 		WHERE 1 = 1
@@ -410,7 +410,7 @@
 	</update>
 	
 	<delete id="inClaimProcessDelete">
-		DELETE FROM inClaimProcess
+		DELETE FROM inclaimprocess
 		WHERE 1 = 1
 			AND incproSeq = #{incproSeq}
 	</delete>
@@ -428,12 +428,12 @@
     <!--========== inClaimpay ==========-->
     
     <sql id="inClaimPaySelectCommon">
-    	FROM inClaimPay AS j
-			LEFT JOIN inClaimAccept AS h
+    	FROM inclaimpay AS j
+			LEFT JOIN inclaimaccept AS h
 				ON j.inClaimAccept_incaccSeq = h.incaccSeq
-			LEFT JOIN inMember AS c 
+			LEFT JOIN inmember AS c 
 				ON j.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d 
+			LEFT JOIN instaff AS d 
 				ON j.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 	    	<if test="shIncaccSeq != null and !shIncaccSeq.equals('')">AND incaccSeq = #{shIncaccSeq}</if><!-- 접수번호 -->
@@ -477,7 +477,7 @@
 	</select>
 	
 	<insert id="inClaimPayInsert">
-		INSERT INTO inClaimPay (
+		INSERT INTO inclaimpay (
 			incpaySettleDate,
 			incpaySettleNy,
 			inClaimAccept_incaccSeq,
@@ -490,14 +490,14 @@
 			(SELECT 
 				inMember_inmeSeq
 			FROM 
-				inClaimAccept
+				inclaimaccept
 			WHERE
 				incaccSeq = #{inClaimAccept_incaccSeq}
 			),
 			(SELECT 
 				inStaff_instSeq 
 			FROM 
-				inClaimAccept 
+				inclaimaccept 
 			WHERE 
 				incaccSeq = #{inClaimAccept_incaccSeq}
 			)
@@ -519,19 +519,19 @@
 			j.inClaimAccept_incaccSeq, 
 			j.inMember_inmeSeq,
 			j.inStaff_instSeq
-		FROM inClaimPay AS j
-			LEFT JOIN inClaimAccept AS h
+		FROM inclaimpay AS j
+			LEFT JOIN inclaimaccept AS h
 				ON j.inClaimAccept_incaccSeq = h.incaccSeq
-			LEFT JOIN inMember AS c 
+			LEFT JOIN inmember AS c 
 				ON j.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d 
+			LEFT JOIN instaff AS d 
 				ON j.inStaff_instSeq = d.instSeq
 		WHERE 1 = 1
 			AND incpaySeq = #{incpaySeq}
 	</select>
 	
 	<update id="inClaimPayUpdate">
-		UPDATE inClaimPay
+		UPDATE inclaimpay
 		SET
 			incpaySettleDate = now(),
 			incpaySettleNy = #{incpaySettleNy}
@@ -549,11 +549,11 @@
 	 <!--========== inClaimAssign(클레임배정관리)==========-->
     <sql id="selectCommon">
     	from
-			inClaimAssign as k
+			inclaimassign as k
 			<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
-			left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
-			left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
-			left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+			left join inclaimaccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
+			left join inmember as c on h.inMember_inmeSeq = c.inmeSeq
+			left join instaff as d on h.inStaff_instSeq = d.instSeq 
 		where 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND incassDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
 			<if test="shCompleteDelNy != null and !shCompleteDelNy.equals('')">AND incassCompleteNy = #{shCompleteDelNy}</if> <!-- 클레임완료 여부 -->
@@ -610,7 +610,7 @@
 	</select>
 	
 	<insert id="inClaimAssignInsert">        
-		INSERT INTO inClaimAssign (  
+		INSERT INTO inclaimassign (  
 			incassRequType,
 			incassCompleteNy,
 			incassAssigndate,
@@ -671,17 +671,17 @@
     		k.inMember_inmeSeq,
     		k.inStaff_instSeq
     	from
-    		inClaimAssign as k
+    		inclaimassign as k
 		<!-- inClaimAccept와 연결된 inClaimAccept_incaccSeq 먼저 join -->
-		left join inClaimAccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
-		left join inMember as c on h.inMember_inmeSeq = c.inmeSeq
-		left join inStaff as d on h.inStaff_instSeq = d.instSeq 
+		left join inclaimaccept as h on k.inClaimAccept_incaccSeq = h.incaccSeq 
+		left join inmember as c on h.inMember_inmeSeq = c.inmeSeq
+		left join instaff as d on h.inStaff_instSeq = d.instSeq 
     	where 1=1 
     		and k.incassSeq = #{incassSeq}       
 	</select>
 	
 	<update id="inClaimAssignUpdate">
-		update inClaimAssign
+		update inclaimassign
 		set 
 			incassRequType = #{incassRequType},    
 			incassAssigndate = #{incassAssigndate},

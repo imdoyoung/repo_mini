@@ -6,14 +6,14 @@
 	
 	<sql id="conSelectCommon">
 		FROM 
-			inContract AS g
-			LEFT JOIN inApplication AS e
+			incontract AS g
+			LEFT JOIN inapplication AS e
 				ON g.inApplication_inappSeq = e.inappSeq
-			LEFT JOIN inMember AS c
+			LEFT JOIN inmember AS c
 				ON e.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d
+			LEFT JOIN instaff AS d
 				ON g.inStaff_instSeq = d.instSeq
-			LEFT JOIN inProduct AS f
+			LEFT JOIN inproduct AS f
 				ON g.inProduct_inproSeq = f.inproSeq
 		WHERE 1=1
 			<if test="shconDelNy != null and !shconDelNy.equals('')">AND inconDelNy = #{shconDelNy}</if>
@@ -116,7 +116,7 @@
 	</select>
 	
 	<insert id="conInsert">
-		INSERT INTO inContract (
+		INSERT INTO incontract (
 			inconCondition,
 			inconSettleDate,
 		    inconRefund,
@@ -148,7 +148,7 @@
 	</insert>
 	
 	<update id="conUpdate">
-		UPDATE inContract
+		UPDATE incontract
 		SET
 			inconCondition = #{inconCondition},
 			inconSettleDate = #{inconSettleDate},
