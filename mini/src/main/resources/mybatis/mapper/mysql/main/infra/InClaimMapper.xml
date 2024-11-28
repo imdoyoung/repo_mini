@@ -379,7 +379,7 @@
 			i.inStaff_instSeq,
 			i.inClaimAccept_incaccSeq
 		FROM inclaimprocess AS i
-			LEFT JOIN inclaimAccept AS h
+			LEFT JOIN inclaimaccept AS h
 				ON i.inClaimAccept_incaccSeq = h.incaccSeq
 			LEFT JOIN inmember AS c 
 				ON h.inMember_inmeSeq = c.inmeSeq
