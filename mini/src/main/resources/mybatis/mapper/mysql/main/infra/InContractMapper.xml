@@ -102,14 +102,14 @@
 		    f.inproStartDate,
 		    f.inproEndDate
 		FROM 
-			inContract AS g
-			LEFT JOIN inApplication AS e
+			incontract AS g
+			LEFT JOIN inapplication AS e
 				ON g.inApplication_inappSeq = e.inappSeq
-			LEFT JOIN inMember AS c
+			LEFT JOIN inmember AS c
 				ON e.inMember_inmeSeq = c.inmeSeq
-			LEFT JOIN inStaff AS d
+			LEFT JOIN instaff AS d
 				ON g.inStaff_instSeq = d.instSeq
-			LEFT JOIN inProduct AS f
+			LEFT JOIN inproduct AS f
 				ON g.inProduct_inproSeq = f.inproSeq
 		WHERE 1=1
 			AND g.inconSeq = #{inconSeq}
@@ -138,7 +138,7 @@
 		    (SELECT 
 	            inMember_inmeSeq
 	         FROM 
-	            inApplication
+	            inapplication
 	         WHERE
 	            inappSeq = #{inApplication_inappSeq}
 	         ),
@@ -164,7 +164,7 @@
 		SELECT
 			e.inappSeq
 		FROM
-			inApplication e
+			inapplication e
 		WHERE 1 = 1
 			AND e.inappDelNy = 0
 	</select>
@@ -175,7 +175,7 @@
 			f.inproSeq,
 			f.inproName
 		FROM
-			inProduct f
+			inproduct f
 		WHERE 1 = 1
 			AND f.inproDelNy = 0
 	</select>
@@ -186,7 +186,7 @@
 			d.instSeq,
 			d.instId
 		FROM
-			inStaff d
+			instaff d
 		WHERE 1 = 1
 			AND d.instDelNy = 0
 	</select>

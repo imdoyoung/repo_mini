@@ -136,7 +136,7 @@
 		SELECT
 			c.inmeSeq,
 		    c.inmeName
-	    FROM inMember c
+	    FROM inmember c
 		WHERE 1=1
 			AND c.inmeDelNy = 0
 	</select>
