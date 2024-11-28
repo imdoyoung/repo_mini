@@ -30,7 +30,7 @@ public class InContractController {
 			model.addAttribute("list", inContractService.conSelectList(inContractVo));
 		}
 		
-		return "/xdm/v1/infra/inContract/inContractXdmList";
+		return "xdm/v1/infra/inContract/inContractXdmList";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inContract/inContractXdmForm")
@@ -45,13 +45,13 @@ public class InContractController {
 		List<InContractDto> products = inContractService.selectListProduct();
 		model.addAttribute("listProduct", inContractService.selectListProduct());
 		
-		return "/xdm/v1/infra/inContract/inContractXdmForm";
+		return "xdm/v1/infra/inContract/inContractXdmForm";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inContract/inContractXdmMForm")
 	public String inContractXdmMForm(InContractDto inContractDto, Model model) {
 		model.addAttribute("item", inContractService.conSelectOne(inContractDto));
-		return "/xdm/v1/infra/inContract/inContractXdmMForm";
+		return "xdm/v1/infra/inContract/inContractXdmMForm";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inContract/inContractXdmInst")

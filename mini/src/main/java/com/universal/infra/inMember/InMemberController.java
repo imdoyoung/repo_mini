@@ -37,13 +37,13 @@ public class InMemberController {
 			model.addAttribute("memberList", inMemberService.selectMemberList(inMemberVo));
 		}
 		
-		return "/xdm/v1/infra/inMember/inMemberXdmList";
+		return "xdm/v1/infra/inMember/inMemberXdmList";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inMember/inMemberXdmForm")
 	public String inMemberXdmForm() {
 		
-		return "/xdm/v1/infra/inMember/inMemberXdmForm";
+		return "xdm/v1/infra/inMember/inMemberXdmForm";
 	}
 	
 	// insert
@@ -59,7 +59,7 @@ public class InMemberController {
 	public String inMemberXdmMForm(InMemberDto inMemberDto, Model model) {
 		
 		model.addAttribute("memberItem", inMemberService.selectOneMember(inMemberDto));
-		return "/xdm/v1/infra/inMember/inMemberXdmMForm";
+		return "xdm/v1/infra/inMember/inMemberXdmMForm";
 	}
 	
 	// update 

@@ -28,12 +28,12 @@ public class InProductController {
 			model.addAttribute("list", inProductService.ProSelectList(inProductVo));
 		}
 		
-		return "/xdm/v1/infra/inProduct/inProductXdmList";
+		return "xdm/v1/infra/inProduct/inProductXdmList";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inProduct/inProductXdmForm")
 	public String inProductXdmForm() {
-		return "/xdm/v1/infra/inProduct/inProductXdmForm";
+		return "xdm/v1/infra/inProduct/inProductXdmForm";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inProduct/inProductXdmInst")
@@ -45,7 +45,7 @@ public class InProductController {
 	@RequestMapping(value="/xdm/v1/infra/inProduct/inProductXdmMForm")
 	public String inProductXdmMForm(InProductDto inProductDto, Model model) {
 		model.addAttribute("item", inProductService.ProSelectOne(inProductDto));
-		return "/xdm/v1/infra/inProduct/inProductXdmMForm";
+		return "xdm/v1/infra/inProduct/inProductXdmMForm";
 	}
 
 	@RequestMapping(value="/xdm/v1/infra/inProduct/inProductXdmUpdt")

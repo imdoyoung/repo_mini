@@ -38,12 +38,12 @@ public class InStaffController {
 			model.addAttribute("staffList", inStaffService.selectStaffList(inStaffVo));
 		}
 		 
-		return "/xdm/v1/infra/inStaff/inStaffXdmList";
+		return "xdm/v1/infra/inStaff/inStaffXdmList";
 	}
 	
 	@RequestMapping(value="/xdm/v1/infra/inStaff/inStaffXdmForm")
 	public String inStaffXdmForm() {
-		return "/xdm/v1/infra/inStaff/inStaffXdmForm";
+		return "xdm/v1/infra/inStaff/inStaffXdmForm";
 	}
 	
 	// insert
@@ -59,7 +59,7 @@ public class InStaffController {
 	public String inStaffXdmMForm(InStaffDto inStaffDto, Model model) {
 		
 		model.addAttribute("staffItem", inStaffService.selectOneStaff(inStaffDto));
-		return "/xdm/v1/infra/inStaff/inStaffXdmMForm";
+		return "xdm/v1/infra/inStaff/inStaffXdmMForm";
 	}
 	
 	// update 
@@ -86,7 +86,7 @@ public class InStaffController {
 	   public String userXdmSignin(InStaffDto inStaffDto) {
 		  
 		 inStaffService.selectOneSignin(inStaffDto);
-	     return "/xdm/v1/infra/common/signin";
+	     return "xdm/v1/infra/common/signin";
 	 }
 	 
 	// LoginProc 

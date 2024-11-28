@@ -28,7 +28,7 @@ public class InQnaBoardController {
 		if (inQnaBoardvo.getTotalRows() > 0) {
 		model.addAttribute("list", inQnaBoardService.selectList(inQnaBoardvo));
 		}
-		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
+		return "xdm/v1/infra/inQnaBoard/inQnaBoardXdmList";
 	}
 	
 	// Form-member 
@@ -37,7 +37,7 @@ public class InQnaBoardController {
 		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
 		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
-		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm";
+		return "xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm";
 	}
 	
 	
@@ -47,7 +47,7 @@ public class InQnaBoardController {
 		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
 		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
-		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm";
+		return "xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm";
 	}
 		
 	//reForm 
@@ -58,7 +58,7 @@ public class InQnaBoardController {
 		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
 		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
-		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm";
+		return "xdm/v1/infra/inQnaBoard/inQnaBoardXdmReForm";
 	}
 	//reMForm 
 	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm")
@@ -66,7 +66,7 @@ public class InQnaBoardController {
 		List<InQnaBoardDto>inQnaBoards=inQnaBoardService.selectListInQnaBoard();
 		model.addAttribute("listMember", inQnaBoards);
 		model.addAttribute("item", inQnaBoardService.selectOne(inQnaBoardDto));
-		return "/xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm";
+		return "xdm/v1/infra/inQnaBoard/inQnaBoardXdmReMForm";
 	}
 	//UPDATE
 	@RequestMapping(value="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmUpdt")

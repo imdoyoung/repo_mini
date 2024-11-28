@@ -34,7 +34,7 @@ public class CodeController {
 			if (codevo.getTotalRows() > 0) {
 			model.addAttribute("list", codeService.selectList(codevo));
 			}
-			return "/xdm/v1/infra/code/codeXdmList";
+			return "xdm/v1/infra/code/codeXdmList";
 		}
 		
 		// Form -codegroup
@@ -42,7 +42,7 @@ public class CodeController {
 		public String codeXdmForm(Model model) {
 			List<CodeDto>codegroups=codeService.selectListCodeGroup();
 			model.addAttribute("listCodeGroup", codegroups);
-			return "/xdm/v1/infra/code/codeXdmForm";
+			return "xdm/v1/infra/code/codeXdmForm";
 		}	
 		
 		//insert
@@ -57,7 +57,7 @@ public class CodeController {
 			model.addAttribute("item", codeService.selectOne(codeDto));
 			List<CodeDto>codegroups=codeService.selectListCodeGroup();
 			model.addAttribute("listCodeGroup", codegroups);
-			return "/xdm/v1/infra/code/codeXdmMForm";
+			return "xdm/v1/infra/code/codeXdmMForm";
 		}
 		//UPDATE
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmUpdt")

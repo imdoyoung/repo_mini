@@ -26,13 +26,13 @@ public class CodeGroupController {
 		if (codegroupvo.getTotalRows() > 0) {
 		model.addAttribute("list", codeGroupService.selectList(codegroupvo));
 		}
-		return "/xdm/v1/infra/codeGroup/codeGroupXdmList";
+		return "xdm/v1/infra/codeGroup/codeGroupXdmList";
 	}
 	
 	// Form 
 	@RequestMapping(value="/xdm/v1/infra/codeGroup/codeGroupXdmForm")
 	public String codeGroupXdmForm() {
-		return "/xdm/v1/infra/codeGroup/codeGroupXdmForm";
+		return "xdm/v1/infra/codeGroup/codeGroupXdmForm";
 	}
 	
 	//insert
@@ -45,7 +45,7 @@ public class CodeGroupController {
 	@RequestMapping(value="/xdm/v1/infra/codeGroup/codeGroupXdmMForm")
 	public String codeGroupXdmMform(CodeGroupDto codeGroupDto, Model model) {
 		model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
-		return "/xdm/v1/infra/codeGroup/codeGroupXdmMForm";
+		return "xdm/v1/infra/codeGroup/codeGroupXdmMForm";
 	}
 	//UPDATE
 	@RequestMapping(value="/xdm/v1/infra/codeGroup/codeGroupXdmUpdt")

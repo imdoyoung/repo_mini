@@ -38,7 +38,7 @@ public class InClaimController {
 			model.addAttribute("list", inClaimService.inClaimAcceptSelectList(inClaimVo));
 		}
 		
-		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmList";
+		return "xdm/v1/infra/inClaim/inClaimAcceptXdmList";
 	}
 	
 	// ClaimAccept: Form
@@ -51,7 +51,7 @@ public class InClaimController {
 		List<InStaffDto> inStaff = inClaimService.selectListStaff();
 		model.addAttribute("listInStaff", inStaff);
 		
-		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmForm";
+		return "xdm/v1/infra/inClaim/inClaimAcceptXdmForm";
 	}
 	
 	// ClaimAccept: Inst
@@ -71,7 +71,7 @@ public class InClaimController {
 		List<InStaffDto> inStaff = inClaimService.selectListStaff();
 		model.addAttribute("listInStaff", inStaff);
 		System.out.println("selectOne 잘 넘어감");
-		return "/xdm/v1/infra/inClaim/inClaimAcceptXdmMfom";
+		return "xdm/v1/infra/inClaim/inClaimAcceptXdmMfom";
 	}
 	
 	// ClaimAccept: Updt
@@ -117,7 +117,7 @@ public class InClaimController {
 			model.addAttribute("list", inClaimService.inClaimProcessSelectList(inClaimVo));
 		}
 		
-		return "/xdm/v1/infra/inClaim/inClaimProcessXdmList";
+		return "xdm/v1/infra/inClaim/inClaimProcessXdmList";
 	}
 	
 	// ClaimProcess: Form
@@ -125,7 +125,7 @@ public class InClaimController {
 	public String inClaimProcessXdmForm(Model model) {
 		List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
 		model.addAttribute("listInClaimAccept", inClaimAccept);
-		return "/xdm/v1/infra/inClaim/inClaimProcessXdmForm";
+		return "xdm/v1/infra/inClaim/inClaimProcessXdmForm";
 	}
 	
 	// ClaimProcess: Inst
@@ -140,7 +140,7 @@ public class InClaimController {
 	public String inClaimProcessXdmMfom(InClaimDto inClaimDto, Model model) {
 		model.addAttribute("item", inClaimService.inClaimProcessSelectOne(inClaimDto));
 		System.out.println("selectOne 잘 넘어감");
-		return "/xdm/v1/infra/inClaim/inClaimProcessXdmMfom";
+		return "xdm/v1/infra/inClaim/inClaimProcessXdmMfom";
 	}
 	
 	// ClaimProcess: Updt
@@ -185,7 +185,7 @@ public class InClaimController {
 			model.addAttribute("list", inClaimService.inClaimPaySelectList(inClaimVo));
 		}
 		
-		return "/xdm/v1/infra/inClaim/inClaimPayXdmList";
+		return "xdm/v1/infra/inClaim/inClaimPayXdmList";
 	}
 	
 	// inClaimPay: Form
@@ -193,7 +193,7 @@ public class InClaimController {
 	public String inClaimPayXdmForm(Model model) {
 		List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
 		model.addAttribute("listInClaimAccept", inClaimAccept);
-		return "/xdm/v1/infra/inClaim/inClaimPayXdmForm";
+		return "xdm/v1/infra/inClaim/inClaimPayXdmForm";
 	}
 	
 	// inClaimPay: Inst
@@ -208,7 +208,7 @@ public class InClaimController {
 	public String inClaimPayXdmMfom(InClaimDto inClaimDto, Model model) {
 		model.addAttribute("item", inClaimService.inClaimPaySelectOne(inClaimDto));
 		System.out.println("selectOne 잘 넘어감");
-		return "/xdm/v1/infra/inClaim/inClaimPayXdmMfom";
+		return "xdm/v1/infra/inClaim/inClaimPayXdmMfom";
 	}
 	
 	// inClaimPay: Updt
@@ -241,7 +241,7 @@ public class InClaimController {
 				model.addAttribute("assignList", inClaimService.inClaimAssignSelectList(inClaimAssignVo));
 			}
 			
-			return "/xdm/v1/infra/inClaim/inClaimAssignXdmList";
+			return "xdm/v1/infra/inClaim/inClaimAssignXdmList";
 		}
 		
 		// Form
@@ -249,7 +249,7 @@ public class InClaimController {
 		public String inClaimAssignXdmForm(Model model) {
 			List<InClaimDto> inClaimAccept = inClaimService.selectListClaimAccept();
 			model.addAttribute("listInClaimAccept", inClaimAccept);
-			return "/xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
+			return "xdm/v1/infra/inClaim/inClaimAssignXdmForm";   
 		}
 		              
 		// insert 
@@ -265,7 +265,7 @@ public class InClaimController {
 		public String inClaimAssignXdmMForm(InClaimDto inClaimDto, Model model) {
 			
 			model.addAttribute("assignItem", inClaimService.inClaimAssignSelectOne(inClaimDto));
-			return "/xdm/v1/infra/inClaim/inClaimAssignXdmMForm";
+			return "xdm/v1/infra/inClaim/inClaimAssignXdmMForm";
 		}
 		
 		// update 
