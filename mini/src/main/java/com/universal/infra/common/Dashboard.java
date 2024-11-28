@@ -9,7 +9,7 @@ public class Dashboard {
 	@RequestMapping(value="/xdm/v1/infra/common/dashboard")
 	public String dashboard() {
 		
-		return "/xdm/v1/infra/common/dashboard";
+		return "xdm/v1/infra/common/dashboard";
 	}
 
 }
