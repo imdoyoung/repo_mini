@@ -42,12 +42,12 @@
 
 <body>
 
-	      <!-- ======= Header ======= -->
-		  <div th:replace="~{xdm/v1/infra/common/header :: header}"></div>
+	<!-- ======= Header ======= -->
+		  <div th:replace="~{/xdm/v1/infra/common/header :: header}"></div>
 		  <!-- End Header -->
 
 		  <!-- ======= Sidebar ======= -->
-		  <div th:replace="~{xdm/v1/infra/common/sidebar :: aside}"></div>
+		  <div th:replace="~{/xdm/v1/infra/common/sidebar :: aside}"></div>
 		  <!-- End Sidebar-->
 
   <main id="main" class="main">
@@ -71,13 +71,13 @@
               <!-- Custom Styled Validation -->
               <form class="needs-validation" id="form" name="form"  action="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst">
 				<div class="row mb-3">
-	                <div class="col-md-3">
+	               <div class="col-md-3">
 	                 <label for="inqbType" class="form-label">문의종류<a style="color: red;">*</a></label>
 	                   <select class="form-select" id="inqbType" name="inqbType" th:value="${item?.inqbType}">
 	                     <option value="" th:selected="${item?.inqbType==null}">문의종류</option>
 						 <option th:each="list : ${@codeService.selectListCachedCode(8)}" th:value="${list.incdSeq}" th:text="${list.incdName}" th:selected="${list.incdSeq} == ${item?.inqbType}"></option> 
 	                   </select>
-	                </div>
+	               </div>
 				</div> 
 				<div class="row mb-3">
                   <div class="col-md-3">
@@ -142,27 +142,20 @@
                     <input class="form-control" id="inqbEdiDate" name="inqbEdiDate" type="datetime" th:value="${#dates.format(item?.inqbEdiDate, 'yyyy-MM-dd HH:mm:ss')}" disabled>
                   </div>
                 </div>
-                <!--</div>-->
                 <div class="row mb-3">
                   <div class="col-md-6">
 					<button type="button" class="btn btn-outline-dark">
-                      <a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList">
-                        <i class="bi bi-list-ul"></i>
-                      </a>
+                      <a href="/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList"><i class="bi bi-list-ul"></i></a>
                     </button>
                   </div>
                   <div class="col-md-6" align="Right">
 					<!--<button type="button" class="btn btn-primary">
 					<--	<a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmMForm(inqbSeq=${list.inqbSeq})}" -->
 					<!--<button>
-                      <a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm(inqbSeq=${item.inqbSeq})}">
-                        	<i class="bi bi-plus-lg icon_color_change"></i>
-                      </a>
+                      <a th:href="@{/xdm/v1/infra/inQnaBoard/inQnaBoardXdmForm(inqbSeq=${item.inqbSeq})}"><i class="bi bi-plus-lg icon_color_change"></i></a>
                     </button>-->
                     <!--<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmList" class="btn btn-primary">
-                      <a>
-                        <i class="bi bi-server"></i>
-                      </a>
+                      <a><i class="bi bi-server"></i></a>
                     </button>-->
 					<button type="submit" action="redirect:/xdm/v1/infra/inQnaBoard/inQnaBoardXdmInst" class="btn btn-primary">
                       <a><i class="bi bi-plus-lg icon_color_change"></i></a>
@@ -177,9 +170,19 @@
     </section>
   </main><!-- End #main -->
 
-	<!-- ======= Footer ======= -->
-	<div th:replace="~{xdm/v1/infra/common/footer :: footer}"></div>
-	<!-- End Footer -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
