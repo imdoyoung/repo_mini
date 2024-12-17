@@ -18,7 +18,7 @@ public class InClaimController {
 	@Autowired
 	InClaimService inClaimService;
 	
-// ==================== inCalimAccept ==================== //
+// ==================== inCalimAccept ==================== // // 도영 커밋 충돌 해결중 //
 
 	// ClaimAccept: Lsit-inClaimAcceptSelectList
 	@RequestMapping(value="/xdm/v1/infra/inClaim/inClaimAcceptXdmList")
