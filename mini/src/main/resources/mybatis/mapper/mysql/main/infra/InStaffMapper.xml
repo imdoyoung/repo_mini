@@ -7,7 +7,7 @@
 	
 	<sql id="selectCommon">
 		from 
-			instaff d
+			mini.instaff d
 		where 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND instDelNy = #{shDelNy}</if> <!-- 삭제 여부 -->
 			
@@ -53,7 +53,7 @@
 	</select> 
 	
 	<insert id="staffInsert">
-		insert into instaff (
+		insert into mini.instaff (
 		   instName,
 		   instGender,
 		   instposition,
@@ -92,13 +92,13 @@
 			d.instEdiDate,
 			d.instDelNy
 		from
-			instaff d
+			mini.instaff d
 		where 1=1
 			and d.instSeq = #{instSeq}
 	</select>
 	  
 	<update id="staffUpdate">
-		update instaff
+		update mini.instaff
 		set 
 		   instName = #{instName},
 		   instGender = #{instGender},
@@ -114,7 +114,7 @@
 	</update>
 	
 	<update id="stafftUelete">
-      UPDATE instaff
+      UPDATE mini.instaff
       SET
          instDelNy = 1
       WHERE 1 = 1
@@ -130,7 +130,7 @@
             d.instId,
             d.instPw
          FROM
-            instaff d
+            mini.instaff d
          WHERE 1 = 1
             AND d.instId = #{instId}
             AND d.instPw = #{instPw}
@@ -143,7 +143,7 @@
             d.instId,
             d.instName 
          FROM
-            instaff d
+            mini.instaff d
          WHERE 1 = 1
             AND d.instId = #{instId}
       </select>

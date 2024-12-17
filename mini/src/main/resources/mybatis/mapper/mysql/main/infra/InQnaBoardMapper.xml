@@ -38,10 +38,10 @@
 	<sql id="selectCommon">
 		FROM 
 			mini.inqnaboard AS l
-			LEFT JOIN inmember AS c
-		     on c.inmeSeq = l.inMember_inmeSeq
-		   LEFT JOIN instaff AS d
-		     on d.instSeq = l.inStaff_instSeq
+				LEFT JOIN inmember AS c
+		     		on c.inmeSeq = l.inMember_inmeSeq
+		   		LEFT JOIN instaff AS d
+		     		on d.instSeq = l.inStaff_instSeq
 		WHERE 1=1
 		   <if test="shDelNy !=null and !shDelNy.equals('')">AND inqbDelNy = #{shDelNy}</if>
 		   <if test="shCompleteNy !=null and !shCompleteNy.equals('')">AND inqbCompleteNy = #{shCompleteNy}</if>
