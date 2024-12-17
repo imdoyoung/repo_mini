@@ -8,29 +8,29 @@
 
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT aa.* FROM (
-		SELECT
-		b.incdSeq,
-		b.incdName,
-		b.incdUseNy,
-		b.incdDelNy,
-		b.incdDesc,
-		b.incdRegDate,
-		b.incdEdiDate,
-		b.incdOrder,
-		b.inCodegroup_incgSeq,
-		a.incgSeq,
-		a.incgName
-		<include refid="selectCommon" />
-		ORDER BY
-		b.incdSeq desc
+			SELECT
+				b.incdSeq,
+				b.incdName,
+				b.incdUseNy,
+				b.incdDelNy,
+				b.incdDesc,
+				b.incdRegDate,
+				b.incdEdiDate,
+				b.incdOrder,
+				b.inCodegroup_incgSeq,
+				a.incgSeq,
+				a.incgName
+				<include refid="selectCommon" />
+			ORDER BY
+				b.incdSeq desc
 		) aa limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 
 	<sql id="selectCommon">
 		FROM
-		mini.incode AS b
-		LEFT JOIN incodegroup AS a
-		on a.incgSeq = b.inCodegroup_incgSeq
+			mini.incode AS b
+			LEFT JOIN incodegroup AS a
+				on a.incgSeq = b.inCodegroup_incgSeq
 		WHERE 1=1
 		<if test="shDelNy !=null and !shDelNy.equals('')">AND incdDelNy = #{shDelNy}</if>
 		<if test="shUseNy !=null and !shUseNy.equals('')">AND incdUseNy = #{shUseNy}</if>
@@ -51,24 +51,24 @@
 	</sql>
 
 	<insert id="insert">
-		INSERT INTO incode(
-		incdName,
-		incdUseNy,
-		incdDelNy,
-		incdDesc,
-		incdRegDate,
-		incdEdiDate,
-		incdOrder,
-		inCodegroup_incgSeq
+		INSERT INTO mini.incode(
+			incdName,
+			incdUseNy,
+			incdDelNy,
+			incdDesc,
+			incdRegDate,
+			incdEdiDate,
+			incdOrder,
+			inCodegroup_incgSeq
 		)VALUE(
-		#{incdName},
-		#{incdUseNy},
-		0,
-		#{incdDesc},
-		now(),
-		now(),
-		#{incdOrder},
-		#{inCodegroup_incgSeq}
+			#{incdName},
+			#{incdUseNy},
+			0,
+			#{incdDesc},
+			now(),
+			now(),
+			#{incdOrder},
+			#{inCodegroup_incgSeq}
 		)
 		<selectKey resultType="String" keyProperty="incdSeq"
 			order="AFTER">
@@ -78,56 +78,56 @@
 
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-		b.incdSeq,
-		b.incdName,
-		b.incdUseNy,
-		b.incdDelNy,
-		b.incdDesc,
-		b.incdRegDate,
-		b.incdEdiDate,
-		b.incdOrder,
-		b.inCodegroup_incgSeq
+			b.incdSeq,
+			b.incdName,
+			b.incdUseNy,
+			b.incdDelNy,
+			b.incdDesc,
+			b.incdRegDate,
+			b.incdEdiDate,
+			b.incdOrder,
+			b.incodegroup_incgSeq
 		FROM
-		mini.incode b
+			mini.incode b
 		WHERE 1=1
-		AND b.incdSeq = #{incdSeq}
+			AND b.incdSeq = #{incdSeq}
 	</select>
 
 	<select id="selectListCodeGroup" resultMap="resultMapObj">
 		SELECT
-		a.incgSeq,
-		a.incgName
+			a.incgSeq,
+			a.incgName
 		FROM
-		mini.incodegroup a
+			mini.incodegroup a
 		WHERE 1=1
-		AND a.incgDelNy = 0
+			AND a.incgDelNy = 0
 		ORDER BY
-		a.incgOrder DESC
+			a.incgOrder DESC
 	</select>
 
 	<update id="update">
-		UPDATE incode
+		UPDATE mini.incode
 		SET
 		incdName = #{incdName}
 		,incdUseNy = #{incdUseNy}
 		,incdOrder = #{incdOrder}
 		,incdDesc = #{incdDesc}
 		,incdDelNy = #{incdDelNy}
-		,inCodegroup_incgSeq =
-		#{inCodegroup_incgSeq}
+		,incodegroup_incgSeq =
+		#{incodegroup_incgSeq}
 		WHERE 1=1
 		AND incdSeq = #{incdSeq}
 
 	</update>
 
 	<delete id="delete">
-		DELETE FROM incode
+		DELETE FROM mini.incode
 		WHERE 1=1
 		AND incdSeq = #{incdSeq}
 	</delete>
 
 	<update id="uelete">
-		UPDATE incode
+		UPDATE mini.incode
 		SET
 		incdDelNy = 1
 		WHERE 1=1
@@ -144,13 +144,13 @@
 		SELECT
 			incdSeq,
 			incdName,
-			inCodegroup_incgSeq
+			incodegroup_incgSeq
 		FROM
-			incode 
+			mini.incode 
 		WHERE 1=1
 			AND incdDelNy = 0
 			AND incdUseNy = 1
-		<!-- AND inCodegroup_incgSeq=8 -->
+		<!-- AND incodegroup_incgSeq=8 -->
 	</select>
 
 </mapper>

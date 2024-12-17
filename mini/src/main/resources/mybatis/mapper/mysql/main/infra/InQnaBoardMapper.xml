@@ -165,7 +165,7 @@
 		  d.instSeq,
 		  d.instId
        FROM
-		    mini.inStaff d
+		    mini.instaff d
 	  WHERE 1=1
 		  AND d.instDelNy = 0
 	  ORDER BY

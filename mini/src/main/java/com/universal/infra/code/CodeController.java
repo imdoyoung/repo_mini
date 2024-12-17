@@ -22,7 +22,7 @@ public class CodeController {
 	@Autowired
 	CodeService codeService;
 	
-	// List
+		// List
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmList")
 		public String codeXdmList(@ModelAttribute("vo")CodeVo codevo, Model model) {
 			codevo.setParamsPaging(codeService.selectOneCount(codevo));
@@ -37,6 +37,7 @@ public class CodeController {
 			return "xdm/v1/infra/code/codeXdmList";
 		}
 		
+		
 		// Form -codegroup
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmForm")
 		public String codeXdmForm(Model model) {
@@ -45,12 +46,15 @@ public class CodeController {
 			return "xdm/v1/infra/code/codeXdmForm";
 		}	
 		
+		
 		//insert
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmInst")
 		public String codeXdmInst(CodeDto codeDto) {
 			codeService.insert(codeDto);
 			return "redirect:/xdm/v1/infra/code/codeXdmList";
 		}
+		
+		
 		//MForm
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmMForm")
 		public String codeXdmMform(CodeDto codeDto, Model model) {
@@ -59,6 +63,8 @@ public class CodeController {
 			model.addAttribute("listCodeGroup", codegroups);
 			return "xdm/v1/infra/code/codeXdmMForm";
 		}
+		
+		
 		//UPDATE
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmUpdt")
 		public String codeXdmUpdt(CodeDto codeDto) {
@@ -72,6 +78,8 @@ public class CodeController {
 			codeService.delete(codeDto);
 			return "redirect:/xdm/v1/infra/code/codeXdmList";
 		}
+		
+		
 		//Uelete
 		@RequestMapping(value="/xdm/v1/infra/code/codeXdmUele")
 		public String codeXdmUele(CodeDto codeDto) {

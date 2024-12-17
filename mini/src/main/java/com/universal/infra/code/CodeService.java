@@ -52,7 +52,7 @@ public class CodeService {
 	public int selectOneCount(CodeVo codevo) { 
 	     return codeDao.selectOneCount(codevo); 
 	}
-	//cahco
+	//chached
 	@PostConstruct
 	public void selectListCachedCodeArrayList() {
 		System.out.println("selectListCachedCodeArrayList 함수 실행");

@@ -637,14 +637,14 @@
 			(SELECT 
 				inMember_inmeSeq
 		     FROM 
-		        inClaimAccept
+		        inclaimaccept
 		     WHERE
 		        incaccSeq = #{inClaimAccept_incaccSeq}
 		     ),
 		     (SELECT 
 		        inStaff_instSeq 
 		     FROM 
-		        inClaimAccept 
+		        inclaimaccept 
 		     WHERE 
 		        incaccSeq = #{inClaimAccept_incaccSeq}
 		     )
